@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "Enemy.h"
 
 using namespace sf;
 
@@ -13,6 +14,8 @@ int main()
 	
 	int playerSize = 5;
 	int projectileSize = 3;
+
+	//Enemy enemy1(10, 0.025, 50);
 	
 	float projectileSpeed = 0.05;
 
@@ -45,6 +48,14 @@ int main()
 	
 	player.setFillColor(Color::White);
 	player.setPosition(width / 2, height / 2);
+
+	/*
+	//Enemy
+	CircleShape enemy1();
+	
+	enemy1.setFillColor(Color::Red);
+	enemy1.setPosition(width / 2, height - 500);
+	*/
 	
 	//Projectile
 	CircleShape projectile(projectileSize);
@@ -61,6 +72,7 @@ int main()
 		window.draw(right);
 		window.draw(left);
 		window.draw(projectile);
+		//window.draw(enemy1);
 		window.display();
 
 		Event event;
