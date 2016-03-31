@@ -12,14 +12,16 @@ int main()
 	float playerFocusSpeed = 0.025;
 	
 	int playerSize = 5;
+	int projectileSize = 3;
+	
+	float projectileSpeed = 0.05;
 
-	//Playarea border size
+	//Playarea border sizes
 	int borderSize = 10;
 
 	RenderWindow window(VideoMode(width, height), "Pip");
 
 	//Playarea
-
 	RectangleShape top, bottom, right, left;
 
 	top.setPosition(0, -borderSize);
@@ -43,6 +45,11 @@ int main()
 	
 	player.setFillColor(Color::White);
 	player.setPosition(width / 2, height / 2);
+	
+	//Projectile
+	CircleShape projectile(projectileSize);
+	projectile.setFillColor(Color::Yellow);
+	projectile.setPosition(player.getPosition());
 
 	while (window.isOpen())
 	{
@@ -53,9 +60,7 @@ int main()
 		window.draw(bottom);
 		window.draw(right);
 		window.draw(left);
-		// Hitler did nothing wrong
-		// Allahu akbar
-
+		window.draw(projectile);
 		window.display();
 
 		Event event;
@@ -73,6 +78,7 @@ int main()
 
 		if (Keyboard::isKeyPressed(Keyboard::Left))
 		{
+			//Collision checks
 			FloatRect playerBoundingBox = player.getGlobalBounds();
 			FloatRect leftBoundingBox = left.getGlobalBounds();
 
@@ -87,6 +93,7 @@ int main()
 
 		if (Keyboard::isKeyPressed(Keyboard::Right))
 		{
+			//Collision checks
 			FloatRect playerBoundingBox = player.getGlobalBounds();
 			FloatRect rightBoundingBox = right.getGlobalBounds();
 
@@ -101,6 +108,7 @@ int main()
 
 		if (Keyboard::isKeyPressed(Keyboard::Up))
 		{
+			//Collision checks
 			FloatRect playerBoundingBox = player.getGlobalBounds();
 			FloatRect topBoundingBox = top.getGlobalBounds();
 
@@ -115,6 +123,7 @@ int main()
 
 		if (Keyboard::isKeyPressed(Keyboard::Down))
 		{
+			//Collision checks
 			FloatRect playerBoundingBox = player.getGlobalBounds();
 			FloatRect bottomBoundingBox = bottom.getGlobalBounds();
 
@@ -125,6 +134,11 @@ int main()
 
 			else
 				player.move(0, playerSpeed);
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::Space))
+		{
+			projectile.move(0, -projectileSpeed);
 		}
 	}
 
