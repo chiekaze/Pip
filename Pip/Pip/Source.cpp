@@ -14,8 +14,10 @@ int main()
 	
 	int playerSize = 5;
 	int projectileSize = 3;
+	int playerHP = 100;
 
 	//Enemy enemy1(10, 0.025, 50);
+	int enemysize = 10;
 	
 	float projectileSpeed = 0.05;
 
@@ -56,6 +58,10 @@ int main()
 	enemy1.setFillColor(Color::Red);
 	enemy1.setPosition(width / 2, height - 500);
 	*/
+
+	CircleShape enemy(enemysize);
+	enemy.setFillColor(Color::Red);
+	enemy.setPosition(width / 2, height - 500);
 	
 	//Projectile
 	CircleShape projectile(projectileSize);
@@ -71,9 +77,18 @@ int main()
 		window.draw(bottom);
 		window.draw(right);
 		window.draw(left);
-		window.draw(projectile);
 		//window.draw(enemy1);
+		window.draw(enemy);
+		window.draw(projectile);
 		window.display();
+
+		FloatRect playerBoundingBox = player.getGlobalBounds();
+		FloatRect leftBoundingBox = left.getGlobalBounds(); 
+		FloatRect rightBoundingBox = right.getGlobalBounds();
+		FloatRect topBoundingBox = top.getGlobalBounds();
+		FloatRect bottomBoundingBox = bottom.getGlobalBounds();
+		FloatRect enemyBoundingBox = enemy.getGlobalBounds();
+		FloatRect projectileBoundingBox = projectile.getGlobalBounds();
 
 		Event event;
 		while (window.pollEvent(event))
@@ -91,8 +106,6 @@ int main()
 		if (Keyboard::isKeyPressed(Keyboard::Left))
 		{
 			//Collision checks
-			FloatRect playerBoundingBox = player.getGlobalBounds();
-			FloatRect leftBoundingBox = left.getGlobalBounds();
 
 			if (playerBoundingBox.intersects(leftBoundingBox))
 			{
@@ -106,8 +119,6 @@ int main()
 		if (Keyboard::isKeyPressed(Keyboard::Right))
 		{
 			//Collision checks
-			FloatRect playerBoundingBox = player.getGlobalBounds();
-			FloatRect rightBoundingBox = right.getGlobalBounds();
 
 			if (playerBoundingBox.intersects(rightBoundingBox))
 			{
@@ -121,8 +132,6 @@ int main()
 		if (Keyboard::isKeyPressed(Keyboard::Up))
 		{
 			//Collision checks
-			FloatRect playerBoundingBox = player.getGlobalBounds();
-			FloatRect topBoundingBox = top.getGlobalBounds();
 
 			if (playerBoundingBox.intersects(topBoundingBox))
 			{
@@ -136,8 +145,6 @@ int main()
 		if (Keyboard::isKeyPressed(Keyboard::Down))
 		{
 			//Collision checks
-			FloatRect playerBoundingBox = player.getGlobalBounds();
-			FloatRect bottomBoundingBox = bottom.getGlobalBounds();
 
 			if (playerBoundingBox.intersects(bottomBoundingBox))
 			{
@@ -148,9 +155,19 @@ int main()
 				player.move(0, playerSpeed);
 		}
 
+		if (playerBoundingBox.intersects(enemyBoundingBox))
+		{
+			std::cout << "You're fucking dead m8! ";
+		}
+
 		if (Keyboard::isKeyPressed(Keyboard::Space))
 		{
 			projectile.move(0, -projectileSpeed);
+		}
+
+		if (projectileBoundingBox.intersects(enemyBoundingBox))
+		{
+			std::cout << "MAKE AMERICA GREAT AGAIN! ";
 		}
 	}
 
