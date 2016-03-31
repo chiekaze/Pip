@@ -18,6 +18,7 @@ int main()
 
 	//Enemy enemy1(10, 0.025, 50);
 	int enemysize = 10;
+	int enemyHP = 50;
 	
 	float projectileSpeed = 0.05;
 
@@ -158,6 +159,7 @@ int main()
 		if (playerBoundingBox.intersects(enemyBoundingBox))
 		{
 			std::cout << "You're fucking dead m8! ";
+			playerHP--;
 		}
 
 		if (Keyboard::isKeyPressed(Keyboard::Space))
@@ -168,6 +170,19 @@ int main()
 		if (projectileBoundingBox.intersects(enemyBoundingBox))
 		{
 			std::cout << "MAKE AMERICA GREAT AGAIN! ";
+			enemyHP--;
+		}
+
+		if (enemyHP == 0)
+		{
+			std::cout << "\nYou won the game!";
+			system("PAUSE");
+			return 0;
+		}
+
+		if (playerHP == 0)
+		{
+			return 0;
 		}
 	}
 
