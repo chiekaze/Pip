@@ -156,23 +156,26 @@ int main()
 				player.move(0, playerSpeed);
 		}
 
+		if (Keyboard::isKeyPressed(Keyboard::Space))
+		{
+			projectile.move(0, -projectileSpeed);
+		}
+
+		//Player dies when hitting enemy too much (feel free to delete this)
 		if (playerBoundingBox.intersects(enemyBoundingBox))
 		{
 			std::cout << "You're fucking dead m8! ";
 			playerHP--;
 		}
 
-		if (Keyboard::isKeyPressed(Keyboard::Space))
-		{
-			projectile.move(0, -projectileSpeed);
-		}
-
+		//Enemy dies when hit by the projectile (feel free to delete this as well)
 		if (projectileBoundingBox.intersects(enemyBoundingBox))
 		{
 			std::cout << "MAKE AMERICA GREAT AGAIN! ";
 			enemyHP--;
 		}
 
+		//Winning and losing conditions (Ditto)
 		if (enemyHP == 0)
 		{
 			std::cout << "\nYou won the game!";
