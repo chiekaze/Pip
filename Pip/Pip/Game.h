@@ -11,6 +11,7 @@ class Game
 public:
 	RenderWindow* window;
 	Player* player;
+	
 	Clock clock;
 	Clock deltaTime;
 
