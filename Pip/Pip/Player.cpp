@@ -95,6 +95,7 @@ void Player::Update(Clock& clock)
 	{
 		//std::thread projectile (&Player::shootProjectile, this);
 		//this->shootProjectile();
+		shootProjectile();
 		//projectileShape.setPosition(playerShape.getPosition());
 	}
 }
