@@ -18,6 +18,9 @@ public:
 	Projectile();
 	~Projectile();
 
+	//void setPosition();
+	Vector2f getProjectilePosition();
+
 	void projectileMove(Clock& clock);
 	void Draw(RenderWindow& window);
 };

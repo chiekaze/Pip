@@ -17,6 +17,11 @@ Projectile::~Projectile()
 {
 }
 
+Vector2f Projectile::getProjectilePosition()
+{
+	return projectileShape.getPosition();
+}
+
 void Projectile::projectileMove(Clock& clock)
 {
 	//Projectile moves

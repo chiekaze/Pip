@@ -27,6 +27,7 @@ public:
 	void setPosition();
 	Vector2f getPosition();
 
+	//void setProjectilePosition();
 	void shootProjectile();
 
 	void Update(Clock& clock);

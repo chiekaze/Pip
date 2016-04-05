@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <iostream>
 #include <thread>
+#include <sstream>
 
 Player::Player()
 {
@@ -26,9 +27,18 @@ Vector2f Player::getPosition()
 
 void Player::shootProjectile()
 {
+	Projectile projectile;
+	projectile.projectileShape.setPosition(playerShape.getPosition());
+	//projectile.projectileMove();
+
 	//This is supposed to delay the shots, and it sort of does
 	Time delayTime = milliseconds(100);
-	std::cout << "PAM ";
+
+	//Checking if it's working
+	if (projectile.projectileShape.getPosition() == playerShape.getPosition())
+	{
+		std::cout << &Projectile::getProjectilePosition << ", this means the projectile spawns where the player is. ";
+	}
 	sleep(delayTime);
 }
 
@@ -96,7 +106,6 @@ void Player::Update(Clock& clock)
 		//std::thread projectile (&Player::shootProjectile, this);
 		//this->shootProjectile();
 		shootProjectile();
-		//projectileShape.setPosition(playerShape.getPosition());
 	}
 }
 
