@@ -4,7 +4,12 @@ Game::Game()
 {
 	window = new RenderWindow(VideoMode(windowWidth, windowHeight), "Pip");
 	player = new Player();
-	
+	playArea = new PlayArea();
+	playArea->setPositions();
+
+	//Sets player start position
+	player->setPosition();
+
 	clock.restart();
 }
 
@@ -12,6 +17,7 @@ Game::~Game()
 {
 	delete window;
 	delete player;
+	delete playArea;
 }
 
 void Game::Update()
@@ -38,5 +44,6 @@ void Game::Draw()
 {
 	window->clear();
 	player->Draw(*window);
+	playArea->Draw(*window);
 	window->display();
 }
