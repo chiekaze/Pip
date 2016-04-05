@@ -1,7 +1,6 @@
 #include "Player.h"
 #include <iostream>
 #include <thread>
-#include <sstream>
 
 Player::Player()
 {
@@ -29,7 +28,6 @@ void Player::shootProjectile()
 {
 	Projectile projectile;
 	projectile.projectileShape.setPosition(playerShape.getPosition());
-	//projectile.projectileMove();
 
 	//This is supposed to delay the shots, and it sort of does
 	Time delayTime = milliseconds(100);
