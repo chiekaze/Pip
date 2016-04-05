@@ -27,6 +27,8 @@ public:
 	void setPosition();
 	Vector2f getPosition();
 
+	void shootProjectile();
+
 	void Update(Clock& clock);
 	void Draw(RenderWindow& window);
 };

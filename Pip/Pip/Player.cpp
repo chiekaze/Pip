@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <iostream>
+#include <thread>
 
 Player::Player()
 {
@@ -21,6 +22,14 @@ void Player::setPosition()
 Vector2f Player::getPosition()
 {
 	return playerShape.getPosition();
+}
+
+void Player::shootProjectile()
+{
+	//This is supposed to delay the shots, and it sort of does
+	Time delayTime = milliseconds(100);
+	std::cout << "PAM ";
+	sleep(delayTime);
 }
 
 void Player::Update(Clock& clock)
@@ -84,7 +93,8 @@ void Player::Update(Clock& clock)
 
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		std::cout << "PAM ";
+		//std::thread projectile (&Player::shootProjectile, this);
+		//this->shootProjectile();
 		//projectileShape.setPosition(playerShape.getPosition());
 	}
 }
