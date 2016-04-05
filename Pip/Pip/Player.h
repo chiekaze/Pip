@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "PlayArea.h"
 #include "Projectile.h"
+#include "Enemy.h"
 
 using namespace sf;
 
@@ -14,6 +15,7 @@ public:
 
 	PlayArea* playArea;
 	Projectile* projectile;
+	Enemy* enemy;
 
 	float playerSize = 5.0;
 

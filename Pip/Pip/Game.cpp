@@ -4,11 +4,16 @@ Game::Game()
 {
 	window = new RenderWindow(VideoMode(windowWidth, windowHeight), "Pip");
 	player = new Player();
+	//enemy = new Enemy();
+	//projectile = new Projectile();
 	playArea = new PlayArea();
 	playArea->setPositions();
 
 	//Sets player start position
 	player->setPosition();
+
+	//Sets enemy start position
+	//enemy->setStartPosition();
 
 	clock.restart();
 }
@@ -18,6 +23,8 @@ Game::~Game()
 	delete window;
 	delete player;
 	delete playArea;
+	//delete enemy;
+	//delete projectile;
 }
 
 void Game::Update()
@@ -35,6 +42,8 @@ void Game::Update()
 		}
 
 		player->Update(clock);
+		//enemy->Update(clock);
+		//projectile->Update(clock);
 		Draw();
 		clock.restart();
 	}
@@ -45,5 +54,7 @@ void Game::Draw()
 	window->clear();
 	player->Draw(*window);
 	playArea->Draw(*window);
+	//enemy->Draw(*window);
+	//projectile->Draw(*window);
 	window->display();
 }

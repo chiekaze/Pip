@@ -22,7 +22,7 @@ Vector2f Projectile::getProjectilePosition()
 	return projectileShape.getPosition();
 }
 
-void Projectile::projectileMove(Clock& clock)
+void Projectile::Update(Clock& clock)
 {
 	//Projectile moves
 	projectileShape.move(Vector2f(0, -projectileSpeed * clock.getElapsedTime().asSeconds()));

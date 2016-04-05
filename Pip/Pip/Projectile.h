@@ -14,6 +14,7 @@ public:
 
 	float projectileSize = 2.5;
 	int projectileSpeed = 2500;
+	int projectileDamage = 10;
 
 	Projectile();
 	~Projectile();
@@ -21,7 +22,7 @@ public:
 	//void setPosition();
 	Vector2f getProjectilePosition();
 
-	void projectileMove(Clock& clock);
+	void Update(Clock& clock);
 	void Draw(RenderWindow& window);
 };
 

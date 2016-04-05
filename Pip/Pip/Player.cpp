@@ -105,6 +105,13 @@ void Player::Update(Clock& clock)
 		//this->shootProjectile();
 		shootProjectile();
 	}
+	/*
+	//This is supposed to check if the enemy is there but apparently it crashes the game
+	if (playerBoundingBox.intersects(enemy->getEnemyBox()))
+	{
+		std::cout << "The enemy is nearby! ";
+	}
+	*/
 }
 
 void Player::Draw(RenderWindow& window)
