@@ -84,7 +84,8 @@ void Player::Update(Clock& clock)
 
 	if (Keyboard::isKeyPressed(Keyboard::Space))
 	{
-		//SHOOTING
+		std::cout << "PAM ";
+		//projectileShape.setPosition(playerShape.getPosition());
 	}
 }
 

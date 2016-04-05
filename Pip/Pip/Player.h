@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "PlayArea.h"
+#include "Projectile.h"
 
 using namespace sf;
 
@@ -12,6 +13,7 @@ public:
 	CircleShape playerShape;
 
 	PlayArea* playArea;
+	Projectile* projectile;
 
 	float playerSize = 5.0;
 

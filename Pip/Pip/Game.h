@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "PlayArea.h"
+#include "Projectile.h"
 
 using namespace sf;
 
@@ -13,6 +14,7 @@ public:
 	RenderWindow* window;
 	Player* player;
 	PlayArea* playArea;
+	Projectile* projectile;
 
 	Clock clock;
 	//Clock deltaTime;
