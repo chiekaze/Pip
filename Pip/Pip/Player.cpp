@@ -26,17 +26,21 @@ Vector2f Player::getPosition()
 
 void Player::shootProjectile()
 {
+	//This shit needs to be completely redone
 	Projectile projectile;
 	projectile.projectileShape.setPosition(playerShape.getPosition());
+	std::cout << "PAM";
 
 	//This is supposed to delay the shots, and it sort of does
 	Time delayTime = milliseconds(100);
 
 	//Checking if it's working
+	/*
 	if (projectile.projectileShape.getPosition() == playerShape.getPosition())
 	{
 		std::cout << &Projectile::getProjectilePosition << ", this means the projectile spawns where the player is. ";
 	}
+	*/
 	sleep(delayTime);
 }
 
