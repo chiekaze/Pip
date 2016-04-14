@@ -2,10 +2,11 @@
 #define GAME_H
 
 #include <SFML/Graphics.hpp>
+#include <vector>
+
 #include "Player.h"
 #include "PlayArea.h"
 #include "Projectile.h"
-#include <vector>
 
 using namespace sf;
 
@@ -19,8 +20,6 @@ public:
 
 	std::vector<Projectile*> projectiles;
 
-	Clock clock;
-
 	int windowWidth = 800;
 	int windowHeight = 600;
 
@@ -29,7 +28,6 @@ public:
 
 	void Update();
 	void Draw();
-	void DrawProj();
 };
 
 #endif;

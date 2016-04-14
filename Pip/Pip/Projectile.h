@@ -3,18 +3,21 @@
 
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "PlayArea.h"
 
 using namespace sf;
 
 class Projectile
 {
 public:
+	PlayArea* playArea;
 	CircleShape projectileShape;
 
-	/*FloatRect getProjectileBox();*/
+	FloatRect getProjectileBox();
+	FloatRect projectileBoundingBox;
 
 	float projectileSize = 2.5;
-	int projectileSpeed = 2500;
+	float projectileSpeed = 0.08;
 	//int projectileDamage = 10;
 
 	Projectile(Player*);
@@ -22,8 +25,9 @@ public:
 
 	void setPosition(Vector2f);
 	Vector2f getProjectilePosition();
+	bool Intersect();
 
-	void Update(Clock& clock);
+	void Update();
 	void Draw(RenderWindow& window);
 };
 

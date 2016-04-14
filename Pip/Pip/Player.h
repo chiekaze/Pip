@@ -15,9 +15,9 @@ public:
 
 	float playerSize = 5.0;
 
-	int playerSpeed;
-	int playerNormalSpeed = 2500;
-	int playerFocusSpeed = 1000;
+	float playerSpeed;
+	float playerNormalSpeed = 0.05;
+	float playerFocusSpeed = 0.025;
 
 	Player();
 	~Player();
@@ -25,7 +25,7 @@ public:
 	void setPosition();
 	Vector2f getPosition();
 
-	void Update(Clock& clock);
+	void Update();
 	void Draw(RenderWindow& window);
 };
 

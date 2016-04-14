@@ -24,7 +24,7 @@ Vector2f Player::getPosition()
 	return playerShape.getPosition();
 }
 
-void Player::Update(Clock& clock)
+void Player::Update()
 {
 	//Player boundingbox
 	FloatRect playerBoundingBox = playerShape.getGlobalBounds();
@@ -44,7 +44,7 @@ void Player::Update(Clock& clock)
 			playerShape.move(0, 0);
 		}
 		else
-			playerShape.move(Vector2f(0, -playerSpeed * clock.getElapsedTime().asSeconds()));
+			playerShape.move(Vector2f(0, -playerSpeed));
 	}
 
 	//Move down
@@ -56,7 +56,7 @@ void Player::Update(Clock& clock)
 			playerShape.move(0, 0);
 		}
 		else
-			playerShape.move(Vector2f(0, playerSpeed * clock.getElapsedTime().asSeconds()));
+			playerShape.move(Vector2f(0, playerSpeed));
 	}
 
 	//Move right
@@ -68,7 +68,7 @@ void Player::Update(Clock& clock)
 			playerShape.move(0, 0);
 		}
 		else
-			playerShape.move(Vector2f(playerSpeed * clock.getElapsedTime().asSeconds(), 0));
+			playerShape.move(Vector2f(playerSpeed, 0));
 	}
 
 	//Move left
@@ -80,7 +80,7 @@ void Player::Update(Clock& clock)
 			playerShape.move(0, 0);
 		}
 		else
-			playerShape.move(Vector2f(-playerSpeed * clock.getElapsedTime().asSeconds(), 0));
+			playerShape.move(Vector2f(-playerSpeed, 0));
 	}
 }
 

@@ -7,8 +7,6 @@ Game::Game()
 	
 	player = new Player();
 	playArea = new PlayArea();
-
-	clock.restart();
 }
 
 Game::~Game()
@@ -23,6 +21,9 @@ void Game::Update()
 {
 	while (window->isOpen())
 	{
+		window->setFramerateLimit(0);
+		window->setVerticalSyncEnabled(0);
+		
 		Event event;
 
 		while (window->pollEvent(event))
@@ -37,22 +38,24 @@ void Game::Update()
 			if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Space))
 			{
 				projectile = new Projectile(player);
-
 				projectiles.push_back(projectile);
-
+				
 				std::cout << "BANG " << projectiles.size() << "\n";
 			}
 		}
-
+		
 		for (auto projectile : projectiles)
 		{
-			projectile->Update(clock);
+			projectile->Update();
+			if (projectile->Intersect())
+			{
+				projectiles.erase(projectiles.begin());
+			}
 		}
 
-		player->Update(clock);
-
+		player->Update();
+		
 		Draw();
-		clock.restart();
 	}
 }
 
