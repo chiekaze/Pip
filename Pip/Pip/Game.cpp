@@ -36,11 +36,11 @@ void Game::Update()
 
 			if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Space))
 			{
-				projectile = new Projectile();
+				projectile = new Projectile(player);
 
 				projectiles.push_back(projectile);
-				
-				std::cout << "PAM\n" << projectiles.size();
+
+				std::cout << "BANG " << projectiles.size() << "\n";
 			}
 		}
 

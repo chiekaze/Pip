@@ -18,8 +18,6 @@ public:
 	int playerSpeed;
 	int playerNormalSpeed = 2500;
 	int playerFocusSpeed = 1000;
-	Vector2f playerPos;
-
 
 	Player();
 	~Player();

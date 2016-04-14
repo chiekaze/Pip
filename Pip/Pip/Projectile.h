@@ -10,7 +10,6 @@ class Projectile
 {
 public:
 	CircleShape projectileShape;
-	Player* player;
 
 	/*FloatRect getProjectileBox();*/
 
@@ -18,10 +17,10 @@ public:
 	int projectileSpeed = 2500;
 	//int projectileDamage = 10;
 
-	Projectile();
+	Projectile(Player*);
 	~Projectile();
 
-	void setPosition();
+	void setPosition(Vector2f);
 	Vector2f getProjectilePosition();
 
 	void Update(Clock& clock);

@@ -3,9 +3,10 @@
 Player::Player()
 {
 	playerShape = CircleShape(playerSize);
+	
 	playArea = new PlayArea();
-
 	playArea->setPositions();
+	
 	setPosition();
 }
 
@@ -20,8 +21,7 @@ void Player::setPosition()
 
 Vector2f Player::getPosition()
 {
-	playerPos =  playerShape.getPosition();
-	return playerPos;
+	return playerShape.getPosition();
 }
 
 void Player::Update(Clock& clock)

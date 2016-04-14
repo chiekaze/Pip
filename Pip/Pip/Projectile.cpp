@@ -1,11 +1,14 @@
 #include "Projectile.h"
 #include <iostream>
 
-Projectile::Projectile()
+Projectile::Projectile(Player* player)
 {
-	player = new Player();
 	projectileShape = CircleShape(projectileSize);
-	projectileShape.setPosition(400, 300);
+
+	if (player)
+	{
+		setPosition(player->getPosition());
+	}
 }
 
 //FloatRect Projectile::getProjectileBox()
@@ -19,9 +22,9 @@ Projectile::~Projectile()
 {
 }
 
-void Projectile::setPosition()
+void Projectile::setPosition(Vector2f position)
 {
-	projectileShape.setPosition(player->getPosition());
+	projectileShape.setPosition(position);
 }
 
 Vector2f Projectile::getProjectilePosition()
