@@ -6,8 +6,6 @@
 #include "PlayArea.h"
 #include "Projectile.h"
 #include <vector>
-#include <iostream>
-#include <thread>
 
 using namespace sf;
 
@@ -28,21 +26,6 @@ public:
 
 	Game();
 	~Game();
-
-	/*
-	void shoot(){
-		projectile = new Projectile(player);
-
-		projectiles.push_back(projectile);
-
-		std::cout << "BANG " << projectiles.size() << "\n";
-	}
-
-	std::thread shootThread()
-	{
-		return std::thread([=] {shoot(); });
-	}
-	*/
 
 	void Update();
 	void Draw();

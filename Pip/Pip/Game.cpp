@@ -1,6 +1,5 @@
 #include "Game.h"
 #include <iostream>
-#include <thread>
 
 Game::Game()
 {
@@ -20,25 +19,10 @@ Game::~Game()
 	delete projectile;
 }
 
-/*
-void Game::shoot()
-{
-	projectile = new Projectile(player);
-
-	projectiles.push_back(projectile);
-
-	std::cout << "BANG " << projectiles.size() << "\n";
-}
-*/
-
 void Game::Update()
 {
 	while (window->isOpen())
 	{
-		/*
-		Game *game = new Game();
-		std::thread sht = game->shootThread();
-		*/
 
 		Time time = seconds(2);
 		Time elapsed = clock.getElapsedTime();
@@ -47,7 +31,6 @@ void Game::Update()
 
 		while (window->pollEvent(event))
 		{
-			//std::thread shoot(&Game::shoot, Game());
 
 			if ((event.type == sf::Event::Closed) || 
 				(event.type == sf::Event::KeyPressed) && 
@@ -58,8 +41,6 @@ void Game::Update()
 
 			if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Space))
 			{
-				
-				//sht.join();
 				
 				projectile = new Projectile(player);
 
