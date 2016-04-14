@@ -35,6 +35,7 @@ void Game::Update()
 				window->close();
 			}
 
+			//Shooting
 			if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Space))
 			{
 				projectile = new Projectile(player);
@@ -43,12 +44,14 @@ void Game::Update()
 				std::cout << "BANG " << projectiles.size() << "\n";
 			}
 		}
-		
+
 		for (auto projectile : projectiles)
 		{
+			//Collision checking and projectile movement
 			projectile->Update();
 			if (projectile->Intersect())
 			{
+				//Deletes projectiles from vector after colliding
 				projectiles.erase(projectiles.begin());
 			}
 		}
@@ -63,6 +66,7 @@ void Game::Draw()
 {
 	window->clear();
 
+	//Draws projectiles
 	for (auto projectile : projectiles)
 	{
 		projectile->Draw(*window);

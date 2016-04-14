@@ -24,7 +24,6 @@ public:
 	~Projectile();
 
 	void setPosition(Vector2f);
-	Vector2f getProjectilePosition();
 	bool Intersect();
 
 	void Update();

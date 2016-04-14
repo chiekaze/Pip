@@ -8,6 +8,7 @@ Projectile::Projectile(Player* player)
 
 	projectileShape = CircleShape(projectileSize);
 
+	//Sets projecteil start position to player position
 	if (player)
 	{
 		setPosition(player->getPosition());
@@ -30,25 +31,19 @@ void Projectile::setPosition(Vector2f position)
 	projectileShape.setPosition(position);
 }
 
-Vector2f Projectile::getProjectilePosition()
-{
-	return projectileShape.getPosition();
-}
-
+//Projectile moves
 void Projectile::Update()
 {
-	//Projectile moves
 	projectileShape.move(Vector2f(0, -projectileSpeed));
 }
 
+//Projectile collision check with top border
 bool Projectile::Intersect()
 {
 	FloatRect projectileBoundingBox = projectileShape.getGlobalBounds();
 
 	if (projectileBoundingBox.intersects(playArea->getTopBoundingBox()))
-	{
 		return true;
-	}
 
 	else
 		return false;
