@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "PlayArea.h"
 #include "Projectile.h"
+#include <vector>
 
 using namespace sf;
 
@@ -16,8 +17,9 @@ public:
 	PlayArea* playArea;
 	Projectile* projectile;
 
+	std::vector<Projectile*> projectiles;
+
 	Clock clock;
-	//Clock deltaTime;
 
 	int windowWidth = 800;
 	int windowHeight = 600;
@@ -27,6 +29,7 @@ public:
 
 	void Update();
 	void Draw();
+	void DrawProj();
 };
 
 #endif;

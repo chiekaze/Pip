@@ -10,6 +10,8 @@ PlayArea::PlayArea()
 	//(10, 600)
 	rightBorder = RectangleShape(Vector2f(borderSize, height));
 	leftBorder = RectangleShape(Vector2f(borderSize, height));
+
+	setPositions();
 }
 
 PlayArea::~PlayArea()

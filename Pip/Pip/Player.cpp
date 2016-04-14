@@ -1,6 +1,4 @@
 #include "Player.h"
-#include <iostream>
-#include <thread>
 
 Player::Player()
 {
@@ -8,6 +6,7 @@ Player::Player()
 	playArea = new PlayArea();
 
 	playArea->setPositions();
+	setPosition();
 }
 
 Player::~Player()
@@ -21,27 +20,8 @@ void Player::setPosition()
 
 Vector2f Player::getPosition()
 {
-	return playerShape.getPosition();
-}
-
-void Player::shootProjectile()
-{
-	//This shit needs to be completely redone
-	Projectile projectile;
-	projectile.projectileShape.setPosition(playerShape.getPosition());
-	std::cout << "PAM";
-
-	//This is supposed to delay the shots, and it sort of does
-	Time delayTime = milliseconds(100);
-
-	//Checking if it's working
-	/*
-	if (projectile.projectileShape.getPosition() == playerShape.getPosition())
-	{
-		std::cout << &Projectile::getProjectilePosition << ", this means the projectile spawns where the player is. ";
-	}
-	*/
-	sleep(delayTime);
+	playerPos =  playerShape.getPosition();
+	return playerPos;
 }
 
 void Player::Update(Clock& clock)
@@ -102,20 +82,6 @@ void Player::Update(Clock& clock)
 		else
 			playerShape.move(Vector2f(-playerSpeed * clock.getElapsedTime().asSeconds(), 0));
 	}
-
-	if (Keyboard::isKeyPressed(Keyboard::Space))
-	{
-		//std::thread projectile (&Player::shootProjectile, this);
-		//this->shootProjectile();
-		shootProjectile();
-	}
-	/*
-	//This is supposed to check if the enemy is there but apparently it just doesn't work
-	if (playerBoundingBox.intersects(enemy->getEnemyBox()))
-	{
-		std::cout << "The enemy is nearby! ";
-	}
-	*/
 }
 
 void Player::Draw(RenderWindow& window)

@@ -3,8 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "PlayArea.h"
-#include "Projectile.h"
-#include "Enemy.h"
 
 using namespace sf;
 
@@ -14,22 +12,20 @@ public:
 	CircleShape playerShape;
 
 	PlayArea* playArea;
-	Projectile* projectile;
-	Enemy* enemy;
 
 	float playerSize = 5.0;
 
 	int playerSpeed;
 	int playerNormalSpeed = 2500;
 	int playerFocusSpeed = 1000;
+	Vector2f playerPos;
+
 
 	Player();
 	~Player();
 
 	void setPosition();
 	Vector2f getPosition();
-
-	void shootProjectile();
 
 	void Update(Clock& clock);
 	void Draw(RenderWindow& window);

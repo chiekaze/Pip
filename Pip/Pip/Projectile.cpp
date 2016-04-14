@@ -3,18 +3,25 @@
 
 Projectile::Projectile()
 {
+	player = new Player();
 	projectileShape = CircleShape(projectileSize);
+	projectileShape.setPosition(400, 300);
 }
 
-FloatRect Projectile::getProjectileBox()
-{
-	//Projectile boundingbox
-	FloatRect projectileBoundingBox = projectileShape.getGlobalBounds();
-	return projectileBoundingBox;
-}
+//FloatRect Projectile::getProjectileBox()
+//{
+//	//Projectile boundingbox
+//	FloatRect projectileBoundingBox = projectileShape.getGlobalBounds();
+//	return projectileBoundingBox;
+//}
 
 Projectile::~Projectile()
 {
+}
+
+void Projectile::setPosition()
+{
+	projectileShape.setPosition(player->getPosition());
 }
 
 Vector2f Projectile::getProjectilePosition()

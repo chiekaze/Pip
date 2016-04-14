@@ -1,19 +1,12 @@
 #include "Game.h"
+#include <iostream>
 
 Game::Game()
 {
 	window = new RenderWindow(VideoMode(windowWidth, windowHeight), "Pip");
+	
 	player = new Player();
-	//enemy = new Enemy();
-	//projectile = new Projectile();
 	playArea = new PlayArea();
-	playArea->setPositions();
-
-	//Sets player start position
-	player->setPosition();
-
-	//Sets enemy start position
-	//enemy->setStartPosition();
 
 	clock.restart();
 }
@@ -23,8 +16,7 @@ Game::~Game()
 	delete window;
 	delete player;
 	delete playArea;
-	//delete enemy;
-	//delete projectile;
+	delete projectile;
 }
 
 void Game::Update()
@@ -35,15 +27,30 @@ void Game::Update()
 
 		while (window->pollEvent(event))
 		{
-			if ((event.type == sf::Event::Closed) || (event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+			if ((event.type == sf::Event::Closed) || 
+				(event.type == sf::Event::KeyPressed) && 
+				(event.key.code == sf::Keyboard::Escape))
 			{
 				window->close();
 			}
+
+			if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Space))
+			{
+				projectile = new Projectile();
+
+				projectiles.push_back(projectile);
+				
+				std::cout << "PAM\n" << projectiles.size();
+			}
+		}
+
+		for (auto projectile : projectiles)
+		{
+			projectile->Update(clock);
 		}
 
 		player->Update(clock);
-		//enemy->Update(clock);
-		//projectile->Update(clock);
+
 		Draw();
 		clock.restart();
 	}
@@ -52,9 +59,14 @@ void Game::Update()
 void Game::Draw()
 {
 	window->clear();
+
+	for (auto projectile : projectiles)
+	{
+		projectile->Draw(*window);
+	}
+
 	player->Draw(*window);
 	playArea->Draw(*window);
-	//enemy->Draw(*window);
-	//projectile->Draw(*window);
+	
 	window->display();
 }
