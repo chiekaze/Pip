@@ -27,6 +27,11 @@ void Game::Update()
 		Time time = seconds(2);
 		Time elapsed = clock.getElapsedTime();
 
+		while (true)
+		{
+			std::cout << elapsed.asSeconds() << std::endl;
+		}
+
 		Event event;
 
 		while (window->pollEvent(event))
