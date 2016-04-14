@@ -21,18 +21,13 @@ void Game::Update()
 {
 	while (window->isOpen())
 	{
-<<<<<<< HEAD
 		window->setFramerateLimit(0);
 		window->setVerticalSyncEnabled(0);
 		
-=======
-
->>>>>>> cb5efada8c9f21118f6bad88fe1280a308e10e2c
 		Event event;
 
 		while (window->pollEvent(event))
 		{
-
 			if ((event.type == sf::Event::Closed) || 
 				(event.type == sf::Event::KeyPressed) && 
 				(event.key.code == sf::Keyboard::Escape))
@@ -42,7 +37,6 @@ void Game::Update()
 
 			if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Space))
 			{
-				
 				projectile = new Projectile(player);
 				projectiles.push_back(projectile);
 				
