@@ -26,19 +26,25 @@ Vector2f Player::getPosition()
 
 void Player::Update()
 {
+	PlayerInput();
+}
+
+void Player::PlayerInput()
+{
 	//Player boundingbox
 	FloatRect playerBoundingBox = playerShape.getGlobalBounds();
 
+	//Player speed
 	if (Keyboard::isKeyPressed(Keyboard::LControl))
 		playerSpeed = playerFocusSpeed;
 
 	else
 		playerSpeed = playerNormalSpeed;
 
-	//Move up
+	//Movement UP
 	if (Keyboard::isKeyPressed(Keyboard::Up))
 	{
-		//Collision check here
+		//Collision check
 		if (playerBoundingBox.intersects(playArea->getTopBoundingBox()))
 		{
 			playerShape.move(0, 0);
@@ -47,10 +53,10 @@ void Player::Update()
 			playerShape.move(Vector2f(0, -playerSpeed));
 	}
 
-	//Move down
+	//Movement DOWN
 	if (Keyboard::isKeyPressed(Keyboard::Down))
 	{
-		//Collision check here
+		//Collision check
 		if (playerBoundingBox.intersects(playArea->getBotBoundingBox()))
 		{
 			playerShape.move(0, 0);
@@ -59,10 +65,10 @@ void Player::Update()
 			playerShape.move(Vector2f(0, playerSpeed));
 	}
 
-	//Move right
+	//Movement RIGHT
 	if (Keyboard::isKeyPressed(Keyboard::Right))
 	{
-		//Collision check here
+		//Collision check
 		if (playerBoundingBox.intersects(playArea->getRightBoundingBox()))
 		{
 			playerShape.move(0, 0);
@@ -71,10 +77,10 @@ void Player::Update()
 			playerShape.move(Vector2f(playerSpeed, 0));
 	}
 
-	//Move left
+	//Movement LEFT
 	if (Keyboard::isKeyPressed(Keyboard::Left))
 	{
-		//Collision check here
+		//Collision check
 		if (playerBoundingBox.intersects(playArea->getLeftBoundingBox()))
 		{
 			playerShape.move(0, 0);

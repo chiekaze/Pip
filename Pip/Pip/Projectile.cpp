@@ -7,6 +7,7 @@ Projectile::Projectile(Player* player)
 	playArea->setPositions();
 
 	projectileShape = CircleShape(projectileSize);
+	projectileShape.setFillColor(Color::Magenta);
 
 	//Sets projecteil start position to player position
 	if (player)

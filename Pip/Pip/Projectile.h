@@ -15,9 +15,10 @@ public:
 
 	FloatRect getProjectileBox();
 	FloatRect projectileBoundingBox;
+	
+	float projectileSize = 2;
+	float projectileSpeed = 15;
 
-	float projectileSize = 2.5;
-	float projectileSpeed = 0.08;
 	//int projectileDamage = 10;
 
 	Projectile(Player*);

@@ -16,16 +16,20 @@ public:
 	float playerSize = 5.0;
 
 	float playerSpeed;
-	float playerNormalSpeed = 0.05;
-	float playerFocusSpeed = 0.025;
+	float playerNormalSpeed = 5;
+	float playerFocusSpeed = 2.5;
 
 	Player();
 	~Player();
 
 	void setPosition();
 	Vector2f getPosition();
-
+	
+	//void FireProjectile();
+	
 	void Update();
+	void PlayerInput();
+
 	void Draw(RenderWindow& window);
 };
 

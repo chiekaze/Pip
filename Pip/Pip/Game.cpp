@@ -14,15 +14,17 @@ Game::~Game()
 	delete window;
 	delete player;
 	delete playArea;
-	delete projectile;
 }
 
 void Game::Update()
 {
 	while (window->isOpen())
 	{
-		window->setFramerateLimit(0);
-		window->setVerticalSyncEnabled(0);
+		window->setFramerateLimit(60);
+		window->setVerticalSyncEnabled(1);
+
+		window->setKeyRepeatEnabled(false);
+		player->Update();
 		
 		Event event;
 
