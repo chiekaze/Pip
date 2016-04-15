@@ -28,7 +28,7 @@ public:
 	int height = 600;
 
 	//Playarea bordersize
-	int borderSize = 10;
+	int borderSize = 50;
 
 	FloatRect getTopBoundingBox();
 	FloatRect getBotBoundingBox();
