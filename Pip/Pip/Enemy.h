@@ -2,6 +2,7 @@
 #define ENEMY_H
 
 #include <SFML/Graphics.hpp>
+#include "PlayArea.h"
 #include "Projectile.h"
 
 using namespace sf;
@@ -9,25 +10,24 @@ using namespace sf;
 class Enemy
 {
 public:
-	CircleShape enemyShape;
-
-	FloatRect getEnemyBox();
-
-	Projectile* projectile;
-
-	std::vector<Enemy*> enemies;
-
-	float enemySize = 5.0;
-	int enemySpeed = 2500;
-	int enemyHP = 100;
-
 	Enemy();
 	~Enemy();
 
-	void setStartPosition();
+	FloatRect getEnemyBox();
+
+	void setPosition();
 	Vector2f getPosition();
 
-	//void Update(Clock& clock);
+	bool Intersect();
+	void Update();
 	void Draw(RenderWindow& window);
+
+private:
+	CircleShape enemyShape;
+	PlayArea* playArea;
+	Projectile* projectile;
+
+	int enemySize = 10;
+	int enemySpeed = 2;
 };
 #endif

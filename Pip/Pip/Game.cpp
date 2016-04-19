@@ -4,9 +4,9 @@
 Game::Game()
 {
 	window = new RenderWindow(VideoMode(windowWidth, windowHeight), "Pip");
-	
 	player = new Player();
 	playArea = new PlayArea();
+	enemy = new Enemy();
 }
 
 Game::~Game()
@@ -18,20 +18,21 @@ Game::~Game()
 
 void Game::Update()
 {
+	enemy = new Enemy();
+	enemies.push_back(enemy);
+
 	while (window->isOpen())
 	{
 		window->setFramerateLimit(60);
 		window->setVerticalSyncEnabled(1);
-
 		window->setKeyRepeatEnabled(false);
+
 		player->Update();
-		
-		Event event;
 
 		while (window->pollEvent(event))
 		{
-			if ((event.type == sf::Event::Closed) || 
-				(event.type == sf::Event::KeyPressed) && 
+			if ((event.type == sf::Event::Closed) ||
+				(event.type == sf::Event::KeyPressed) &&
 				(event.key.code == sf::Keyboard::Escape))
 			{
 				window->close();
@@ -42,7 +43,7 @@ void Game::Update()
 			{
 				projectile = new Projectile(player);
 				projectiles.push_back(projectile);
-				
+
 				std::cout << "BANG " << projectiles.size() << "\n";
 			}
 		}
@@ -51,6 +52,7 @@ void Game::Update()
 		{
 			//Collision checking and projectile movement
 			projectile->Update();
+
 			if (projectile->Intersect())
 			{
 				//Deletes projectiles from vector after colliding
@@ -58,8 +60,19 @@ void Game::Update()
 			}
 		}
 
-		player->Update();
-		
+		for (auto enemy : enemies)
+		{
+			enemy->Update();
+
+			if (enemy->Intersect())
+			{
+				enemies.erase(enemies.begin());
+				enemy = new Enemy();
+				enemies.push_back(enemy);
+				std::cout << "Enemy " << enemies.size() << "\n";
+			}
+		}
+	
 		Draw();
 	}
 }
@@ -72,6 +85,11 @@ void Game::Draw()
 	for (auto projectile : projectiles)
 	{
 		projectile->Draw(*window);
+	}
+
+	for (auto enemy : enemies)
+	{
+		enemy->Draw(*window);
 	}
 
 	player->Draw(*window);

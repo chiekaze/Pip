@@ -2,7 +2,7 @@
 
 int main()
 {
-	Game game;
-	game.Update();
+	Game pip;
+	pip.Update();
 	return 0;
 }

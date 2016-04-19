@@ -1,9 +1,12 @@
 #include "Enemy.h"
+#include <cstdlib>
 
 Enemy::Enemy()
 {
+	playArea = new PlayArea();
 	enemyShape = CircleShape(enemySize);
 	enemyShape.setFillColor(Color::Red);
+	setPosition();
 }
 
 Enemy::~Enemy()
@@ -18,9 +21,11 @@ FloatRect Enemy::getEnemyBox()
 	return enemyBoundingBox;
 }
 
-void Enemy::setStartPosition()
+void Enemy::setPosition()
 {
-	enemyShape.setPosition(800 - 100, 600 / 2);
+	srand(time(NULL));
+
+	enemyShape.setPosition(rand() % 800, rand() % 1);
 }
 
 Vector2f Enemy::getPosition()
@@ -28,18 +33,21 @@ Vector2f Enemy::getPosition()
 	return enemyShape.getPosition();
 }
 
-/*
-void Enemy::Update(Clock& clock)
+bool Enemy::Intersect()
 {
-	enemyShape.move(Vector2f(0, enemySpeed * clock.getElapsedTime().asSeconds()));
+	FloatRect enemyBoundingBox = enemyShape.getGlobalBounds();
 
-	//Getting hit by projectile (this needs to be done better at some point)
-	if (getEnemyBox().intersects(projectile->getProjectileBox()))
-	{
-		enemyHP -= projectile->projectileDamage;
-	}
+	if (enemyBoundingBox.intersects(playArea->getBotBoundingBox()))
+		return true;
+
+	else
+		return false;
 }
-*/
+
+void Enemy::Update()
+{
+	enemyShape.move(Vector2f(0, enemySpeed));
+}
 
 void Enemy::Draw(RenderWindow& window)
 {

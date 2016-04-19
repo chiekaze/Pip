@@ -1,27 +1,26 @@
 #include "Player.h"
+#include <iostream>
 
 Player::Player()
 {
 	playerShape = CircleShape(playerSize);
-	
 	playArea = new PlayArea();
-	playArea->setPositions();
-	
 	setPosition();
 }
 
 Player::~Player()
 {
-}
-
-void Player::setPosition()
-{
-	playerShape.setPosition(800 / 2, 600 / 2);
+	delete playArea;
 }
 
 Vector2f Player::getPosition()
 {
 	return playerShape.getPosition();
+}
+
+void Player::setPosition()
+{
+	playerShape.setPosition(800 / 2, 600 / 2);
 }
 
 void Player::Update()

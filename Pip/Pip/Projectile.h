@@ -10,25 +10,23 @@ using namespace sf;
 class Projectile
 {
 public:
-	PlayArea* playArea;
-	CircleShape projectileShape;
-
-	FloatRect getProjectileBox();
-	FloatRect projectileBoundingBox;
-	
-	float projectileSize = 2;
-	float projectileSpeed = 15;
-
-	//int projectileDamage = 10;
-
 	Projectile(Player*);
 	~Projectile();
 
+	FloatRect getProjectileBox();
 	void setPosition(Vector2f);
-	bool Intersect();
-
 	void Update();
+	bool Intersect();
 	void Draw(RenderWindow& window);
+
+private:
+	PlayArea* playArea;
+
+	CircleShape projectileShape;
+	FloatRect projectileBoundingBox;
+
+	int projectileSize = 2;
+	int projectileSpeed = 15;
 };
 
 #endif

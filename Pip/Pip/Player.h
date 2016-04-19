@@ -9,28 +9,23 @@ using namespace sf;
 class Player
 {
 public:
-	CircleShape playerShape;
-
-	PlayArea* playArea;
-
-	float playerSize = 5.0;
-
-	float playerSpeed;
-	float playerNormalSpeed = 5;
-	float playerFocusSpeed = 2.5;
-
 	Player();
 	~Player();
 
-	void setPosition();
 	Vector2f getPosition();
-	
-	//void FireProjectile();
-	
+	void setPosition();
 	void Update();
 	void PlayerInput();
-
 	void Draw(RenderWindow& window);
+
+private:
+	PlayArea* playArea;
+	CircleShape playerShape;
+	
+	int playerSize = 5;
+	int playerSpeed;
+	int playerNormalSpeed = 5;
+	int playerFocusSpeed = 2;
 };
 
 #endif;

@@ -8,6 +8,19 @@ using namespace sf;
 class PlayArea
 {
 public:
+	PlayArea();
+	~PlayArea();
+
+	void setPositions();
+
+	FloatRect getTopBoundingBox();
+	FloatRect getBotBoundingBox();
+	FloatRect getRightBoundingBox();
+	FloatRect getLeftBoundingBox();
+
+	void Draw(RenderWindow& window);
+
+private:
 	RectangleShape topBorder;
 	RectangleShape bottomBorder;
 	RectangleShape rightBorder;
@@ -18,24 +31,12 @@ public:
 	FloatRect rightBoundingBox;
 	FloatRect leftBoundingBox;
 
-	PlayArea();
-	~PlayArea();
-
-	void setPositions();
-
 	//Window width and height
 	int width = 800;
 	int height = 600;
 
 	//Playarea bordersize
 	int borderSize = 50;
-
-	FloatRect getTopBoundingBox();
-	FloatRect getBotBoundingBox();
-	FloatRect getRightBoundingBox();
-	FloatRect getLeftBoundingBox();
-
-	void Draw(RenderWindow& window);
 };
 
 #endif;

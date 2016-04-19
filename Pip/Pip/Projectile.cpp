@@ -4,16 +4,21 @@
 Projectile::Projectile(Player* player)
 {
 	playArea = new PlayArea();
-	playArea->setPositions();
+	//playArea->setPositions();
 
 	projectileShape = CircleShape(projectileSize);
 	projectileShape.setFillColor(Color::Magenta);
 
-	//Sets projecteil start position to player position
+	//Sets projectile start position to player position
 	if (player)
 	{
 		setPosition(player->getPosition());
 	}
+}
+
+Projectile::~Projectile()
+{
+	delete playArea;
 }
 
 FloatRect Projectile::getProjectileBox()
@@ -21,10 +26,6 @@ FloatRect Projectile::getProjectileBox()
 	//Projectile boundingbox
 	FloatRect projectileBoundingBox = projectileShape.getGlobalBounds();
 	return projectileBoundingBox;
-}
-
-Projectile::~Projectile()
-{
 }
 
 void Projectile::setPosition(Vector2f position)
