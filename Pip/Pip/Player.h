@@ -18,6 +18,8 @@ public:
 	void PlayerInput();
 	void Draw(RenderWindow& window);
 
+	FloatRect getPlayerBox();
+
 private:
 	PlayArea* playArea;
 	CircleShape playerShape;

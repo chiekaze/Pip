@@ -13,6 +13,14 @@ Player::~Player()
 	delete playArea;
 }
 
+FloatRect Player::getPlayerBox()
+{
+	//Player boundingbox
+	FloatRect playerBoundingBox = playerShape.getGlobalBounds();
+
+	return playerBoundingBox;
+}
+
 Vector2f Player::getPosition()
 {
 	return playerShape.getPosition();
