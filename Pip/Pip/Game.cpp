@@ -72,21 +72,25 @@ void Game::Update()
 				std::cout << "Enemy " << enemies.size() << "\n";
 			}
 
-			//Wut da fuq
-			/*
-			if (enemy->isHit())
+			//Checks if enemy is hit by projectile
+			for (auto projectile : projectiles)
 			{
-				std::cout << "Enemy is kill!\n";
+				if (enemy->getEnemyBox().intersects(projectile->getProjectileBox()))
+				{
+					std::cout << "Enemy is kill!\n";
+					enemy->TakeDamage(projectile->projectileDamage());
+					std::cout << enemy->EnemyHP() << "\n";
+				}
 			}
-			*/
 
-			//Same as the above, but not as well organized
-			/*
-			if (enemy->getEnemyBox().intersects(projectile->getProjectileBox()))
+			if (enemy->isDead())
 			{
-				std::cout << "Enemy is kill!\n";
+				enemies.erase(enemies.begin());
+				enemy = new Enemy();
+				enemies.push_back(enemy);
+				std::cout << "Enemy " << enemies.size() << "\n";
 			}
-			*/
+			
 		}
 	
 		Draw();

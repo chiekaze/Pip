@@ -19,9 +19,10 @@ public:
 	Vector2f getPosition();
 
 	int EnemyHP();
+	void TakeDamage(int damage);
 
+	bool isDead();
 	bool Intersect();
-	bool isHit();
 	void Update();
 	void Draw(RenderWindow& window);
 
@@ -32,5 +33,6 @@ private:
 
 	int enemySize = 10;
 	int enemySpeed = 2;
+	int enemyHp = 10;
 };
 #endif

@@ -44,21 +44,23 @@ bool Enemy::Intersect()
 		return false;
 }
 
-bool Enemy::isHit()
+int Enemy::EnemyHP()
 {
-	FloatRect enemyBoundingBox = enemyShape.getGlobalBounds();
+	return enemyHp;
+}
 
-	if (enemyBoundingBox.intersects(projectile->getProjectileBox()))
+void Enemy::TakeDamage(int damage)
+{
+	enemyHp -= damage;
+}
+
+bool Enemy::isDead()
+{
+	if (enemyHp <= 0)
 		return true;
 
 	else
 		return false;
-}
-
-int Enemy::EnemyHP()
-{
-	int enemyHP = 10;
-	return enemyHP;
 }
 
 void Enemy::Update()
