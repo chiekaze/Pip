@@ -71,6 +71,22 @@ void Game::Update()
 				enemies.push_back(enemy);
 				std::cout << "Enemy " << enemies.size() << "\n";
 			}
+
+			//Wut da fuq
+			/*
+			if (enemy->isHit())
+			{
+				std::cout << "Enemy is kill!\n";
+			}
+			*/
+
+			//Same as the above, but not as well organized
+			/*
+			if (enemy->getEnemyBox().intersects(projectile->getProjectileBox()))
+			{
+				std::cout << "Enemy is kill!\n";
+			}
+			*/
 		}
 	
 		Draw();

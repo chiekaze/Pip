@@ -19,6 +19,7 @@ public:
 	Vector2f getPosition();
 
 	bool Intersect();
+	bool isHit();
 	void Update();
 	void Draw(RenderWindow& window);
 

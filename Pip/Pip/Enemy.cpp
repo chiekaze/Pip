@@ -44,6 +44,17 @@ bool Enemy::Intersect()
 		return false;
 }
 
+bool Enemy::isHit()
+{
+	FloatRect enemyBoundingBox = enemyShape.getGlobalBounds();
+
+	if (enemyBoundingBox.intersects(projectile->getProjectileBox()))
+		return true;
+
+	else
+		return false;
+}
+
 void Enemy::Update()
 {
 	enemyShape.move(Vector2f(0, enemySpeed));
