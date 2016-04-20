@@ -18,6 +18,8 @@ public:
 	void setPosition();
 	Vector2f getPosition();
 
+	int EnemyHP();
+
 	bool Intersect();
 	bool isHit();
 	void Update();

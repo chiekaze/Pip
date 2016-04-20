@@ -13,6 +13,8 @@ public:
 	Projectile(Player*);
 	~Projectile();
 
+	int projectileDamage();
+
 	FloatRect getProjectileBox();
 	void setPosition(Vector2f);
 	void Update();

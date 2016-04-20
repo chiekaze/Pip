@@ -55,6 +55,12 @@ bool Enemy::isHit()
 		return false;
 }
 
+int Enemy::EnemyHP()
+{
+	int enemyHP = 10;
+	return enemyHP;
+}
+
 void Enemy::Update()
 {
 	enemyShape.move(Vector2f(0, enemySpeed));

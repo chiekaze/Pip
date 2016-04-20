@@ -51,6 +51,12 @@ bool Projectile::Intersect()
 		return false;
 }
 
+int Projectile::projectileDamage()
+{
+	int damage = 5;
+	return damage;
+}
+
 void Projectile::Draw(RenderWindow& window)
 {
 	window.draw(projectileShape);
