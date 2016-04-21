@@ -18,7 +18,7 @@ public:
 	void setPosition();
 	Vector2f getPosition();
 
-	int EnemyHP();
+	int getEnemyHP();
 	void TakeDamage(int damage);
 
 	bool isDead();
@@ -27,9 +27,11 @@ public:
 	void Draw(RenderWindow& window);
 
 private:
-	CircleShape enemyShape;
 	PlayArea* playArea;
 	Projectile* projectile;
+	CircleShape enemyShape;
+	
+	FloatRect enemyBoundingBox;
 
 	int enemySize = 10;
 	int enemySpeed = 2;

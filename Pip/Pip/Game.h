@@ -36,6 +36,7 @@ private:
 	int windowWidth = 800;
 	int windowHeight = 600;
 
+	int score = 0;
 };
 
 #endif;

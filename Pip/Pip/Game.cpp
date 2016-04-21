@@ -6,7 +6,6 @@ Game::Game()
 	window = new RenderWindow(VideoMode(windowWidth, windowHeight), "Pip");
 	player = new Player();
 	playArea = new PlayArea();
-	enemy = new Enemy();
 }
 
 Game::~Game()
@@ -18,8 +17,12 @@ Game::~Game()
 
 void Game::Update()
 {
+	//Spawns enemy when game starts
 	enemy = new Enemy();
 	enemies.push_back(enemy);
+
+	std::cout << "Enemy " << enemies.size() << "\n";
+	std::cout << "Enemy HP: " << enemy->getEnemyHP() << "\n";
 
 	while (window->isOpen())
 	{
@@ -62,35 +65,41 @@ void Game::Update()
 
 		for (auto enemy : enemies)
 		{
+
 			enemy->Update();
 
+			//Checks if an enemy collides with the bottom border, then deletes it and spawns a new one 
 			if (enemy->Intersect())
 			{
 				enemies.erase(enemies.begin());
 				enemy = new Enemy();
 				enemies.push_back(enemy);
+
 				std::cout << "Enemy " << enemies.size() << "\n";
 			}
 
 			//Checks if enemy is hit by projectile
 			for (auto projectile : projectiles)
 			{
-				if (enemy->getEnemyBox().intersects(projectile->getProjectileBox()))
+				if (enemy->getEnemyBox().intersects(projectile->getProjectileBoundingBox()))
 				{
-					std::cout << "Enemy is kill!\n";
+					std::cout << "Enemy Hit!\n";
 					enemy->TakeDamage(projectile->projectileDamage());
-					std::cout << enemy->EnemyHP() << "\n";
+					
+					std::cout << "Enemy HP: " << enemy->getEnemyHP() << "\n";
 				}
 			}
 
+			//Deletes killed enemy, spawns a new one and adds 1 score
 			if (enemy->isDead())
 			{
 				enemies.erase(enemies.begin());
 				enemy = new Enemy();
 				enemies.push_back(enemy);
-				std::cout << "Enemy " << enemies.size() << "\n";
-			}
 			
+				std::cout << "Enemy " << enemies.size() << "\n";
+				std::cout << "Score: " << ++score << "\n";
+			}
 		}
 	
 		Draw();

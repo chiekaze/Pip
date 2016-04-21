@@ -4,7 +4,6 @@
 Player::Player()
 {
 	playerShape = CircleShape(playerSize);
-	playArea = new PlayArea();
 	setPosition();
 }
 
@@ -13,12 +12,10 @@ Player::~Player()
 	delete playArea;
 }
 
-FloatRect Player::getPlayerBox()
+FloatRect Player::getPlayerBoundingBox()
 {
 	//Player boundingbox
-	FloatRect playerBoundingBox = playerShape.getGlobalBounds();
-
-	return playerBoundingBox;
+	return playerBoundingBox = playerShape.getGlobalBounds();
 }
 
 Vector2f Player::getPosition()
@@ -38,6 +35,8 @@ void Player::Update()
 
 void Player::PlayerInput()
 {
+	playArea = new PlayArea();
+
 	//Player boundingbox
 	FloatRect playerBoundingBox = playerShape.getGlobalBounds();
 

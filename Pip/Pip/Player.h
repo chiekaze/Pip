@@ -18,11 +18,13 @@ public:
 	void PlayerInput();
 	void Draw(RenderWindow& window);
 
-	FloatRect getPlayerBox();
+	FloatRect getPlayerBoundingBox();
 
 private:
 	PlayArea* playArea;
 	CircleShape playerShape;
+	
+	FloatRect playerBoundingBox;
 	
 	int playerSize = 5;
 	int playerSpeed;

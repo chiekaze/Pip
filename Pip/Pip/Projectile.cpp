@@ -3,9 +3,6 @@
 
 Projectile::Projectile(Player* player)
 {
-	playArea = new PlayArea();
-	//playArea->setPositions();
-
 	projectileShape = CircleShape(projectileSize);
 	projectileShape.setFillColor(Color::Magenta);
 
@@ -21,7 +18,7 @@ Projectile::~Projectile()
 	delete playArea;
 }
 
-FloatRect Projectile::getProjectileBox()
+FloatRect Projectile::getProjectileBoundingBox()
 {
 	//Projectile boundingbox
 	FloatRect projectileBoundingBox = projectileShape.getGlobalBounds();
@@ -42,6 +39,8 @@ void Projectile::Update()
 //Projectile collision check with top border
 bool Projectile::Intersect()
 {
+	playArea = new PlayArea();
+
 	FloatRect projectileBoundingBox = projectileShape.getGlobalBounds();
 
 	if (projectileBoundingBox.intersects(playArea->getTopBoundingBox()))
@@ -53,8 +52,7 @@ bool Projectile::Intersect()
 
 int Projectile::projectileDamage()
 {
-	int damage = 5;
-	return damage;
+	return projectileDmg;
 }
 
 void Projectile::Draw(RenderWindow& window)

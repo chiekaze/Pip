@@ -3,7 +3,6 @@
 
 Enemy::Enemy()
 {
-	playArea = new PlayArea();
 	enemyShape = CircleShape(enemySize);
 	enemyShape.setFillColor(Color::Red);
 	setPosition();
@@ -11,16 +10,16 @@ Enemy::Enemy()
 
 Enemy::~Enemy()
 {
+	delete playArea;
 }
 
+//Enemy boundingbox
 FloatRect Enemy::getEnemyBox()
 {
-	//Enemy boundingbox
-	FloatRect enemyBoundingBox = enemyShape.getGlobalBounds();
-
-	return enemyBoundingBox;
+	return enemyBoundingBox = enemyShape.getGlobalBounds();
 }
 
+//Randomizes enemy spawn position
 void Enemy::setPosition()
 {
 	srand(time(NULL));
@@ -33,9 +32,12 @@ Vector2f Enemy::getPosition()
 	return enemyShape.getPosition();
 }
 
+//Checks if enemy collides with the bottom border
 bool Enemy::Intersect()
 {
-	FloatRect enemyBoundingBox = enemyShape.getGlobalBounds();
+	playArea = new PlayArea();
+
+	enemyBoundingBox = enemyShape.getGlobalBounds();
 
 	if (enemyBoundingBox.intersects(playArea->getBotBoundingBox()))
 		return true;
@@ -44,7 +46,7 @@ bool Enemy::Intersect()
 		return false;
 }
 
-int Enemy::EnemyHP()
+int Enemy::getEnemyHP()
 {
 	return enemyHp;
 }
