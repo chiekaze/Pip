@@ -12,18 +12,17 @@ public:
 	Player();
 	~Player();
 
-	Vector2f getPosition();
-	void setPosition();
+	Vector2f GetPosition();
+	FloatRect GetPlayerBoundingBox();
+	void SetPosition();
 	void Update();
 	void PlayerInput();
 	void Draw(RenderWindow& window);
 
-	FloatRect getPlayerBoundingBox();
-
 private:
 	PlayArea* playArea;
-	CircleShape playerShape;
 	
+	CircleShape playerShape;
 	FloatRect playerBoundingBox;
 	
 	int playerSize = 5;

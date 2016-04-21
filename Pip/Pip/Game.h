@@ -8,6 +8,7 @@
 #include "PlayArea.h"
 #include "Projectile.h"
 #include "Enemy.h"
+#include "Background.h"
 
 using namespace sf;
 
@@ -21,17 +22,18 @@ public:
 	void Draw();
 
 private:
-	Projectile* projectile;
-	std::vector<Projectile*> projectiles;
-
-	Event event;
-
 	RenderWindow* window;
 	Player* player;
 	PlayArea* playArea;
+	//Background* bg;
+
+	Projectile* projectile;
+	std::vector<Projectile*> projectiles;
 
 	Enemy* enemy;
 	std::vector<Enemy*> enemies;
+	
+	Event event;
 
 	int windowWidth = 800;
 	int windowHeight = 600;

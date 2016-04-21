@@ -9,7 +9,7 @@ Projectile::Projectile(Player* player)
 	//Sets projectile start position to player position
 	if (player)
 	{
-		setPosition(player->getPosition());
+		SetPosition(player->GetPosition());
 	}
 }
 
@@ -18,22 +18,21 @@ Projectile::~Projectile()
 	delete playArea;
 }
 
-FloatRect Projectile::getProjectileBoundingBox()
+int Projectile::GetProjectileDamage()
+{
+	return projectileDamage;
+}
+
+FloatRect Projectile::GetProjectileBoundingBox()
 {
 	//Projectile boundingbox
 	FloatRect projectileBoundingBox = projectileShape.getGlobalBounds();
 	return projectileBoundingBox;
 }
 
-void Projectile::setPosition(Vector2f position)
+void Projectile::SetPosition(Vector2f position)
 {
 	projectileShape.setPosition(position);
-}
-
-//Projectile moves
-void Projectile::Update()
-{
-	projectileShape.move(Vector2f(0, -projectileSpeed));
 }
 
 //Projectile collision check with top border
@@ -43,16 +42,17 @@ bool Projectile::Intersect()
 
 	FloatRect projectileBoundingBox = projectileShape.getGlobalBounds();
 
-	if (projectileBoundingBox.intersects(playArea->getTopBoundingBox()))
+	if (projectileBoundingBox.intersects(playArea->GetTopBoundingBox()))
 		return true;
 
 	else
 		return false;
 }
 
-int Projectile::projectileDamage()
+//Projectile moves
+void Projectile::Update()
 {
-	return projectileDmg;
+	projectileShape.move(Vector2f(0, -projectileSpeed));
 }
 
 void Projectile::Draw(RenderWindow& window)

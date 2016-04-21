@@ -11,13 +11,11 @@ public:
 	PlayArea();
 	~PlayArea();
 
-	void setPositions();
-
-	FloatRect getTopBoundingBox();
-	FloatRect getBotBoundingBox();
-	FloatRect getRightBoundingBox();
-	FloatRect getLeftBoundingBox();
-
+	FloatRect GetTopBoundingBox();
+	FloatRect GetBottomBoundingBox();
+	FloatRect GetRightBoundingBox();
+	FloatRect GetLeftBoundingBox();
+	void SetPositions();
 	void Draw(RenderWindow& window);
 
 private:

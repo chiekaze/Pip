@@ -13,23 +13,22 @@ public:
 	Projectile(Player*);
 	~Projectile();
 
-	int projectileDamage();
-
-	FloatRect getProjectileBoundingBox();
-	void setPosition(Vector2f);
-	void Update();
+	int GetProjectileDamage();
+	FloatRect GetProjectileBoundingBox();
+	void SetPosition(Vector2f);
 	bool Intersect();
+	void Update();
 	void Draw(RenderWindow& window);
 
 private:
 	PlayArea* playArea;
+
 	CircleShape projectileShape;
-	
 	FloatRect projectileBoundingBox;
 
 	int projectileSize = 4;
 	int projectileSpeed = 15;
-	int projectileDmg = 5;
+	int projectileDamage = 5;
 };
 
 #endif

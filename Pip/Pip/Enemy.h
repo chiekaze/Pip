@@ -13,24 +13,21 @@ public:
 	Enemy();
 	~Enemy();
 
-	FloatRect getEnemyBox();
-
-	void setPosition();
-	Vector2f getPosition();
-
-	int getEnemyHP();
-	void TakeDamage(int damage);
-
-	bool isDead();
+	FloatRect GetEnemyBoundingBox();
+	void SetPosition();
+	Vector2f GetPosition();
 	bool Intersect();
+	int GetEnemyHP();
+	void TakeDamage(int damage);
+	bool IsDead();
 	void Update();
 	void Draw(RenderWindow& window);
 
 private:
 	PlayArea* playArea;
 	Projectile* projectile;
-	CircleShape enemyShape;
-	
+
+	CircleShape enemyShape;	
 	FloatRect enemyBoundingBox;
 
 	int enemySize = 10;

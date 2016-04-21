@@ -5,7 +5,7 @@ Enemy::Enemy()
 {
 	enemyShape = CircleShape(enemySize);
 	enemyShape.setFillColor(Color::Red);
-	setPosition();
+	SetPosition();
 }
 
 Enemy::~Enemy()
@@ -14,20 +14,20 @@ Enemy::~Enemy()
 }
 
 //Enemy boundingbox
-FloatRect Enemy::getEnemyBox()
+FloatRect Enemy::GetEnemyBoundingBox()
 {
 	return enemyBoundingBox = enemyShape.getGlobalBounds();
 }
 
 //Randomizes enemy spawn position
-void Enemy::setPosition()
+void Enemy::SetPosition()
 {
 	srand(time(NULL));
 
 	enemyShape.setPosition(rand() % 800, rand() % 1);
 }
 
-Vector2f Enemy::getPosition()
+Vector2f Enemy::GetPosition()
 {
 	return enemyShape.getPosition();
 }
@@ -39,14 +39,14 @@ bool Enemy::Intersect()
 
 	enemyBoundingBox = enemyShape.getGlobalBounds();
 
-	if (enemyBoundingBox.intersects(playArea->getBotBoundingBox()))
+	if (enemyBoundingBox.intersects(playArea->GetBottomBoundingBox()))
 		return true;
 
 	else
 		return false;
 }
 
-int Enemy::getEnemyHP()
+int Enemy::GetEnemyHP()
 {
 	return enemyHp;
 }
@@ -56,7 +56,7 @@ void Enemy::TakeDamage(int damage)
 	enemyHp -= damage;
 }
 
-bool Enemy::isDead()
+bool Enemy::IsDead()
 {
 	if (enemyHp <= 0)
 		return true;

@@ -6,6 +6,7 @@ Game::Game()
 	window = new RenderWindow(VideoMode(windowWidth, windowHeight), "Pip");
 	player = new Player();
 	playArea = new PlayArea();
+	//bg = new Background();
 }
 
 Game::~Game()
@@ -13,6 +14,7 @@ Game::~Game()
 	delete window;
 	delete player;
 	delete playArea;
+	//delete bg;
 }
 
 void Game::Update()
@@ -22,7 +24,7 @@ void Game::Update()
 	enemies.push_back(enemy);
 
 	std::cout << "Enemy " << enemies.size() << "\n";
-	std::cout << "Enemy HP: " << enemy->getEnemyHP() << "\n";
+	std::cout << "Enemy HP: " << enemy->GetEnemyHP() << "\n";
 
 	while (window->isOpen())
 	{
@@ -30,6 +32,7 @@ void Game::Update()
 		window->setVerticalSyncEnabled(1);
 		window->setKeyRepeatEnabled(false);
 
+		//bg->Update();
 		player->Update();
 
 		while (window->pollEvent(event))
@@ -81,22 +84,23 @@ void Game::Update()
 			//Checks if enemy is hit by projectile
 			for (auto projectile : projectiles)
 			{
-				if (enemy->getEnemyBox().intersects(projectile->getProjectileBoundingBox()))
+				if (enemy->GetEnemyBoundingBox().intersects(projectile->GetProjectileBoundingBox()))
 				{
 					std::cout << "Enemy Hit!\n";
-					enemy->TakeDamage(projectile->projectileDamage());
+					enemy->TakeDamage(projectile->GetProjectileDamage());
 					
-					std::cout << "Enemy HP: " << enemy->getEnemyHP() << "\n";
+					std::cout << "Enemy HP: " << enemy->GetEnemyHP() << "\n";
 				}
 			}
 
 			//Deletes killed enemy, spawns a new one and adds 1 score
-			if (enemy->isDead())
+			if (enemy->IsDead())
 			{
 				enemies.erase(enemies.begin());
 				enemy = new Enemy();
 				enemies.push_back(enemy);
 			
+				std::cout << "Enemy killed!\n";
 				std::cout << "Enemy " << enemies.size() << "\n";
 				std::cout << "Score: " << ++score << "\n";
 			}
@@ -109,7 +113,7 @@ void Game::Update()
 void Game::Draw()
 {
 	window->clear();
-
+	//bg->Draw(*window);
 	//Draws projectiles
 	for (auto projectile : projectiles)
 	{
@@ -123,6 +127,7 @@ void Game::Draw()
 
 	player->Draw(*window);
 	playArea->Draw(*window);
+
 	
 	window->display();
 }
