@@ -8,6 +8,7 @@ Player::Player()
 	playerSprite.setTexture(playerText);
 	playerSprite.setTextureRect(IntRect(0, 0, 32, 32));
 	playerSprite.setScale(2, 2);
+	playerSprite.setOrigin(14, 5);
 
 	SetPosition();
 }

@@ -3,8 +3,14 @@
 
 Projectile::Projectile(Player* player)
 {
-	projectileShape = CircleShape(projectileSize);
-	projectileShape.setFillColor(Color::Magenta);
+	//projectileShape = CircleShape(projectileSize);
+	//projectileShape.setFillColor(Color::Magenta);
+
+	projectileText.loadFromFile("sprites/projectile.png");
+	projectileText.setSmooth(false);
+	projectileSprite.setTexture(projectileText);
+	projectileSprite.setTextureRect(IntRect(0, 0, 3, 32));
+	projectileSprite.setScale(1, 1);
 
 	//Sets projectile start position to player position
 	if (player)
@@ -26,13 +32,13 @@ int Projectile::GetProjectileDamage()
 FloatRect Projectile::GetProjectileBoundingBox()
 {
 	//Projectile boundingbox
-	FloatRect projectileBoundingBox = projectileShape.getGlobalBounds();
+	FloatRect projectileBoundingBox = projectileSprite.getGlobalBounds();
 	return projectileBoundingBox;
 }
 
 void Projectile::SetPosition(Vector2f position)
 {
-	projectileShape.setPosition(position);
+	projectileSprite.setPosition(position);
 }
 
 //Projectile collision check with top border
@@ -40,7 +46,7 @@ bool Projectile::Intersect()
 {
 	playArea = new PlayArea();
 
-	FloatRect projectileBoundingBox = projectileShape.getGlobalBounds();
+	FloatRect projectileBoundingBox = projectileSprite.getGlobalBounds();
 
 	if (projectileBoundingBox.intersects(playArea->GetTopBoundingBox()))
 		return true;
@@ -52,10 +58,10 @@ bool Projectile::Intersect()
 //Projectile moves
 void Projectile::Update()
 {
-	projectileShape.move(Vector2f(0, -projectileSpeed));
+	projectileSprite.move(Vector2f(0, -projectileSpeed));
 }
 
 void Projectile::Draw(RenderWindow& window)
 {
-	window.draw(projectileShape);
+	window.draw(projectileSprite);
 }

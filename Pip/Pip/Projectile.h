@@ -23,6 +23,9 @@ public:
 private:
 	PlayArea* playArea;
 
+	Texture projectileText;
+	Sprite projectileSprite;
+
 	CircleShape projectileShape;
 	FloatRect projectileBoundingBox;
 

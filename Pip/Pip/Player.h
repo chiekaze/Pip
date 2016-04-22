@@ -13,6 +13,7 @@ public:
 	~Player();
 
 	Vector2f GetPosition();
+
 	FloatRect GetPlayerBoundingBox();
 	void SetPosition();
 	void Update();
