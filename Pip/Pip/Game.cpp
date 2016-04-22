@@ -104,6 +104,18 @@ void Game::Update()
 				std::cout << "Enemy " << enemies.size() << "\n";
 				std::cout << "Score: " << ++score << "\n";
 			}
+
+			//Checks if player collides with enemy and gives damage to player
+			if (player->GetPlayerBoundingBox().intersects(enemy->GetEnemyBoundingBox()))
+			{
+				player->TakeDamage(enemy->GetEnemyDamage());
+				std::cout << player->GetPlayerHP() << std::endl;
+			}
+		}
+
+		if (player->IsDead())
+		{
+			std::cout << "You're fucking dead m8!\n";
 		}
 	
 		Draw();

@@ -39,6 +39,25 @@ void Player::Update()
 	PlayerInput();
 }
 
+int Player::GetPlayerHP()
+{
+	return playerHP;
+}
+
+void Player::TakeDamage(int damage)
+{
+	playerHP -= damage;
+}
+
+bool Player::IsDead()
+{
+	if (playerHP <= 0)
+		return true;
+
+	else
+		return false;
+}
+
 void Player::PlayerInput()
 {
 	playArea = new PlayArea();

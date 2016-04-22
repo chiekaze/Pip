@@ -51,6 +51,11 @@ int Enemy::GetEnemyHP()
 	return enemyHp;
 }
 
+int Enemy::GetEnemyDamage()
+{
+	return enemyDMG;
+}
+
 void Enemy::TakeDamage(int damage)
 {
 	enemyHp -= damage;

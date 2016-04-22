@@ -16,6 +16,9 @@ public:
 
 	FloatRect GetPlayerBoundingBox();
 	void SetPosition();
+	int GetPlayerHP();
+	void TakeDamage(int damage);
+	bool IsDead();
 	void Update();
 	void PlayerInput();
 	void Draw(RenderWindow& window);
@@ -34,6 +37,7 @@ private:
 	int playerSpeed;
 	int playerNormalSpeed = 5;
 	int playerFocusSpeed = 2;
+	int playerHP = 100;
 };
 
 #endif;
