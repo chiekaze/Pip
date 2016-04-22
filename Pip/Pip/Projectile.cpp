@@ -3,11 +3,9 @@
 
 Projectile::Projectile(Player* player)
 {
-	//projectileShape = CircleShape(projectileSize);
-	//projectileShape.setFillColor(Color::Magenta);
-
 	projectileText.loadFromFile("sprites/projectile.png");
 	projectileText.setSmooth(false);
+	
 	projectileSprite.setTexture(projectileText);
 	projectileSprite.setTextureRect(IntRect(0, 0, 3, 32));
 	projectileSprite.setScale(1, 1);

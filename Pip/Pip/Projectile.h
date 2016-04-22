@@ -29,7 +29,6 @@ private:
 	CircleShape projectileShape;
 	FloatRect projectileBoundingBox;
 
-	int projectileSize = 4;
 	int projectileSpeed = 15;
 	int projectileDamage = 5;
 };

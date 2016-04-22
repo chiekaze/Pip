@@ -29,9 +29,9 @@ private:
 	Projectile* projectile;
 
 	Texture enemyText;
-	RectangleShape enemyShape;	
+	//RectangleShape enemyShape;	
 	Sprite enemySprite;
-	Vector2f enemySize;
+	//Vector2f enemySize;
 
 	FloatRect enemyBoundingBox;
 

@@ -5,10 +5,11 @@ Player::Player()
 {
 	playerText.loadFromFile("sprites/player_ship.png");
 	playerText.setSmooth(false);
+	
 	playerSprite.setTexture(playerText);
 	playerSprite.setTextureRect(IntRect(0, 0, 32, 32));
 	playerSprite.setScale(2, 2);
-	playerSprite.setOrigin(14, 5);
+	playerSprite.setOrigin(15, 5);
 
 	SetPosition();
 }

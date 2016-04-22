@@ -14,7 +14,7 @@ Game::~Game()
 	delete window;
 	delete player;
 	delete playArea;
-	//delete bg;
+	delete bg;
 }
 
 void Game::Update()
@@ -115,6 +115,7 @@ void Game::Update()
 				if (player->IsDead())
 				{
 					std::cout << "You're fucking dead m8!\n";
+					window->close();
 				}
 			}
 		}

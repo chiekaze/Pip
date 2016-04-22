@@ -18,21 +18,18 @@ public:
 private:
 	sf::Texture bg1Tex;
 	sf::Texture bg2Tex;
-
-	RectangleShape bgShape;
 	
 	Vector2f bgSize;
 	
 	sf::Sprite bg1Sprite;
 	sf::Sprite bg2Sprite;
 	
-	float bgSpeed = 5;;
+	float bgSpeed = 1;
 	
 	float bgY;
-	
 	float bg1Y;
 	float bg2Y;
 
-	float windowbg1diff;
+	float windowBgDiff;
 };
 #endif;

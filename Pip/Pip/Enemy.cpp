@@ -5,6 +5,7 @@ Enemy::Enemy()
 {
 	enemyText.loadFromFile("sprites/enemy_ship.png");
 	enemyText.setSmooth(false);
+	
 	enemySprite.setTexture(enemyText);
 	enemySprite.setTextureRect(IntRect(0, 0, 32, 32));
 	enemySprite.setScale(2, 2);
@@ -29,7 +30,7 @@ void Enemy::SetPosition()
 {
 	srand(time(NULL));
 
-	enemySprite.setPosition(rand() % 800, rand() % 1);
+	enemySprite.setPosition(rand() % 700 + 100, rand() % 1);
 }
 
 Vector2f Enemy::GetPosition()
