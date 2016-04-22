@@ -21,11 +21,15 @@ public:
 
 private:
 	PlayArea* playArea;
-	
-	CircleShape playerShape;
+
+	Texture playerText;
+	RectangleShape playerShape;
+	Sprite playerSprite;
+	Vector2f playerSize;
+
 	FloatRect playerBoundingBox;
 	
-	int playerSize = 5;
+	//int playerSize = 5;
 	int playerSpeed;
 	int playerNormalSpeed = 5;
 	int playerFocusSpeed = 2;

@@ -6,7 +6,7 @@ Game::Game()
 	window = new RenderWindow(VideoMode(windowWidth, windowHeight), "Pip");
 	player = new Player();
 	playArea = new PlayArea();
-	//bg = new Background();
+	bg = new Background();
 }
 
 Game::~Game()
@@ -32,7 +32,7 @@ void Game::Update()
 		window->setVerticalSyncEnabled(1);
 		window->setKeyRepeatEnabled(false);
 
-		//bg->Update();
+		bg->Update();
 		player->Update();
 
 		while (window->pollEvent(event))
@@ -113,7 +113,7 @@ void Game::Update()
 void Game::Draw()
 {
 	window->clear();
-	//bg->Draw(*window);
+	bg->Draw(*window);
 	//Draws projectiles
 	for (auto projectile : projectiles)
 	{
@@ -125,9 +125,8 @@ void Game::Draw()
 		enemy->Draw(*window);
 	}
 
-	player->Draw(*window);
 	playArea->Draw(*window);
-
+	player->Draw(*window);
 	
 	window->display();
 }

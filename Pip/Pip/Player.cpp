@@ -3,7 +3,12 @@
 
 Player::Player()
 {
-	playerShape = CircleShape(playerSize);
+	playerText.loadFromFile("sprites/player_ship.png");
+	playerText.setSmooth(false);
+	playerSprite.setTexture(playerText);
+	playerSprite.setTextureRect(IntRect(0, 0, 32, 32));
+	playerSprite.setScale(2, 2);
+
 	SetPosition();
 }
 
@@ -15,17 +20,17 @@ Player::~Player()
 FloatRect Player::GetPlayerBoundingBox()
 {
 	//Player boundingbox
-	return playerBoundingBox = playerShape.getGlobalBounds();
+	return playerBoundingBox = playerSprite.getGlobalBounds();
 }
 
 Vector2f Player::GetPosition()
 {
-	return playerShape.getPosition();
+	return playerSprite.getPosition();
 }
 
 void Player::SetPosition()
 {
-	playerShape.setPosition(800 / 2, 600 / 2);
+	playerSprite.setPosition(800 / 2, 600 / 2);
 }
 
 void Player::Update()
@@ -38,7 +43,7 @@ void Player::PlayerInput()
 	playArea = new PlayArea();
 
 	//Player boundingbox
-	playerBoundingBox = playerShape.getGlobalBounds();
+	playerBoundingBox = playerSprite.getGlobalBounds();
 
 	//Player speed
 	if (Keyboard::isKeyPressed(Keyboard::LControl))
@@ -53,10 +58,10 @@ void Player::PlayerInput()
 		//Collision check
 		if (playerBoundingBox.intersects(playArea->GetTopBoundingBox()))
 		{
-			playerShape.move(0, 0);
+			playerSprite.move(0, 0);
 		}
 		else
-			playerShape.move(Vector2f(0, -playerSpeed));
+			playerSprite.move(Vector2f(0, -playerSpeed));
 	}
 
 	//Movement DOWN
@@ -65,10 +70,10 @@ void Player::PlayerInput()
 		//Collision check
 		if (playerBoundingBox.intersects(playArea->GetBottomBoundingBox()))
 		{
-			playerShape.move(0, 0);
+			playerSprite.move(0, 0);
 		}
 		else
-			playerShape.move(Vector2f(0, playerSpeed));
+			playerSprite.move(Vector2f(0, playerSpeed));
 	}
 
 	//Movement RIGHT
@@ -77,10 +82,10 @@ void Player::PlayerInput()
 		//Collision check
 		if (playerBoundingBox.intersects(playArea->GetRightBoundingBox()))
 		{
-			playerShape.move(0, 0);
+			playerSprite.move(0, 0);
 		}
 		else
-			playerShape.move(Vector2f(playerSpeed, 0));
+			playerSprite.move(Vector2f(playerSpeed, 0));
 	}
 
 	//Movement LEFT
@@ -89,14 +94,14 @@ void Player::PlayerInput()
 		//Collision check
 		if (playerBoundingBox.intersects(playArea->GetLeftBoundingBox()))
 		{
-			playerShape.move(0, 0);
+			playerSprite.move(0, 0);
 		}
 		else
-			playerShape.move(Vector2f(-playerSpeed, 0));
+			playerSprite.move(Vector2f(-playerSpeed, 0));
 	}
 }
 
 void Player::Draw(RenderWindow& window)
 {
-	window.draw(playerShape);
+	window.draw(playerSprite);
 }

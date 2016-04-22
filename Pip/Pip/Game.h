@@ -25,7 +25,7 @@ private:
 	RenderWindow* window;
 	Player* player;
 	PlayArea* playArea;
-	//Background* bg;
+	Background* bg;
 
 	Projectile* projectile;
 	std::vector<Projectile*> projectiles;
