@@ -104,6 +104,7 @@ void Game::Update()
 				std::cout << "Enemy " << enemies.size() << "\n";
 				std::cout << "Score: " << ++score << "\n";
 			}
+			//Commit: spoon status raped
 
 			//Checks if player collides with enemy and gives damage to player
 			if (player->GetPlayerBoundingBox().intersects(enemy->GetEnemyBoundingBox()))
