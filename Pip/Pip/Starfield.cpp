@@ -2,13 +2,13 @@
 
 Starfield::Starfield()
 {
-	star1Tex.loadFromFile("sprites/starfield.png");
+	star1Tex.loadFromFile("sprites/starfield2.png");
 	star1Tex.setSmooth(false);
 
 	star1Sprite.setTexture(star1Tex);
 	sf1Y = star1Sprite.getPosition().y;
 
-	star2Tex.loadFromFile("sprites/starfield.png");
+	star2Tex.loadFromFile("sprites/starfield2.png");
 	star2Tex.setSmooth(false);
 
 	star2Sprite.setTexture(star2Tex);
