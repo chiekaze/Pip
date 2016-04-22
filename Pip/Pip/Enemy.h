@@ -28,10 +28,13 @@ private:
 	PlayArea* playArea;
 	Projectile* projectile;
 
-	CircleShape enemyShape;	
+	Texture enemyText;
+	RectangleShape enemyShape;	
+	Sprite enemySprite;
+	Vector2f enemySize;
+
 	FloatRect enemyBoundingBox;
 
-	int enemySize = 10;
 	int enemySpeed = 2;
 	int enemyHp = 10;
 	int enemyDMG = 5;

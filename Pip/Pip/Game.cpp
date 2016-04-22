@@ -111,14 +111,14 @@ void Game::Update()
 			{
 				player->TakeDamage(enemy->GetEnemyDamage());
 				std::cout << player->GetPlayerHP() << std::endl;
+				
+				if (player->IsDead())
+				{
+					std::cout << "You're fucking dead m8!\n";
+				}
 			}
 		}
 
-		if (player->IsDead())
-		{
-			std::cout << "You're fucking dead m8!\n";
-		}
-	
 		Draw();
 	}
 }

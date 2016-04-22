@@ -3,8 +3,13 @@
 
 Enemy::Enemy()
 {
-	enemyShape = CircleShape(enemySize);
-	enemyShape.setFillColor(Color::Red);
+	enemyText.loadFromFile("sprites/enemy_ship.png");
+	enemyText.setSmooth(false);
+	enemySprite.setTexture(enemyText);
+	enemySprite.setTextureRect(IntRect(0, 0, 32, 32));
+	enemySprite.setScale(2, 2);
+	enemySprite.setRotation(180);
+
 	SetPosition();
 }
 
@@ -16,7 +21,7 @@ Enemy::~Enemy()
 //Enemy boundingbox
 FloatRect Enemy::GetEnemyBoundingBox()
 {
-	return enemyBoundingBox = enemyShape.getGlobalBounds();
+	return enemyBoundingBox = enemySprite.getGlobalBounds();
 }
 
 //Randomizes enemy spawn position
@@ -24,12 +29,12 @@ void Enemy::SetPosition()
 {
 	srand(time(NULL));
 
-	enemyShape.setPosition(rand() % 800, rand() % 1);
+	enemySprite.setPosition(rand() % 800, rand() % 1);
 }
 
 Vector2f Enemy::GetPosition()
 {
-	return enemyShape.getPosition();
+	return enemySprite.getPosition();
 }
 
 //Checks if enemy collides with the bottom border
@@ -37,7 +42,7 @@ bool Enemy::Intersect()
 {
 	playArea = new PlayArea();
 
-	enemyBoundingBox = enemyShape.getGlobalBounds();
+	enemyBoundingBox = enemySprite.getGlobalBounds();
 
 	if (enemyBoundingBox.intersects(playArea->GetBottomBoundingBox()))
 		return true;
@@ -72,10 +77,10 @@ bool Enemy::IsDead()
 
 void Enemy::Update()
 {
-	enemyShape.move(Vector2f(0, enemySpeed));
+	enemySprite.move(Vector2f(0, enemySpeed));
 }
 
 void Enemy::Draw(RenderWindow& window)
 {
-	window.draw(enemyShape);
+	window.draw(enemySprite);
 }
