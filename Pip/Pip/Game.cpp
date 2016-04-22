@@ -7,6 +7,7 @@ Game::Game()
 	player = new Player();
 	playArea = new PlayArea();
 	bg = new Background();
+	sf = new Starfield();
 }
 
 Game::~Game()
@@ -15,6 +16,7 @@ Game::~Game()
 	delete player;
 	delete playArea;
 	delete bg;
+	delete sf;
 }
 
 void Game::Update()
@@ -33,6 +35,7 @@ void Game::Update()
 		window->setKeyRepeatEnabled(false);
 
 		bg->Update();
+		sf->Update();
 		player->Update();
 
 		while (window->pollEvent(event))
@@ -128,6 +131,7 @@ void Game::Draw()
 {
 	window->clear();
 	bg->Draw(*window);
+	sf->Draw(*window);
 	//Draws projectiles
 	for (auto projectile : projectiles)
 	{

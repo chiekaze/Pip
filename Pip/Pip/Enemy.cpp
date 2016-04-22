@@ -24,7 +24,7 @@ FloatRect Enemy::GetEnemyBoundingBox()
 {
 	return enemyBoundingBox = enemySprite.getGlobalBounds();
 }
-
+ 
 //Randomizes enemy spawn position
 void Enemy::SetPosition()
 {
