@@ -9,6 +9,8 @@ Game::Game()
 	bg = new Background();
 	sf = new Starfield();
 	scoreTxt = new ScoreText();
+
+	clock.restart();
 }
 
 Game::~Game()
@@ -26,8 +28,9 @@ void Game::Update()
 	//Spawns enemy when game starts
 	enemy = new Enemy();
 	enemies.push_back(enemy);
-
+	
 	//Spawns enemy projectiles when game starts(?)
+
 	enemyprojectile = new EnemyProjectile();
 	enemyprojectiles.push_back(enemyprojectile);
 
@@ -47,6 +50,10 @@ void Game::Update()
 
 	while (window->isOpen())
 	{
+		Time elapsed = clock.getElapsedTime();
+
+		//std::cout << elapsed.asSeconds() << "\n";
+
 		window->setFramerateLimit(60);
 		window->setVerticalSyncEnabled(1);
 		window->setKeyRepeatEnabled(false);
@@ -88,7 +95,6 @@ void Game::Update()
 
 		for (auto enemy : enemies)
 		{
-
 			enemy->Update();
 
 			//Checks if an enemy collides with the bottom border, then deletes it and spawns a new one 
@@ -108,12 +114,11 @@ void Game::Update()
 				{
 					std::cout << "Enemy Hit!\n";
 					enemy->TakeDamage(projectile->GetProjectileDamage());
-					
+
 					std::cout << "Enemy HP: " << enemy->GetEnemyHP() << "\n";
 
 					//Deletes projectiles from vector after colliding
 					projectiles.erase(projectiles.begin());
-
 				}
 			}
 
@@ -126,6 +131,7 @@ void Game::Update()
 				if (enemyprojectile->Intersect())
 				{
 					enemyprojectiles.erase(enemyprojectiles.begin());
+
 					enemyprojectile = new EnemyProjectile();
 					enemyprojectiles.push_back(enemyprojectile);
 					enemyprojectile->setPosition(enemy->GetPosition());
@@ -141,11 +147,11 @@ void Game::Update()
 					enemyprojectile->setPosition(enemy->GetPosition());
 
 					player->TakeDamage(enemyprojectile->GetEnemyDamage());
+
 					std::cout << player->GetPlayerHP() << std::endl;
 
 					if (player->IsDead())
 					{
-						std::cout << "You're fucking dead m8!\n";
 						window->close();
 					}
 				}
@@ -157,12 +163,11 @@ void Game::Update()
 				enemies.erase(enemies.begin());
 				enemy = new Enemy();
 				enemies.push_back(enemy);
-			
+
 				scoreTxt->Update();
 
 				std::cout << "Enemy killed!\n";
 				std::cout << "Enemy " << enemies.size() << "\n";
-				std::cout << "Score: " << ++score << "\n";
 			}
 
 			//Checks if player collides with enemy and gives damage to player
@@ -175,7 +180,7 @@ void Game::Update()
 
 				player->TakeDamage(enemy->GetEnemyDamage());
 				std::cout << player->GetPlayerHP() << std::endl;
-				
+
 				if (player->IsDead())
 				{
 					std::cout << "You're fucking dead m8!\n";
@@ -186,6 +191,7 @@ void Game::Update()
 
 		Draw();
 	}
+
 }
 
 void Game::Draw()

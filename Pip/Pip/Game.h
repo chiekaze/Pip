@@ -42,6 +42,8 @@ private:
 	std::vector<EnemyProjectile*> enemyprojectiles;
 	
 	Event event;
+	Clock clock;
+	Time elapsed = clock.getElapsedTime();
 
 	int windowWidth = 800;
 	int windowHeight = 600;
