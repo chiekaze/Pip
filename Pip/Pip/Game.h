@@ -13,6 +13,7 @@
 #include "EnemyProjectile.h"
 #include "ScoreText.h"
 #include "ElapsedTime.h"
+#include "SoundManager.h"
 
 using namespace sf;
 
@@ -33,6 +34,7 @@ private:
 	Starfield* sf;
 	ScoreText* scoreTxt;
 	ElapsedTime* elapsedTime;
+	SoundManager* soundManager;
 
 	Projectile* projectile;
 	std::vector<Projectile*> projectiles;

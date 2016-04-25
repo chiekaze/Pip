@@ -27,6 +27,9 @@ Game::~Game()
 
 void Game::Update()
 {
+	SoundBuffer buffer;
+	Sound sound;
+
 	//Spawns enemy when game starts
 	enemy = new Enemy();
 	enemies.push_back(enemy);
@@ -163,6 +166,11 @@ void Game::Update()
 			if (enemy->IsDead())
 			{
 				enemies.erase(enemies.begin());
+				//soundManager->EnemyDeathSound();
+				buffer.loadFromFile("sounds/explosion1.wav");
+				sound.setBuffer(buffer);
+				sound.play();
+				std::cout << "Sound played!";
 				enemy = new Enemy();
 				enemies.push_back(enemy);
 
