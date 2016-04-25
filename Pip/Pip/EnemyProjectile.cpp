@@ -8,15 +8,6 @@ EnemyProjectile::EnemyProjectile()
 	enemyProjectileSprite.setTexture(enemyProjectileText);
 	enemyProjectileSprite.setTextureRect(IntRect(0, 0, 3, 32));
 	enemyProjectileSprite.setScale(1, 1);
-
-	//Sets start position as enemy position
-	for (auto enemy : enemies)
-	{
-		if (enemy)
-		{
-			setPosition(enemy->GetPosition());
-		}
-	}
 }
 
 EnemyProjectile::~EnemyProjectile()

@@ -26,7 +26,7 @@ private:
 	Texture enemyProjectileText;
 	Sprite enemyProjectileSprite;
 
-	int enemyProjectileSpeed = 10;
+	int enemyProjectileSpeed = 7;
 	int enemyProjectileDamage = 5;
 
 	Enemy* enemy;

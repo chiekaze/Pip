@@ -27,6 +27,21 @@ void Game::Update()
 	enemy = new Enemy();
 	enemies.push_back(enemy);
 
+	//Spawns enemy projectiles when game starts(?)
+	enemyprojectile = new EnemyProjectile();
+	enemyprojectiles.push_back(enemyprojectile);
+
+	for (auto enemy : enemies)
+	{
+		for (auto enemyprojectile : enemyprojectiles)
+		{
+			if (enemy)
+			{
+				enemyprojectile->setPosition(enemy->GetPosition());
+			}
+		}
+	}
+
 	std::cout << "Enemy " << enemies.size() << "\n";
 	std::cout << "Enemy HP: " << enemy->GetEnemyHP() << "\n";
 
@@ -73,6 +88,7 @@ void Game::Update()
 
 		for (auto enemy : enemies)
 		{
+
 			enemy->Update();
 
 			//Checks if an enemy collides with the bottom border, then deletes it and spawns a new one 
@@ -98,6 +114,40 @@ void Game::Update()
 					//Deletes projectiles from vector after colliding
 					projectiles.erase(projectiles.begin());
 
+				}
+			}
+
+			//This is supposed to spawn enemy projectiles
+			for (auto enemyprojectile : enemyprojectiles)
+			{
+				enemyprojectile->Update();
+
+				//Checks if enemy projectile collides with bottom border of the screen
+				if (enemyprojectile->Intersect())
+				{
+					enemyprojectiles.erase(enemyprojectiles.begin());
+					enemyprojectile = new EnemyProjectile();
+					enemyprojectiles.push_back(enemyprojectile);
+					enemyprojectile->setPosition(enemy->GetPosition());
+				}
+
+				//Checks if enemy projectile collides with player
+				if (enemyprojectile->GetEnemyProjectileBoundingBox().intersects(player->GetPlayerBoundingBox()))
+				{
+					//Deletes enemy projectile when hits player
+					enemyprojectiles.erase(enemyprojectiles.begin());
+					enemyprojectile = new EnemyProjectile();
+					enemyprojectiles.push_back(enemyprojectile);
+					enemyprojectile->setPosition(enemy->GetPosition());
+
+					player->TakeDamage(enemyprojectile->GetEnemyDamage());
+					std::cout << player->GetPlayerHP() << std::endl;
+
+					if (player->IsDead())
+					{
+						std::cout << "You're fucking dead m8!\n";
+						window->close();
+					}
 				}
 			}
 
@@ -154,6 +204,11 @@ void Game::Draw()
 	for (auto enemy : enemies)
 	{
 		enemy->Draw(*window);
+	}
+
+	for (auto enemyprojectile : enemyprojectiles)
+	{
+		enemyprojectile->Draw(*window);
 	}
 
 	scoreTxt->Draw(*window);
