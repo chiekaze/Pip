@@ -10,6 +10,7 @@ Enemy::Enemy()
 	enemySprite.setTextureRect(IntRect(0, 0, 32, 32));
 	enemySprite.setScale(2, 2);
 	enemySprite.setRotation(180);
+	enemySprite.setOrigin(15, -5);
 
 	SetPosition();
 }

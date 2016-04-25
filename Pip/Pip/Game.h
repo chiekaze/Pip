@@ -8,8 +8,8 @@
 #include "PlayArea.h"
 #include "Projectile.h"
 #include "Enemy.h"
-#include "Background.h"
-#include "Starfield.h"
+#include "BackGround.h"
+#include "StarField.h"
 #include "EnemyProjectile.h"
 #include "ScoreText.h"
 

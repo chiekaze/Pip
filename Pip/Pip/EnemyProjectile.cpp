@@ -2,12 +2,13 @@
 
 EnemyProjectile::EnemyProjectile()
 {
-	enemyProjectileText.loadFromFile("sprites/projectile.png");
+	enemyProjectileText.loadFromFile("sprites/enemy_projectile.png");
 	enemyProjectileText.setSmooth(false);
 
 	enemyProjectileSprite.setTexture(enemyProjectileText);
 	enemyProjectileSprite.setTextureRect(IntRect(0, 0, 3, 32));
 	enemyProjectileSprite.setScale(1, 1);
+	enemyProjectileSprite.setRotation(180);
 }
 
 EnemyProjectile::~EnemyProjectile()
