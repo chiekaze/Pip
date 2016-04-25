@@ -152,16 +152,23 @@ void Game::Update()
 					enemyprojectile->setPosition(enemy->GetPosition());
 
 					player->TakeDamage(enemyprojectile->GetEnemyDamage());
+					std::cout << player->GetPlayerHP() << std::endl;
+
+					//Plays player hurt sound
 					buffer.loadFromFile("sounds/playerhurt.wav");
 					sound.setBuffer(buffer);
 					sound.play();
-					std::cout << player->GetPlayerHP() << std::endl;
 
-					if (player->IsDead())
+					//HUEHUEHUEHUEHUE
+					if (player->GetPlayerHP() == 5)
 					{
 						buffer.loadFromFile("sounds/playerdeath.wav");
 						sound.setBuffer(buffer);
 						sound.play();
+					}
+
+					if (player->IsDead())
+					{
 						window->close();
 					}
 				}
@@ -171,11 +178,14 @@ void Game::Update()
 			if (enemy->IsDead())
 			{
 				enemies.erase(enemies.begin());
+
+				//Playes enemy death sound
 				//soundManager->EnemyDeathSound();
 				buffer.loadFromFile("sounds/explosion1.wav");
 				sound.setBuffer(buffer);
 				sound.play();
 				std::cout << "Sound played!\n";
+
 				enemy = new Enemy();
 				enemies.push_back(enemy);
 
