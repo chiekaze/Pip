@@ -10,6 +10,7 @@
 #include "Enemy.h"
 #include "Background.h"
 #include "Starfield.h"
+#include "EnemyProjectile.h"
 
 using namespace sf;
 
@@ -34,6 +35,9 @@ private:
 
 	Enemy* enemy;
 	std::vector<Enemy*> enemies;
+
+	EnemyProjectile* enemyprojectile;
+	std::vector<EnemyProjectile*> enemyprojectiles;
 	
 	Event event;
 
