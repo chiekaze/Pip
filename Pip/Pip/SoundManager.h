@@ -18,7 +18,9 @@ public:
 	void PlayerDeathSound();
 
 private:
-	SoundBuffer buffer;
+	SoundBuffer enemyDeath;
+	SoundBuffer projectileSound;
+	SoundBuffer playerDeath;
 	Sound sound;
 };
 
