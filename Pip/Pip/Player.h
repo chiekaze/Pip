@@ -23,6 +23,9 @@ public:
 	void PlayerInput();
 	void Draw(RenderWindow& window);
 
+	Font font;
+	Text text;
+
 private:
 	PlayArea* playArea;
 

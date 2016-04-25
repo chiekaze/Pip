@@ -11,6 +11,11 @@ Player::Player()
 	playerSprite.setScale(2, 2);
 	playerSprite.setOrigin(15, 5);
 
+	font.loadFromFile("fonts/Minecraft.ttf"); 
+	text.setString("HEALTH: " + std::to_string(playerHP)); 
+	text.setFont(font); text.setCharacterSize(22);
+	text.setPosition(Vector2f(5, 30));
+
 	SetPosition();
 }
 
@@ -47,7 +52,7 @@ int Player::GetPlayerHP()
 
 void Player::TakeDamage(int damage)
 {
-	playerHP -= damage;
+	text.setString("HEALTH: " + std::to_string(playerHP -= damage));
 }
 
 bool Player::IsDead()
@@ -125,4 +130,5 @@ void Player::PlayerInput()
 void Player::Draw(RenderWindow& window)
 {
 	window.draw(playerSprite);
+	window.draw(text);
 }

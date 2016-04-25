@@ -77,6 +77,7 @@
     <ClCompile Include="PlayArea.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="ScoreText.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Starfield.cpp" />
   </ItemGroup>
@@ -88,6 +89,7 @@
     <ClInclude Include="PlayArea.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="ScoreText.h" />
     <ClInclude Include="Starfield.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

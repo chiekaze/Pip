@@ -27,7 +27,7 @@ private:
 	Sprite projectileSprite;
 
 	int projectileSpeed = 15;
-	int projectileDamage = 5;
+	int projectileDamage = 25;
 };
 
 #endif

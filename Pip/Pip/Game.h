@@ -11,6 +11,7 @@
 #include "Background.h"
 #include "Starfield.h"
 #include "EnemyProjectile.h"
+#include "ScoreText.h"
 
 using namespace sf;
 
@@ -29,6 +30,7 @@ private:
 	PlayArea* playArea;
 	Background* bg;
 	Starfield* sf;
+	ScoreText* scoreTxt;
 
 	Projectile* projectile;
 	std::vector<Projectile*> projectiles;

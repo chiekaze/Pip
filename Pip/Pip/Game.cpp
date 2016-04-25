@@ -8,6 +8,7 @@ Game::Game()
 	playArea = new PlayArea();
 	bg = new Background();
 	sf = new Starfield();
+	scoreTxt = new ScoreText();
 }
 
 Game::~Game()
@@ -17,6 +18,7 @@ Game::~Game()
 	delete playArea;
 	delete bg;
 	delete sf;
+	delete scoreTxt;
 }
 
 void Game::Update()
@@ -71,7 +73,6 @@ void Game::Update()
 
 		for (auto enemy : enemies)
 		{
-
 			enemy->Update();
 
 			//Checks if an enemy collides with the bottom border, then deletes it and spawns a new one 
@@ -93,6 +94,10 @@ void Game::Update()
 					enemy->TakeDamage(projectile->GetProjectileDamage());
 					
 					std::cout << "Enemy HP: " << enemy->GetEnemyHP() << "\n";
+
+					//Deletes projectiles from vector after colliding
+					projectiles.erase(projectiles.begin());
+
 				}
 			}
 
@@ -103,6 +108,8 @@ void Game::Update()
 				enemy = new Enemy();
 				enemies.push_back(enemy);
 			
+				scoreTxt->Update();
+
 				std::cout << "Enemy killed!\n";
 				std::cout << "Enemy " << enemies.size() << "\n";
 				std::cout << "Score: " << ++score << "\n";
@@ -111,6 +118,11 @@ void Game::Update()
 			//Checks if player collides with enemy and gives damage to player
 			if (player->GetPlayerBoundingBox().intersects(enemy->GetEnemyBoundingBox()))
 			{
+				//Deletes enemy when player collides with it
+				enemies.erase(enemies.begin());
+				enemy = new Enemy();
+				enemies.push_back(enemy);
+
 				player->TakeDamage(enemy->GetEnemyDamage());
 				std::cout << player->GetPlayerHP() << std::endl;
 				
@@ -129,8 +141,10 @@ void Game::Update()
 void Game::Draw()
 {
 	window->clear();
+	
 	bg->Draw(*window);
 	sf->Draw(*window);
+	
 	//Draws projectiles
 	for (auto projectile : projectiles)
 	{
@@ -142,6 +156,7 @@ void Game::Draw()
 		enemy->Draw(*window);
 	}
 
+	scoreTxt->Draw(*window);
 	playArea->Draw(*window);
 	player->Draw(*window);
 	
