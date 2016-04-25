@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "PlayArea.h"
+#include <math.h>
 
 using namespace sf;
 
@@ -34,5 +35,6 @@ private:
 	int enemySpeed = 2;
 	int enemyHp = 100;
 	int enemyDMG = 5;
+	Clock clock;
 };
 #endif

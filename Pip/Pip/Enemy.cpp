@@ -13,6 +13,7 @@ Enemy::Enemy()
 	enemySprite.setOrigin(15, -5);
 
 	SetPosition();
+	clock.restart();
 }
 
 Enemy::~Enemy()
@@ -79,6 +80,7 @@ bool Enemy::IsDead()
 
 void Enemy::Update()
 {
+	//cos(clock.getElapsedTime().asSeconds())*2   example of wave-y movement
 	enemySprite.move(Vector2f(0, enemySpeed));
 }
 
