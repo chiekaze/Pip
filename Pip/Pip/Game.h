@@ -12,6 +12,7 @@
 #include "StarField.h"
 #include "EnemyProjectile.h"
 #include "ScoreText.h"
+#include "ElapsedTime.h"
 
 using namespace sf;
 
@@ -31,6 +32,7 @@ private:
 	Background* bg;
 	Starfield* sf;
 	ScoreText* scoreTxt;
+	ElapsedTime* elapsedTime;
 
 	Projectile* projectile;
 	std::vector<Projectile*> projectiles;

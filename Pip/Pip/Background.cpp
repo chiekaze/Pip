@@ -54,7 +54,7 @@ void Background::Update()
 
 	windowBgDiff = bg1Y - 600;
 }
-void Background::Draw(sf::RenderWindow &window)
+void Background::Draw(RenderWindow &window)
 {
 	window.draw(bg1Sprite);
 	window.draw(bg2Sprite);

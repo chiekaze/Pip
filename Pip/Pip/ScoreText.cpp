@@ -19,7 +19,7 @@ void ScoreText::Update()
 	text.setString("SCORE: " + std::to_string(++score)); 
 }
 
-void ScoreText::Draw(sf::RenderWindow &window) 
+void ScoreText::Draw(RenderWindow &window) 
 { 
 	window.draw(text); 
 }

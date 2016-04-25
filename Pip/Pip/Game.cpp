@@ -9,6 +9,7 @@ Game::Game()
 	bg = new Background();
 	sf = new Starfield();
 	scoreTxt = new ScoreText();
+	elapsedTime = new ElapsedTime();
 
 	clock.restart();
 }
@@ -21,6 +22,7 @@ Game::~Game()
 	delete bg;
 	delete sf;
 	delete scoreTxt;
+	delete elapsedTime;
 }
 
 void Game::Update()
@@ -30,7 +32,6 @@ void Game::Update()
 	enemies.push_back(enemy);
 	
 	//Spawns enemy projectiles when game starts(?)
-
 	enemyprojectile = new EnemyProjectile();
 	enemyprojectiles.push_back(enemyprojectile);
 
@@ -61,6 +62,7 @@ void Game::Update()
 		bg->Update();
 		sf->Update();
 		player->Update();
+		elapsedTime->Update();
 
 		while (window->pollEvent(event))
 		{
@@ -122,7 +124,7 @@ void Game::Update()
 				}
 			}
 
-			//This is supposed to spawn enemy projectiles
+			//Updates and spawns enemy projectiles
 			for (auto enemyprojectile : enemyprojectiles)
 			{
 				enemyprojectile->Update();
@@ -218,6 +220,7 @@ void Game::Draw()
 	}
 
 	scoreTxt->Draw(*window);
+	elapsedTime->Draw(*window);
 	playArea->Draw(*window);
 	player->Draw(*window);
 	

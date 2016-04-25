@@ -15,7 +15,7 @@ public:
 	int score = 0; 
 	
 	void Update(); 
-	void Draw(sf::RenderWindow &window);
+	void Draw(RenderWindow &window);
 };
 
 #endif;

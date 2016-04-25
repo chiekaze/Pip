@@ -16,13 +16,13 @@ public:
 	void Draw(RenderWindow& window);
 
 private:
-	sf::Texture bg1Tex;
-	sf::Texture bg2Tex;
+	Texture bg1Tex;
+	Texture bg2Tex;
 	
 	Vector2f bgSize;
 	
-	sf::Sprite bg1Sprite;
-	sf::Sprite bg2Sprite;
+	Sprite bg1Sprite;
+	Sprite bg2Sprite;
 	
 	float bgSpeed = 1;
 	

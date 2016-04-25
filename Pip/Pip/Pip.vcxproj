@@ -71,6 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="ElapsedTime.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyProjectile.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -83,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="ElapsedTime.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyProjectile.h" />
     <ClInclude Include="Game.h" />
