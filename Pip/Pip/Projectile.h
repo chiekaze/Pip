@@ -26,9 +26,6 @@ private:
 	Texture projectileText;
 	Sprite projectileSprite;
 
-	CircleShape projectileShape;
-	FloatRect projectileBoundingBox;
-
 	int projectileSpeed = 15;
 	int projectileDamage = 5;
 };

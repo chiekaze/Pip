@@ -3,7 +3,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "PlayArea.h"
-#include "Projectile.h"
 
 using namespace sf;
 
@@ -26,12 +25,9 @@ public:
 
 private:
 	PlayArea* playArea;
-	Projectile* projectile;
 
 	Texture enemyText;
-	//RectangleShape enemyShape;	
 	Sprite enemySprite;
-	//Vector2f enemySize;
 
 	FloatRect enemyBoundingBox;
 
