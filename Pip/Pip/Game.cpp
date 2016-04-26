@@ -10,6 +10,7 @@ Game::Game()
 	sf = new Starfield();
 	scoreTxt = new ScoreText();
 	elapsedTime = new ElapsedTime();
+	soundManager = new SoundManager();
 
 	clock.restart();
 }
@@ -23,6 +24,7 @@ Game::~Game()
 	delete sf;
 	delete scoreTxt;
 	delete elapsedTime;
+	delete soundManager;
 }
 
 void Game::Update()
@@ -155,16 +157,12 @@ void Game::Update()
 					std::cout << player->GetPlayerHP() << std::endl;
 
 					//Plays player hurt sound
-					buffer.loadFromFile("sounds/playerhurt.wav");
-					sound.setBuffer(buffer);
-					sound.play();
+					soundManager->PlayerHurt();
 
 					//HUEHUEHUEHUEHUE
 					if (player->GetPlayerHP() == 5)
 					{
-						buffer.loadFromFile("sounds/playerdeath.wav");
-						sound.setBuffer(buffer);
-						sound.play();
+						soundManager->PlayerDeathSound();
 					}
 
 					if (player->IsDead())
@@ -180,10 +178,7 @@ void Game::Update()
 				enemies.erase(enemies.begin());
 
 				//Playes enemy death sound
-				//soundManager->EnemyDeathSound();
-				buffer.loadFromFile("sounds/explosion1.wav");
-				sound.setBuffer(buffer);
-				sound.play();
+				soundManager->EnemyDeathSound();
 				std::cout << "Sound played!\n";
 
 				enemy = new Enemy();

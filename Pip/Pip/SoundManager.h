@@ -16,11 +16,13 @@ public:
 	void EnemyDeathSound();
 	void ProjectileSound();
 	void PlayerDeathSound();
+	void PlayerHurt();
 
 private:
 	SoundBuffer enemyDeath;
 	SoundBuffer projectileSound;
 	SoundBuffer playerDeath;
+	SoundBuffer playerHurt;
 	Sound sound;
 };
 
