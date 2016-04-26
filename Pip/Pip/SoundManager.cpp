@@ -6,6 +6,7 @@ SoundManager::SoundManager()
 	playerDeath.loadFromFile("sounds/playerdeath.wav");
 	playerHurt.loadFromFile("sounds/playerhurt.wav");
 	healthPickUp.loadFromFile("sounds/health.wav");
+	projectileSound.loadFromFile("sounds/playershoot.wav");
 }
 
 SoundManager::~SoundManager()
@@ -27,7 +28,6 @@ void SoundManager::PlayerDeathSound()
 
 void SoundManager::ProjectileSound()
 {
-	projectileSound.loadFromFile("sounds/playershoot.wav");
 	sound.setBuffer(projectileSound);
 	sound.play();
 }
