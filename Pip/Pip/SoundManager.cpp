@@ -16,30 +16,30 @@ SoundManager::~SoundManager()
 
 void SoundManager::EnemyDeathSound()
 {
-	sound.setBuffer(enemyDeath);
-	sound.play();
+	enemydeath.setBuffer(enemyDeath);
+	enemydeath.play();
 }
 
 void SoundManager::PlayerDeathSound()
 {
-	sound.setBuffer(playerDeath);
-	sound.play();
+	playerdeath.setBuffer(playerDeath);
+	playerdeath.play();
 }
 
 void SoundManager::ProjectileSound()
 {
-	sound.setBuffer(projectileSound);
-	sound.play();
+	projectilesound.setBuffer(projectileSound);
+	projectilesound.play();
 }
 
 void SoundManager::PlayerHurt()
 {
-	sound.setBuffer(playerHurt);
-	sound.play();
+	playerhurt.setBuffer(playerHurt);
+	playerhurt.play();
 }
 
 void SoundManager::HealthPickupSound()
 {
-	sound.setBuffer(healthPickUp);
-	sound.play();
+	healthpickup.setBuffer(healthPickUp);
+	healthpickup.play();
 }

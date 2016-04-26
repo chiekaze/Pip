@@ -25,7 +25,12 @@ private:
 	SoundBuffer playerDeath;
 	SoundBuffer playerHurt;
 	SoundBuffer healthPickUp;
-	Sound sound;
+
+	Sound enemydeath;
+	Sound projectilesound;
+	Sound playerdeath;
+	Sound playerhurt;
+	Sound healthpickup;
 };
 
 #endif
