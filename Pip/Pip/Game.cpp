@@ -36,9 +36,13 @@ void Game::Update()
 	enemy = new Enemy();
 	enemies.push_back(enemy);
 	
-	//Spawns enemy projectiles when game starts(?)
+	//Spawns enemy projectiles when game starts
 	enemyprojectile = new EnemyProjectile();
 	enemyprojectiles.push_back(enemyprojectile);
+
+	//Spawns healthpack when game starts
+	healthpack = new HealthPack();
+	healthpacks.push_back(healthpack);
 
 	for (auto enemy : enemies)
 	{
@@ -81,6 +85,7 @@ void Game::Update()
 			//Shooting
 			if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Space))
 			{
+				soundManager->ProjectileSound();
 				projectile = new Projectile(player);
 				projectiles.push_back(projectile);
 
@@ -97,6 +102,29 @@ void Game::Update()
 			{
 				//Deletes projectiles from vector after colliding
 				projectiles.erase(projectiles.begin());
+			}
+		}
+
+		for (auto healthpack : healthpacks)
+		{
+			//Collision checking and movement
+			healthpack->Update();
+
+			if (healthpack->Intersect())
+			{
+				healthpacks.erase(healthpacks.begin());
+				std::cout << "Healthpack deleted!\n";
+				healthpack = new HealthPack();
+				healthpacks.push_back(healthpack);
+			}
+
+			if (healthpack->GetHealthPackBoundingBox().intersects(player->GetPlayerBoundingBox()))
+			{
+				player->TakeHealth(healthpack->GetHealth());
+				soundManager->HealthPickupSound();
+				healthpacks.erase(healthpacks.begin());
+				healthpack = new HealthPack();
+				healthpacks.push_back(healthpack);
 			}
 		}
 
@@ -195,6 +223,7 @@ void Game::Update()
 			{
 				//Deletes enemy when player collides with it
 				enemies.erase(enemies.begin());
+				soundManager->EnemyDeathSound();
 				enemy = new Enemy();
 				enemies.push_back(enemy);
 
@@ -238,6 +267,11 @@ void Game::Draw()
 	for (auto enemyprojectile : enemyprojectiles)
 	{
 		enemyprojectile->Draw(*window);
+	}
+
+	for (auto healthpack : healthpacks)
+	{
+		healthpack->Draw(*window);
 	}
 
 	scoreTxt->Draw(*window);

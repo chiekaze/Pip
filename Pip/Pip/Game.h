@@ -14,6 +14,7 @@
 #include "ScoreText.h"
 #include "ElapsedTime.h"
 #include "SoundManager.h"
+#include "HealthPack.h"
 
 using namespace sf;
 
@@ -44,6 +45,9 @@ private:
 
 	EnemyProjectile* enemyprojectile;
 	std::vector<EnemyProjectile*> enemyprojectiles;
+
+	HealthPack* healthpack;
+	std::vector<HealthPack*> healthpacks;
 	
 	Event event;
 	Clock clock;

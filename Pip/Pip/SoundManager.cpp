@@ -5,6 +5,7 @@ SoundManager::SoundManager()
 	enemyDeath.loadFromFile("sounds/explosion1.wav");
 	playerDeath.loadFromFile("sounds/playerdeath.wav");
 	playerHurt.loadFromFile("sounds/playerhurt.wav");
+	healthPickUp.loadFromFile("sounds/health.wav");
 }
 
 SoundManager::~SoundManager()
@@ -26,13 +27,19 @@ void SoundManager::PlayerDeathSound()
 
 void SoundManager::ProjectileSound()
 {
-	/*buffer.loadFromFile("sounds/explosion1.wav");
-	sound.setBuffer(buffer);
-	sound.play();*/
+	projectileSound.loadFromFile("sounds/playershoot.wav");
+	sound.setBuffer(projectileSound);
+	sound.play();
 }
 
 void SoundManager::PlayerHurt()
 {
 	sound.setBuffer(playerHurt);
+	sound.play();
+}
+
+void SoundManager::HealthPickupSound()
+{
+	sound.setBuffer(healthPickUp);
 	sound.play();
 }

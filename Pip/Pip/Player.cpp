@@ -55,6 +55,11 @@ void Player::TakeDamage(int damage)
 	text.setString("HEALTH: " + std::to_string(playerHP -= damage));
 }
 
+void Player::TakeHealth(int health)
+{
+	text.setString("HEALTH: " + std::to_string(playerHP += health));
+}
+
 bool Player::IsDead()
 {
 	if (playerHP <= 0)

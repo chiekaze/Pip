@@ -18,6 +18,7 @@ public:
 	void SetPosition();
 	int GetPlayerHP();
 	void TakeDamage(int damage);
+	void TakeHealth(int health);
 	bool IsDead();
 	void Update();
 	void PlayerInput();
