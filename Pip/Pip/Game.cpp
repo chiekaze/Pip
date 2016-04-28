@@ -58,9 +58,20 @@ void Game::Update()
 	std::cout << "Enemy " << enemies.size() << "\n";
 	std::cout << "Enemy HP: " << enemy->GetEnemyHP() << "\n";
 
+	float spawnTimer = 0;
+
 	while (window->isOpen())
 	{
 		Time elapsed = clock.getElapsedTime();
+
+		spawnTimer += 1 / 60.0f;
+		
+		if (spawnTimer > 5)
+		{
+			spawnTimer = 0;
+			enemy = new Enemy();
+			enemies.push_back(enemy);
+		}
 
 		//std::cout << elapsed.asSeconds() << "\n";
 
@@ -132,13 +143,20 @@ void Game::Update()
 		{
 			enemy->Update();
 
+			if (enemy->projectileTimer > 1)
+			{
+				enemy->projectileTimer = 0;
+
+				enemyprojectile = new EnemyProjectile();
+				enemyprojectiles.push_back(enemyprojectile);
+				enemyprojectile->setPosition(enemy->GetPosition());
+			}
+
 			//Checks if an enemy collides with the bottom border, then deletes it and spawns a new one 
 			if (enemy->Intersect())
 			{
 				enemies.erase(enemies.begin());
-				enemy = new Enemy();
-				enemies.push_back(enemy);
-
+			
 				std::cout << "Enemy " << enemies.size() << "\n";
 			}
 
@@ -167,9 +185,11 @@ void Game::Update()
 				{
 					enemyprojectiles.erase(enemyprojectiles.begin());
 
+					/*
 					enemyprojectile = new EnemyProjectile();
 					enemyprojectiles.push_back(enemyprojectile);
 					enemyprojectile->setPosition(enemy->GetPosition());
+					*/
 				}
 
 				//Checks if enemy projectile collides with player
@@ -177,9 +197,13 @@ void Game::Update()
 				{
 					//Deletes enemy projectile when hits player
 					enemyprojectiles.erase(enemyprojectiles.begin());
+
+					/*
 					enemyprojectile = new EnemyProjectile();
 					enemyprojectiles.push_back(enemyprojectile);
 					enemyprojectile->setPosition(enemy->GetPosition());
+					*/
+
 
 					player->TakeDamage(enemyprojectile->GetEnemyDamage());
 					std::cout << player->GetPlayerHP() << std::endl;
@@ -209,8 +233,8 @@ void Game::Update()
 				soundManager->EnemyDeathSound();
 				std::cout << "Sound played!\n";
 
-				enemy = new Enemy();
-				enemies.push_back(enemy);
+				//enemy = new Enemy();
+				//enemies.push_back(enemy);
 
 				scoreTxt->Update();
 
@@ -224,8 +248,8 @@ void Game::Update()
 				//Deletes enemy when player collides with it
 				enemies.erase(enemies.begin());
 				soundManager->EnemyDeathSound();
-				enemy = new Enemy();
-				enemies.push_back(enemy);
+				//enemy = new Enemy();
+				//enemies.push_back(enemy);
 
 				player->TakeDamage(enemy->GetEnemyDamage());
 				std::cout << player->GetPlayerHP() << std::endl;

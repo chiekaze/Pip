@@ -21,6 +21,11 @@ void ElapsedTime::Update()
 	playTime = clock.getElapsedTime();
 	text.setString("TIME: " + std::to_string((int)floorf(playTime.asSeconds())));
 
+	if (floorf(playTime.asSeconds()) > 99)
+	{
+		text.setPosition(Vector2f(690, 5)); 
+	}
+
 	if (floorf(playTime.asSeconds()) > 999)
 	{
 		text.setPosition(Vector2f(675, 5));

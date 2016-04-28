@@ -24,6 +24,8 @@ public:
 	void Update();
 	void Draw(RenderWindow& window);
 
+	float projectileTimer;
+
 private:
 	PlayArea* playArea;
 
@@ -35,6 +37,5 @@ private:
 	int enemySpeed = 2;
 	int enemyHp = 100;
 	int enemyDMG = 5;
-	Clock clock;
 };
 #endif
