@@ -14,7 +14,7 @@ Enemy::Enemy()
 
 	SetPosition();
 
-	projectileTimer = 0;
+	//projectileTimer = 0;
 }
 
 Enemy::~Enemy()
@@ -83,7 +83,7 @@ void Enemy::Update()
 {
 	//cos(clock.getElapsedTime().asSeconds())*2   example of wave-y movement
 	enemySprite.move(Vector2f(0, enemySpeed));
-	projectileTimer += 1 / 60.0f;
+	//projectileTimer += 1 / 60.0f;
 }
 
 void Enemy::Draw(RenderWindow& window)

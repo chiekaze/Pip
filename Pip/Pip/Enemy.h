@@ -24,7 +24,7 @@ public:
 	void Update();
 	void Draw(RenderWindow& window);
 
-	float projectileTimer;
+	//float projectileTimer;
 
 private:
 	PlayArea* playArea;
