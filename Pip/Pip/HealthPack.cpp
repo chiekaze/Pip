@@ -4,11 +4,11 @@
 
 HealthPack::HealthPack()
 {
-	healthText.loadFromFile("sprites/projectile.png");
+	healthText.loadFromFile("sprites/health_pack.png");
 	healthText.setSmooth(false);
 	healthSprite.setTexture(healthText);
 	healthSprite.setTextureRect(IntRect(0, 0, 32, 32));
-	healthSprite.setScale(0.7 , 0.7);
+	healthSprite.setScale(1 , 1);
 
 	SetPosition();
 }
@@ -29,7 +29,7 @@ void HealthPack::SetPosition()
 {
 	srand(time(NULL));
 
-	healthSprite.setPosition(rand() % 700 + 100, rand() % 1);
+	healthSprite.setPosition(rand() % 600 + 200, rand() % 10);
 }
 
 bool HealthPack::Intersect()

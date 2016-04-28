@@ -272,6 +272,11 @@ void Game::Draw()
 	bg->Draw(*window);
 	sf->Draw(*window);
 	
+	for (auto healthpack : healthpacks)
+	{
+		healthpack->Draw(*window);
+	}
+
 	//Draws projectiles
 	for (auto projectile : projectiles)
 	{
@@ -286,11 +291,6 @@ void Game::Draw()
 	for (auto enemyprojectile : enemyprojectiles)
 	{
 		enemyprojectile->Draw(*window);
-	}
-
-	for (auto healthpack : healthpacks)
-	{
-		healthpack->Draw(*window);
 	}
 
 	scoreTxt->Draw(*window);
