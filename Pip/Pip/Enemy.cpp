@@ -1,5 +1,4 @@
 #include "Enemy.h"
-#include <cstdlib>
 
 Enemy::Enemy()
 {
@@ -29,9 +28,7 @@ FloatRect Enemy::GetEnemyBoundingBox()
 //Randomizes enemy spawn position
 void Enemy::SetPosition()
 {
-	srand(time(NULL));
-
-	enemySprite.setPosition(rand() % 700 + 100, rand() % 1);
+	enemySprite.setPosition(rand() % 600 + 100, rand() % 1);
 }
 
 Vector2f Enemy::GetPosition()

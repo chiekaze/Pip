@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <iostream>
+#include <cstdlib>
 
 Game::Game()
 {
@@ -14,6 +15,8 @@ Game::Game()
 
 	projectileTimer = 0;
 	healthTimer = 0;
+
+	srand(time(NULL));
 }
 
 Game::~Game()
@@ -40,10 +43,6 @@ void Game::Update()
 	//Spawns enemy projectiles when game starts
 	enemyprojectile = new EnemyProjectile();
 	enemyprojectiles.push_back(enemyprojectile);
-
-	//Spawns healthpack when game starts
-	healthpack = new HealthPack();
-	healthpacks.push_back(healthpack);
 
 	for (auto enemy : enemies)
 	{
@@ -75,7 +74,7 @@ void Game::Update()
 		}
 
 		//Healthpack spawn timer
-		if (healthTimer > 20)
+		if (healthTimer > rand() % 30 + 10)
 		{
 			healthTimer = 0;
 

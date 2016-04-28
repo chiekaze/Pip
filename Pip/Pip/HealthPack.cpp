@@ -9,6 +9,7 @@ HealthPack::HealthPack()
 	healthSprite.setTexture(healthText);
 	healthSprite.setTextureRect(IntRect(0, 0, 32, 32));
 	healthSprite.setScale(1 , 1);
+	healthSprite.setOrigin(15, 5);
 
 	SetPosition();
 }
@@ -27,9 +28,7 @@ FloatRect HealthPack::GetHealthPackBoundingBox()
 //Sets spawn point randomly
 void HealthPack::SetPosition()
 {
-	srand(time(NULL));
-
-	healthSprite.setPosition(rand() % 600 + 200, rand() % 10);
+	healthSprite.setPosition(rand() % 600 + 100, rand() % 10);
 }
 
 bool HealthPack::Intersect()
