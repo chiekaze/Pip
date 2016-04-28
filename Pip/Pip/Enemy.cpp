@@ -4,6 +4,9 @@ Enemy::Enemy()
 {
 	enemyText.loadFromFile("sprites/enemy_ship.png");
 	enemyText.setSmooth(false);
+
+	enemyHurtText.loadFromFile("sprites/health_pack.png");
+	enemyHurtText.setSmooth(false);
 	
 	enemySprite.setTexture(enemyText);
 	enemySprite.setTextureRect(IntRect(0, 0, 32, 32));
@@ -62,7 +65,13 @@ int Enemy::GetEnemyDamage()
 
 void Enemy::TakeDamage(int damage)
 {
+	enemySprite.setTexture(enemyHurtText);
 	enemyHp -= damage;
+}
+
+void Enemy::SetSprite()
+{
+	enemySprite.setTexture(enemyText);
 }
 
 bool Enemy::IsDead()
@@ -76,6 +85,7 @@ bool Enemy::IsDead()
 
 void Enemy::Update()
 {
+	enemySprite.setTexture(enemyText);
 	//cos(clock.getElapsedTime().asSeconds())*2   example of wave-y movement
 	enemySprite.move(Vector2f(0, enemySpeed));
 }

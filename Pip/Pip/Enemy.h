@@ -20,6 +20,7 @@ public:
 	int GetEnemyHP();
 	int GetEnemyDamage();
 	void TakeDamage(int damage);
+	void SetSprite();
 	bool IsDead();
 	void Update();
 	void Draw(RenderWindow& window);
@@ -28,6 +29,7 @@ private:
 	PlayArea* playArea;
 
 	Texture enemyText;
+	Texture enemyHurtText;
 	Sprite enemySprite;
 
 	FloatRect enemyBoundingBox;

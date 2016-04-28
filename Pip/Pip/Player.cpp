@@ -5,6 +5,9 @@ Player::Player()
 {
 	playerText.loadFromFile("sprites/player_ship.png");
 	playerText.setSmooth(false);
+
+	playerHurtText.loadFromFile("sprites/health_pack.png");
+	playerHurtText.setSmooth(false);
 	
 	playerSprite.setTexture(playerText);
 	playerSprite.setTextureRect(IntRect(0, 0, 32, 32));
@@ -42,6 +45,7 @@ void Player::SetPosition()
 
 void Player::Update()
 {
+	playerSprite.setTexture(playerText);
 	PlayerInput();
 }
 
@@ -52,6 +56,7 @@ int Player::GetPlayerHP()
 
 void Player::TakeDamage(int damage)
 {
+	playerSprite.setTexture(playerHurtText);
 	text.setString("HEALTH: " + std::to_string(playerHP -= damage));
 }
 

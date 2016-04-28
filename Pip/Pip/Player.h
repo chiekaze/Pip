@@ -31,6 +31,7 @@ private:
 	PlayArea* playArea;
 
 	Texture playerText;
+	Texture playerHurtText;
 	Sprite playerSprite;
 
 	FloatRect playerBoundingBox;
