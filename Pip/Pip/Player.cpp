@@ -6,7 +6,7 @@ Player::Player()
 	playerText.loadFromFile("sprites/player_ship.png");
 	playerText.setSmooth(false);
 
-	playerHurtText.loadFromFile("sprites/health_pack.png");
+	playerHurtText.loadFromFile("sprites/player_ship_damage.png");
 	playerHurtText.setSmooth(false);
 	
 	playerSprite.setTexture(playerText);

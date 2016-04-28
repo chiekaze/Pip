@@ -5,7 +5,7 @@ Enemy::Enemy()
 	enemyText.loadFromFile("sprites/enemy_ship.png");
 	enemyText.setSmooth(false);
 
-	enemyHurtText.loadFromFile("sprites/health_pack.png");
+	enemyHurtText.loadFromFile("sprites/enemy_ship_damage.png");
 	enemyHurtText.setSmooth(false);
 	
 	enemySprite.setTexture(enemyText);
