@@ -13,7 +13,7 @@ Game::Game()
 	soundManager = new SoundManager();
 
 	projectileTimer = 0;
-	//clock.restart();
+	healthTimer = 0;
 }
 
 Game::~Game()
@@ -63,10 +63,10 @@ void Game::Update()
 
 	while (window->isOpen())
 	{
-		//Time elapsed = clock.getElapsedTime();
-
 		spawnTimer += 1 / 60.0f;
+		healthTimer += 1 / 60.0f;
 		
+		//Enemy spawn timer
 		if (spawnTimer > 5)
 		{
 			spawnTimer = 0;
@@ -74,7 +74,14 @@ void Game::Update()
 			enemies.push_back(enemy);
 		}
 
-		//std::cout << elapsed.asSeconds() << "\n";
+		//Healthpack spawn timer
+		if (healthTimer > 20)
+		{
+			healthTimer = 0;
+
+			healthpack = new HealthPack();
+			healthpacks.push_back(healthpack);
+		}
 
 		window->setFramerateLimit(60);
 		window->setVerticalSyncEnabled(1);
@@ -105,6 +112,7 @@ void Game::Update()
 			}
 		}
 
+		//PROJECTILE UPDATES
 		for (auto projectile : projectiles)
 		{
 			//Collision checking and projectile movement
@@ -115,8 +123,10 @@ void Game::Update()
 				//Deletes projectiles from vector after colliding
 				projectiles.erase(projectiles.begin());
 			}
-		}
+		}//PROJECTILE ENDS HERE
 
+
+		//HEALTHPACK UPDATES
 		for (auto healthpack : healthpacks)
 		{
 			//Collision checking and movement
@@ -126,21 +136,19 @@ void Game::Update()
 			{
 				healthpacks.erase(healthpacks.begin());
 				std::cout << "Healthpack deleted!\n";
-				healthpack = new HealthPack();
-				healthpacks.push_back(healthpack);
 			}
 
+			//Checking if player collides with healthpack
 			if (healthpack->GetHealthPackBoundingBox().intersects(player->GetPlayerBoundingBox()))
 			{
 				player->TakeHealth(healthpack->GetHealth());
 				soundManager->HealthPickupSound();
 				healthpacks.erase(healthpacks.begin());
-				healthpack = new HealthPack();
-				healthpacks.push_back(healthpack);
 			}
-		}
+		}//HEALTHPACK ENDS HERE
 
-		//Updates and spawns enemy projectiles
+
+		//ENEMYPROJECTILE UPDATES
 		for (auto enemyprojectile : enemyprojectiles)
 		{
 			enemyprojectile->Update();
@@ -149,12 +157,6 @@ void Game::Update()
 			if (enemyprojectile->Intersect())
 			{
 				enemyprojectiles.erase(enemyprojectiles.begin());
-
-				/*
-				enemyprojectile = new EnemyProjectile();
-				enemyprojectiles.push_back(enemyprojectile);
-				enemyprojectile->setPosition(enemy->GetPosition());
-				*/
 			}
 
 			//Checks if enemy projectile collides with player
@@ -162,13 +164,6 @@ void Game::Update()
 			{
 				//Deletes enemy projectile when hits player
 				enemyprojectiles.erase(enemyprojectiles.begin());
-
-				/*
-				enemyprojectile = new EnemyProjectile();
-				enemyprojectiles.push_back(enemyprojectile);
-				enemyprojectile->setPosition(enemy->GetPosition());
-				*/
-
 
 				player->TakeDamage(enemyprojectile->GetEnemyDamage());
 				std::cout << player->GetPlayerHP() << std::endl;
@@ -187,12 +182,15 @@ void Game::Update()
 					window->close();
 				}
 			}
-		}
+		} //ENEMYPROJECTILE ENDS HERE
 
+
+		//ENEMY UPDATES
 		for (auto enemy : enemies)
 		{
 			enemy->Update();
-		
+
+			//Enemyprojectile timer
 			projectileTimer += 1 / 60.0f;
 		
 			if (projectileTimer > 1)
@@ -237,9 +235,6 @@ void Game::Update()
 				soundManager->EnemyDeathSound();
 				std::cout << "Sound played!\n";
 
-				//enemy = new Enemy();
-				//enemies.push_back(enemy);
-
 				scoreTxt->Update();
 
 				std::cout << "Enemy killed!\n";
@@ -253,22 +248,17 @@ void Game::Update()
 				enemies.erase(enemies.begin());
 				soundManager->EnemyDeathSound();
 
-				//enemy = new Enemy();
-				//enemies.push_back(enemy);
-
 				player->TakeDamage(enemy->GetEnemyDamage());
 				std::cout << player->GetPlayerHP() << std::endl;
 
 				if (player->IsDead())
 				{
-					buffer.loadFromFile("sounds/playerdeath.wav");
-					sound.setBuffer(buffer);
-					sound.play();
+					soundManager->PlayerDeathSound();
 					std::cout << "You're fucking dead m8!\n";
 					window->close();
 				}
 			}
-		}
+		}//ENEMY ENDS HERE
 
 		Draw();
 	}

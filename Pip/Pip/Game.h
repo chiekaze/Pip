@@ -50,10 +50,9 @@ private:
 	std::vector<HealthPack*> healthpacks;
 	
 	Event event;
-	//Clock clock;
-	//Time elapsed = clock.getElapsedTime();
 
 	float projectileTimer;
+	float healthTimer;
 
 	int windowWidth = 800;
 	int windowHeight = 600;
