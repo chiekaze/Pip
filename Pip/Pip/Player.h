@@ -32,6 +32,7 @@ private:
 
 	Texture playerText;
 	Texture playerHurtText;
+	Texture playerPickupText;
 	Sprite playerSprite;
 
 	FloatRect playerBoundingBox;

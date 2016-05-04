@@ -8,6 +8,9 @@ Player::Player()
 
 	playerHurtText.loadFromFile("sprites/player_ship_damage.png");
 	playerHurtText.setSmooth(false);
+
+	playerPickupText.loadFromFile("sprites/player_ship_pickup.png");
+	playerPickupText.setSmooth(false);
 	
 	playerSprite.setTexture(playerText);
 	playerSprite.setTextureRect(IntRect(0, 0, 32, 32));
@@ -62,6 +65,7 @@ void Player::TakeDamage(int damage)
 
 void Player::TakeHealth(int health)
 {
+	playerSprite.setTexture(playerPickupText);
 	if (playerHP <= 100 - health)
 	{
 		text.setString("HEALTH: " + std::to_string(playerHP += health));
