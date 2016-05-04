@@ -3,6 +3,9 @@
 
 Player::Player()
 {
+	playerFullHP = 100;
+	playerHP = playerFullHP;
+
 	playerText.loadFromFile("sprites/player_ship.png");
 	playerText.setSmooth(false);
 
@@ -24,8 +27,6 @@ Player::Player()
 
 	playerNormalSpeed = 5;
 	playerFocusSpeed = 2;
-	playerFullHP = 100;
-	playerHP = playerFullHP;
 
 	SetPosition();
 }
