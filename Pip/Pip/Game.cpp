@@ -281,7 +281,6 @@ void Game::Draw()
 		healthpack->Draw(*window);
 	}
 
-	//Draws projectiles
 	for (auto projectile : projectiles)
 	{
 		projectile->Draw(*window);
@@ -297,10 +296,10 @@ void Game::Draw()
 		enemyprojectile->Draw(*window);
 	}
 
+	player->Draw(*window);
+	playArea->Draw(*window);
 	scoreTxt->Draw(*window);
 	elapsedTime->Draw(*window);
-	playArea->Draw(*window);
-	player->Draw(*window);
 	
 	window->display();
 }
