@@ -28,8 +28,8 @@ private:
 
 	FloatRect healthBoundingBox;
 
-	float healthSpeed = 1.7;
-	int health = 25;
+	float healthSpeed;
+	int health;
 
 	Clock clock;
 };

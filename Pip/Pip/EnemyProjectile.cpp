@@ -9,6 +9,9 @@ EnemyProjectile::EnemyProjectile()
 	enemyProjectileSprite.setTextureRect(IntRect(0, 0, 3, 32));
 	enemyProjectileSprite.setScale(1, 1);
 	enemyProjectileSprite.setRotation(180);
+
+	enemyProjectileSpeed = 7;
+	enemyProjectileDamage = 5;
 }
 
 EnemyProjectile::~EnemyProjectile()

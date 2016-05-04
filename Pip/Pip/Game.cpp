@@ -254,7 +254,6 @@ void Game::Update()
 				soundManager->EnemyDeathSound();
 
 				player->TakeDamage(enemy->GetEnemyDamage());
-				std::cout << player->GetPlayerHP() << std::endl;
 
 				if (player->IsDead())
 				{

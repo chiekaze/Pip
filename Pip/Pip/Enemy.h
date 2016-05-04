@@ -34,8 +34,8 @@ private:
 
 	FloatRect enemyBoundingBox;
 
-	int enemySpeed = 2;
-	int enemyHp = 100;
-	int enemyDMG = 5;
+	int enemySpeed;
+	int enemyHp;
+	int enemyDMG;
 };
 #endif

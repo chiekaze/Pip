@@ -26,8 +26,8 @@ private:
 	Texture enemyProjectileText;
 	Sprite enemyProjectileSprite;
 
-	int enemyProjectileSpeed = 7;
-	int enemyProjectileDamage = 5;
+	int enemyProjectileSpeed;
+	int enemyProjectileDamage;
 
 	Enemy* enemy;
 	std::vector<Enemy*> enemies;

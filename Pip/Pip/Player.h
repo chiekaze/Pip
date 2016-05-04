@@ -38,9 +38,10 @@ private:
 	FloatRect playerBoundingBox;
 	
 	int playerSpeed;
-	int playerNormalSpeed = 5;
-	int playerFocusSpeed = 2;
-	int playerHP = 100;
+	int playerNormalSpeed;
+	int playerFocusSpeed;
+	int playerHP;
+	int playerFullHP;
 };
 
 #endif;

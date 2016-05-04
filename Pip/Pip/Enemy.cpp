@@ -14,6 +14,10 @@ Enemy::Enemy()
 	enemySprite.setRotation(180);
 	enemySprite.setOrigin(15, -5);
 
+	enemySpeed = 2;
+	enemyHp = 100;
+	enemyDMG = 5;
+
 	SetPosition();
 }
 

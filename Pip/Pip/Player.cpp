@@ -22,6 +22,11 @@ Player::Player()
 	text.setFont(font); text.setCharacterSize(22);
 	text.setPosition(Vector2f(5, 30));
 
+	playerNormalSpeed = 5;
+	playerFocusSpeed = 2;
+	playerFullHP = 100;
+	playerHP = playerFullHP;
+
 	SetPosition();
 }
 
@@ -32,7 +37,6 @@ Player::~Player()
 
 FloatRect Player::GetPlayerBoundingBox()
 {
-	//Player boundingbox
 	return playerBoundingBox = playerSprite.getGlobalBounds();
 }
 
@@ -66,13 +70,14 @@ void Player::TakeDamage(int damage)
 void Player::TakeHealth(int health)
 {
 	playerSprite.setTexture(playerPickupText);
-	if (playerHP <= 100 - health)
+
+	if (playerHP <= playerFullHP - health)
 	{
 		text.setString("HEALTH: " + std::to_string(playerHP += health));
 	}
 
-	//To make sure that the HP won't go over 100
-	else if (100 - health < playerHP < 100)
+	//To make sure that the HP won't go over full HP
+	else if (playerFullHP - health < playerHP < playerFullHP)
 	{
 		text.setString("HEALTH: " + std::to_string(playerHP = 100));
 	}

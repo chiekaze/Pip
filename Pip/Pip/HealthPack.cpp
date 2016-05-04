@@ -11,6 +11,9 @@ HealthPack::HealthPack()
 	healthSprite.setScale(1 , 1);
 	healthSprite.setOrigin(15, 5);
 
+	healthSpeed = 1.7;
+	health = 25;
+
 	SetPosition();
 }
 
