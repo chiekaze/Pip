@@ -4,6 +4,8 @@
 
 Game::Game()
 {
+	srand(time(NULL));
+
 	windowWidth = 800;
 	windowHeight = 600;
 
@@ -22,10 +24,16 @@ Game::Game()
 
 	spawnTimerValue = 5;
 	lastSpawnTimerUpdate = 0;
+	spawnRateTime = 20;
+
+	healthTop = 30;
+	healthBottom = 10;
+
+	healthTimerValue = rand() % healthTop + healthBottom;
+	lastHealthTimerUpdate = 0;
+	healthTime = healthTop;
 
 	score = 0;
-
-	srand(time(NULL));
 }
 
 Game::~Game()
@@ -40,15 +48,27 @@ Game::~Game()
 	delete soundManager;
 }
 
-//An idea of increasing enemies, but it just doesn't werk
+//Increases the spawn rate of enemies after a set amount of time
 void Game::UpdateSpawnTimer()
 {
 	if (spawnTimerValue >= 2)
 	{
-		if (elapsedTime->getElapsedTime() - lastSpawnTimerUpdate >= 20)
+		if (elapsedTime->getElapsedTime() - lastSpawnTimerUpdate >= spawnRateTime)
 		{
 			spawnTimerValue -= 1;
 			lastSpawnTimerUpdate = elapsedTime->getElapsedTime();
+		}
+	}
+
+	if (healthTimerValue <= 120)
+	{
+		if (elapsedTime->getElapsedTime() - lastHealthTimerUpdate >= healthTime)
+		{
+			healthTop += 10;
+			healthBottom += 10;
+			healthTime = healthTop;
+			healthTimerValue = rand() % healthTop + healthBottom;
+			lastHealthTimerUpdate = elapsedTime->getElapsedTime();
 		}
 	}
 }
@@ -93,7 +113,7 @@ void Game::Update()
 		}
 
 		//Healthpack spawn timer
-		if (healthTimer > rand() % 30 + 10)
+		if (healthTimer > healthTimerValue)
 		{
 			healthTimer = 0;
 

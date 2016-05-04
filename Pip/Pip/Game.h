@@ -59,6 +59,14 @@ private:
 
 	float spawnTimerValue;
 	int lastSpawnTimerUpdate;
+	int spawnRateTime;
+
+	float healthTimerValue;
+	int lastHealthTimerUpdate;
+	int healthTime;
+
+	int healthTop;
+	int healthBottom;
 
 	int windowWidth;
 	int windowHeight;
