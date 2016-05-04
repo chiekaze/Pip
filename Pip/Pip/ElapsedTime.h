@@ -15,6 +15,8 @@ public:
 	Clock clock;
 	Time playTime = clock.getElapsedTime();
 
+	int getElapsedTime();
+
 	void Update();
 	void Draw(RenderWindow &window);
 };

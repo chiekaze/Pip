@@ -53,6 +53,7 @@ private:
 
 	float projectileTimer;
 	float healthTimer;
+	float spawnTimer;
 
 	int windowWidth = 800;
 	int windowHeight = 600;

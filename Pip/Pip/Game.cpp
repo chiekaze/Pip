@@ -15,6 +15,7 @@ Game::Game()
 
 	projectileTimer = 0;
 	healthTimer = 0;
+	spawnTimer = 0;
 
 	srand(time(NULL));
 }
@@ -58,19 +59,38 @@ void Game::Update()
 	std::cout << "Enemy " << enemies.size() << "\n";
 	std::cout << "Enemy HP: " << enemy->GetEnemyHP() << "\n";
 
-	float spawnTimer = 0;
-
 	while (window->isOpen())
 	{
 		spawnTimer += 1 / 60.0f;
 		healthTimer += 1 / 60.0f;
 		
 		//Enemy spawn timer
-		if (spawnTimer > 5)
+		if (elapsedTime->getElapsedTime() < 20)
 		{
-			spawnTimer = 0;
-			enemy = new Enemy();
-			enemies.push_back(enemy);
+			if (spawnTimer > 5)
+			{
+				spawnTimer = 0;
+				enemy = new Enemy();
+				enemies.push_back(enemy);
+			}
+		}
+		if (elapsedTime->getElapsedTime() > 40)
+		{
+			if (spawnTimer > 2)
+			{
+				spawnTimer = 0;
+				enemy = new Enemy();
+				enemies.push_back(enemy);
+			}
+		}
+		else if (elapsedTime->getElapsedTime() > 20)
+		{
+			if (spawnTimer > 3)
+			{
+				spawnTimer = 0;
+				enemy = new Enemy();
+				enemies.push_back(enemy);
+			}
 		}
 
 		//Healthpack spawn timer

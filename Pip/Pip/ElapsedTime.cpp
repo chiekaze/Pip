@@ -16,6 +16,12 @@ ElapsedTime::~ElapsedTime()
 
 }
 
+int ElapsedTime::getElapsedTime()
+{
+	playTime = clock.getElapsedTime();
+	return (int)floorf(playTime.asSeconds());
+}
+
 void ElapsedTime::Update()
 {
 	playTime = clock.getElapsedTime();
