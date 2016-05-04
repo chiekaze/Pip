@@ -32,6 +32,18 @@ Game::~Game()
 	delete soundManager;
 }
 
+//An idea of increasing enemies, but it just doesn't werk
+void Game::UpdateSpawnTimer()
+{
+	while (spawnTimerValue >= 2)
+	{
+		if (elapsedTime->getElapsedTime() % 20 == 0)
+		{
+			spawnTimerValue -= 1;
+		}
+	}
+}
+
 void Game::Update()
 {
 	SoundBuffer buffer;
@@ -63,34 +75,15 @@ void Game::Update()
 	{
 		spawnTimer += 1 / 60.0f;
 		healthTimer += 1 / 60.0f;
+
+		UpdateSpawnTimer();
 		
 		//Enemy spawn timer
-		if (elapsedTime->getElapsedTime() < 20)
+		if (spawnTimer > spawnTimerValue)
 		{
-			if (spawnTimer > 5)
-			{
-				spawnTimer = 0;
-				enemy = new Enemy();
-				enemies.push_back(enemy);
-			}
-		}
-		if (elapsedTime->getElapsedTime() > 40)
-		{
-			if (spawnTimer > 2)
-			{
-				spawnTimer = 0;
-				enemy = new Enemy();
-				enemies.push_back(enemy);
-			}
-		}
-		else if (elapsedTime->getElapsedTime() > 20)
-		{
-			if (spawnTimer > 3)
-			{
-				spawnTimer = 0;
-				enemy = new Enemy();
-				enemies.push_back(enemy);
-			}
+			spawnTimer = 0;
+			enemy = new Enemy();
+			enemies.push_back(enemy);
 		}
 
 		//Healthpack spawn timer
@@ -190,7 +183,7 @@ void Game::Update()
 				//Plays player hurt sound
 				soundManager->PlayerHurt();
 
-				//HUEHUEHUEHUEHUE
+				//Plays player death sound
 				if (player->GetPlayerHP() == 5)
 				{
 					soundManager->PlayerDeathSound();

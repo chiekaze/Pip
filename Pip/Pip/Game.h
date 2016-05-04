@@ -24,6 +24,8 @@ public:
 	Game();
 	~Game();
 
+	void UpdateSpawnTimer();
+
 	void Update();
 	void Draw();
 
@@ -54,6 +56,8 @@ private:
 	float projectileTimer;
 	float healthTimer;
 	float spawnTimer;
+
+	float spawnTimerValue = 5;
 
 	int windowWidth = 800;
 	int windowHeight = 600;
