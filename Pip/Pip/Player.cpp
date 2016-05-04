@@ -70,7 +70,6 @@ void Player::TakeHealth(int health)
 	//To make sure that the HP won't go over 100
 	else if (100 - health < playerHP < 100)
 	{
-		std::cout << "Too much health motherfucker!\n";
 		text.setString("HEALTH: " + std::to_string(playerHP = 100));
 	}
 }

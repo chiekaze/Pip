@@ -57,12 +57,13 @@ private:
 	float healthTimer;
 	float spawnTimer;
 
-	float spawnTimerValue = 5;
+	float spawnTimerValue;
+	int lastSpawnTimerUpdate;
 
-	int windowWidth = 800;
-	int windowHeight = 600;
+	int windowWidth;
+	int windowHeight;
 
-	int score = 0;
+	int score;
 };
 
 #endif;

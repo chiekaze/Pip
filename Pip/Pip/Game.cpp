@@ -4,6 +4,9 @@
 
 Game::Game()
 {
+	windowWidth = 800;
+	windowHeight = 600;
+
 	window = new RenderWindow(VideoMode(windowWidth, windowHeight), "Pip");
 	player = new Player();
 	playArea = new PlayArea();
@@ -16,6 +19,11 @@ Game::Game()
 	projectileTimer = 0;
 	healthTimer = 0;
 	spawnTimer = 0;
+
+	spawnTimerValue = 5;
+	lastSpawnTimerUpdate = 0;
+
+	score = 0;
 
 	srand(time(NULL));
 }
@@ -35,11 +43,12 @@ Game::~Game()
 //An idea of increasing enemies, but it just doesn't werk
 void Game::UpdateSpawnTimer()
 {
-	while (spawnTimerValue >= 2)
+	if (spawnTimerValue >= 2)
 	{
-		if (elapsedTime->getElapsedTime() % 20 == 0)
+		if (elapsedTime->getElapsedTime() - lastSpawnTimerUpdate >= 20)
 		{
 			spawnTimerValue -= 1;
+			lastSpawnTimerUpdate = elapsedTime->getElapsedTime();
 		}
 	}
 }
@@ -67,9 +76,6 @@ void Game::Update()
 			}
 		}
 	}
-
-	std::cout << "Enemy " << enemies.size() << "\n";
-	std::cout << "Enemy HP: " << enemy->GetEnemyHP() << "\n";
 
 	while (window->isOpen())
 	{
@@ -119,8 +125,6 @@ void Game::Update()
 				soundManager->ProjectileSound();
 				projectile = new Projectile(player);
 				projectiles.push_back(projectile);
-
-				std::cout << "BANG " << projectiles.size() << "\n";
 			}
 		}
 
@@ -147,7 +151,6 @@ void Game::Update()
 			if (healthpack->Intersect())
 			{
 				healthpacks.erase(healthpacks.begin());
-				std::cout << "Healthpack deleted!\n";
 			}
 
 			//Checking if player collides with healthpack
@@ -178,7 +181,6 @@ void Game::Update()
 				enemyprojectiles.erase(enemyprojectiles.begin());
 
 				player->TakeDamage(enemyprojectile->GetEnemyDamage());
-				std::cout << player->GetPlayerHP() << std::endl;
 
 				//Plays player hurt sound
 				soundManager->PlayerHurt();
@@ -218,8 +220,6 @@ void Game::Update()
 			if (enemy->Intersect())
 			{
 				enemies.erase(enemies.begin());
-			
-				std::cout << "Enemy " << enemies.size() << "\n";
 			}
 
 			//Checks if enemy is hit by projectile
@@ -227,10 +227,7 @@ void Game::Update()
 			{
 				if (enemy->GetEnemyBoundingBox().intersects(projectile->GetProjectileBoundingBox()))
 				{
-					std::cout << "Enemy Hit!\n";
 					enemy->TakeDamage(projectile->GetProjectileDamage());
-
-					std::cout << "Enemy HP: " << enemy->GetEnemyHP() << "\n";
 
 					//Deletes projectiles from vector after colliding
 					projectiles.erase(projectiles.begin());
@@ -245,12 +242,8 @@ void Game::Update()
 
 				//Playes enemy death sound
 				soundManager->EnemyDeathSound();
-				std::cout << "Sound played!\n";
 
 				scoreTxt->Update();
-
-				std::cout << "Enemy killed!\n";
-				std::cout << "Enemy " << enemies.size() << "\n";
 			}
 
 			//Checks if player collides with enemy and gives damage to player
@@ -266,7 +259,6 @@ void Game::Update()
 				if (player->IsDead())
 				{
 					soundManager->PlayerDeathSound();
-					std::cout << "You're fucking dead m8!\n";
 					window->close();
 				}
 			}
