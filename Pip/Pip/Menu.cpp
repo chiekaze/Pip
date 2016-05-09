@@ -68,6 +68,21 @@ bool Menu::IsPlaying()
 	return isPlaying;
 }
 
+bool Menu::isNotPlaying()
+{
+	if (isPlaying == true)
+	{
+		return false;
+	}
+	else
+		return true;
+}
+
+void Menu::stopPlaying()
+{
+	isPlaying = false;
+}
+
 void Menu::Update()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Return))

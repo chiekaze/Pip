@@ -111,13 +111,18 @@ void Game::Update()
 
 	while (window->isOpen())
 	{
-		if (menu->isPlaying == false)
+		if (menu->isNotPlaying())
 		{
 			menu->Update();
 		}
 
 		spawnTimer += 1 / 60.0f;
 		healthTimer += 1 / 60.0f;
+
+		if (player->IsDead())
+		{
+			menu->stopPlaying();
+		}
 
 		if (menu->IsPlaying())
 		{
@@ -205,14 +210,6 @@ void Game::Update()
 					{
 						soundManager->PlayerDeathSound();
 					}
-
-					if (player->IsDead())
-					{
-						menu->isPlaying = false;
-						
-						//DELETES ENEMIES
-						enemies.erase(enemies.begin());
-					}
 				}
 			}
 			//ENEMYPROJECTILE ENDS HERE
@@ -272,15 +269,6 @@ void Game::Update()
 					soundManager->EnemyDeathSound();
 
 					player->TakeDamage(enemy->GetEnemyDamage());
-
-					if (player->IsDead())
-					{
-						soundManager->PlayerDeathSound();
-						menu->isPlaying = false;
-						
-						//DELETES ENEMIES
-						enemies.erase(enemies.begin());
-					}
 				}
 			}
 			//ENEMY ENDS HERE
@@ -323,7 +311,7 @@ void Game::Draw()
 	sf->Draw(*window);
 	menu->Draw(*window);
 	
-	if (player->GetPlayerHP() <= 0)
+	if (player->IsDead())
 	{
 		window->clear(Color::Black);
 		menu->DrawEndMenu(*window);

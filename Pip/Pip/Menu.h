@@ -13,6 +13,8 @@ public:
 	~Menu();
 
 	bool IsPlaying();
+	bool isNotPlaying();
+	void stopPlaying();
 
 	void Draw(RenderWindow &window);
 	void DrawEndMenu(RenderWindow &window);
