@@ -122,35 +122,24 @@ void Game::Update()
 		if (menu->IsPlaying())
 		{
 			UpdateSpawnTimer();
-		}
-		
-		//Enemy spawn timer
-		if ((spawnTimer > spawnTimerValue) && menu->IsPlaying())
-		{
-			std::cout << "penis";
-			spawnTimer = 0;
-			enemy = new Enemy();
-			enemies.push_back(enemy);
-		}
 
-		//Healthpack spawn timer
-		if ((healthTimer > healthTimerValue) && menu->IsPlaying())
-		{
-			healthTimer = 0;
+			//Enemy spawn timer
+			if ((spawnTimer > spawnTimerValue))
+			{
+				spawnTimer = 0;
+				enemy = new Enemy();
+				enemies.push_back(enemy);
+			}
 
-			healthpack = new HealthPack();
-			healthpacks.push_back(healthpack);
-		}
+			//Healthpack spawn timer
+			if ((healthTimer > healthTimerValue))
+			{
+				healthTimer = 0;
 
-		window->setFramerateLimit(60);
-		window->setVerticalSyncEnabled(1);
-		window->setKeyRepeatEnabled(false);
+				healthpack = new HealthPack();
+				healthpacks.push_back(healthpack);
+			}
 
-		bg->Update();
-		sf->Update();
-
-		if (menu->IsPlaying())
-		{
 			player->Update();
 			elapsedTime->Update();
 
@@ -291,6 +280,13 @@ void Game::Update()
 			//ENEMY ENDS HERE
 		}
 
+		window->setFramerateLimit(60);
+		window->setVerticalSyncEnabled(1);
+		window->setKeyRepeatEnabled(false);
+
+		bg->Update();
+		sf->Update();
+
 		while (window->pollEvent(event))
 		{
 			if ((event.type == sf::Event::Closed) ||
@@ -303,7 +299,6 @@ void Game::Update()
 			//Shooting
 			if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Space) && menu->IsPlaying())
 			{
-				std::cout << "bang";
 				soundManager->ProjectileSound();
 				projectile = new Projectile(player);
 				projectiles.push_back(projectile);
