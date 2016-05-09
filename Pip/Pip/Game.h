@@ -30,9 +30,6 @@ public:
 	void Update();
 	void Draw();
 
-	Text text;
-	Font font;
-
 private:
 	RenderWindow* window;
 	Player* player;

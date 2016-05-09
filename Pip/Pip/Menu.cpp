@@ -14,6 +14,10 @@ Menu::Menu()
 	shoot.setFont(font);
 	focus.setFont(font);
 
+	dead.setFont(font);
+
+	//START MENU---------------------------
+
 	//TITLE
 	title.setString("PIP: THE GAME");
 	title.setCharacterSize(64);
@@ -46,6 +50,13 @@ Menu::Menu()
 	focus.setString("FOCUS - LEFT CTRL");
 	focus.setCharacterSize(16);
 	focus.setPosition(Vector2f(315, 500));
+
+	//-------------------------------------
+
+	//DEAD
+	dead.setString("UR DED M8");
+	dead.setCharacterSize(64);
+	dead.setPosition(Vector2f(160, 100));
 }
 
 Menu::~Menu()
@@ -77,4 +88,9 @@ void Menu::Draw(RenderWindow &window)
 	window.draw(move);
 	window.draw(shoot);
 	window.draw(focus);
+}
+
+void Menu::DrawEndMenu(RenderWindow &window)
+{
+	window.draw(dead);
 }

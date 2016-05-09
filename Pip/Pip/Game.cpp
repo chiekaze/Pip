@@ -208,7 +208,10 @@ void Game::Update()
 
 					if (player->IsDead())
 					{
-						window->close();
+						menu->isPlaying = false;
+						
+						//DELETES ENEMIES
+						enemies.erase(enemies.begin());
 					}
 				}
 			}
@@ -273,7 +276,10 @@ void Game::Update()
 					if (player->IsDead())
 					{
 						soundManager->PlayerDeathSound();
-						window->close();
+						menu->isPlaying = false;
+						
+						//DELETES ENEMIES
+						enemies.erase(enemies.begin());
 					}
 				}
 			}
@@ -316,6 +322,12 @@ void Game::Draw()
 	bg->Draw(*window);
 	sf->Draw(*window);
 	menu->Draw(*window);
+	
+	if (player->GetPlayerHP() <= 0)
+	{
+		window->clear(Color::Black);
+		menu->DrawEndMenu(*window);
+	}
 
 	if (menu->IsPlaying())
 	{
@@ -346,11 +358,6 @@ void Game::Draw()
 		playArea->Draw(*window);
 		scoreTxt->Draw(*window);
 		elapsedTime->Draw(*window);
-	}
-
-	else
-	{
-		window->draw(text);
 	}
 	
 	window->display();
