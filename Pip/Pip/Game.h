@@ -16,6 +16,7 @@
 #include "SoundManager.h"
 #include "HealthPack.h"
 #include "Menu.h"
+#include "DeadMenu.h"
 
 using namespace sf;
 

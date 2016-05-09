@@ -1,5 +1,4 @@
 #include "ScoreText.h" 
-#include <string> 
 #include <iostream> 
 
 ScoreText::ScoreText() 
@@ -13,6 +12,11 @@ ScoreText::~ScoreText()
 { 
 
 } 
+
+int ScoreText::getScore()
+{
+	return score;
+}
 
 void ScoreText::Update()
 { 

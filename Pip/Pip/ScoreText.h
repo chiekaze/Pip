@@ -2,6 +2,7 @@
 #define SCORE_TEXT
 
 #include <SFML/Graphics.hpp> 
+#include <string> 
 using namespace sf;
 
 class ScoreText
@@ -9,6 +10,8 @@ class ScoreText
 public:
 	ScoreText();
 	~ScoreText();
+
+	int getScore();
 
 	void Update();
 	void Draw(RenderWindow &window);
