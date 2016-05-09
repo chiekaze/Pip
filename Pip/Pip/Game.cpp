@@ -17,6 +17,8 @@ Game::Game()
 	elapsedTime = new ElapsedTime();
 	scoreTxt = new ScoreText();
 	soundManager = new SoundManager();
+	menu = new Menu();
+	menu->IsPlaying();
 
 	projectileTimer = 0;
 	healthTimer = 0;
@@ -35,13 +37,13 @@ Game::Game()
 
 	score = 0;
 
-	isPlaying = false;
+	/*isPlaying = false;*/
 
-	font.loadFromFile("fonts/Minecraft.ttf");
+	/*font.loadFromFile("fonts/Minecraft.ttf");
 	text.setFont(font);
 	text.setString("homo");
 	text.setCharacterSize(22);
-	text.setPosition(Vector2f(400, 300));
+	text.setPosition(Vector2f(400, 300));*/
 }
 
 Game::~Game()
@@ -54,13 +56,13 @@ Game::~Game()
 	delete scoreTxt;
 	delete elapsedTime;
 	delete soundManager;
-	//delete menu;
+	delete menu;
 }
 
 //Increases the spawn rate of enemies after a set amount of time
 void Game::UpdateSpawnTimer()
 {
-	if (isPlaying)
+	if (menu->IsPlaying())
 	{
 		if (spawnTimerValue >= 2)
 		{
@@ -87,10 +89,13 @@ void Game::UpdateSpawnTimer()
 
 void Game::Update()
 {
+	
+	
+
 	SoundBuffer buffer;
 	Sound sound;
 
-	if (isPlaying)
+	if (menu->IsPlaying())
 	{
 		elapsedTime = new ElapsedTime();
 
@@ -116,21 +121,26 @@ void Game::Update()
 
 	while (window->isOpen())
 	{
-		if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::End) && !isPlaying)
+		if (menu->isPlaying == false)
+		{
+			menu->Update();
+		}
+		
+		/*if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::End) && !isPlaying)
 		{
 			isPlaying = true;
-		}
+		}*/
 
 		spawnTimer += 1 / 60.0f;
 		healthTimer += 1 / 60.0f;
 
-		if (isPlaying)
+		if (menu->IsPlaying())
 		{
 			UpdateSpawnTimer();
 		}
 		
 		//Enemy spawn timer
-		if ((spawnTimer > spawnTimerValue) && isPlaying)
+		if ((spawnTimer > spawnTimerValue) && menu->IsPlaying())
 		{
 			std::cout << "penis";
 			spawnTimer = 0;
@@ -139,7 +149,7 @@ void Game::Update()
 		}
 
 		//Healthpack spawn timer
-		if ((healthTimer > healthTimerValue) && isPlaying)
+		if ((healthTimer > healthTimerValue) && menu->IsPlaying())
 		{
 			healthTimer = 0;
 
@@ -151,7 +161,7 @@ void Game::Update()
 		window->setVerticalSyncEnabled(1);
 		window->setKeyRepeatEnabled(false);
 
-		if (isPlaying)
+		if (menu->IsPlaying())
 		{
 			bg->Update();
 			sf->Update();
@@ -294,8 +304,6 @@ void Game::Update()
 			}
 			//ENEMY ENDS HERE
 		}
-		
-		
 
 		while (window->pollEvent(event))
 		{
@@ -307,7 +315,7 @@ void Game::Update()
 			}
 
 			//Shooting
-			if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Space) && isPlaying)
+			if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Space) && menu->IsPlaying())
 			{
 				std::cout << "bang";
 				soundManager->ProjectileSound();
@@ -323,8 +331,9 @@ void Game::Update()
 void Game::Draw()
 {
 	window->clear(Color::Black);
+	menu->Draw(*window);
 
-	if (isPlaying)
+	if (menu->IsPlaying())
 	{
 		bg->Draw(*window);
 		sf->Draw(*window);

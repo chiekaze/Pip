@@ -17,6 +17,9 @@ public:
 
 	bool IsPlaying();
 	void Draw(RenderWindow &window);
+	void Update();
+
+	bool isPlaying;
 };
 
 #endif;

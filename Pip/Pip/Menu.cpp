@@ -1,8 +1,14 @@
 #include "Menu.h"
+#include <iostream>
 
 Menu::Menu()
 {
-
+	isPlaying = false;
+	font.loadFromFile("fonts/Minecraft.ttf");
+	text.setFont(font);
+	text.setString("Press End to play game");
+	text.setCharacterSize(22);
+	text.setPosition(Vector2f(400, 300));
 }
 
 Menu::~Menu()
@@ -11,13 +17,18 @@ Menu::~Menu()
 
 bool Menu::IsPlaying()
 {
-	if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::End))
+	return isPlaying;
+}
+
+void Menu::Update()
+{
+	if (Keyboard::isKeyPressed(Keyboard::End))
 	{
-		return true;
+		isPlaying = true;
 	}
 
 	else
-		return false;
+		isPlaying = false;
 }
 
 

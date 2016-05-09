@@ -15,7 +15,7 @@
 #include "ElapsedTime.h"
 #include "SoundManager.h"
 #include "HealthPack.h"
-//#include "Menu.h"
+#include "Menu.h"
 
 using namespace sf;
 
@@ -42,7 +42,7 @@ private:
 	ScoreText* scoreTxt;
 	ElapsedTime* elapsedTime;
 	SoundManager* soundManager;
-	//Menu* menu;
+	Menu* menu;
 
 	Projectile* projectile;
 	std::vector<Projectile*> projectiles;
