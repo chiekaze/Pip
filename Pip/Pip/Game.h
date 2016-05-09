@@ -15,6 +15,7 @@
 #include "ElapsedTime.h"
 #include "SoundManager.h"
 #include "HealthPack.h"
+//#include "Menu.h"
 
 using namespace sf;
 
@@ -29,6 +30,9 @@ public:
 	void Update();
 	void Draw();
 
+	Text text;
+	Font font;
+
 private:
 	RenderWindow* window;
 	Player* player;
@@ -38,6 +42,7 @@ private:
 	ScoreText* scoreTxt;
 	ElapsedTime* elapsedTime;
 	SoundManager* soundManager;
+	//Menu* menu;
 
 	Projectile* projectile;
 	std::vector<Projectile*> projectiles;
@@ -52,6 +57,8 @@ private:
 	std::vector<HealthPack*> healthpacks;
 	
 	Event event;
+	Event event1;
+	Event event2;
 
 	float projectileTimer;
 	float healthTimer;
@@ -72,6 +79,8 @@ private:
 	int windowHeight;
 
 	int score;
+
+	bool isPlaying;
 };
 
 #endif;
