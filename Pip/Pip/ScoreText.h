@@ -10,12 +10,13 @@ public:
 	ScoreText();
 	~ScoreText();
 
+	void Update();
+	void Draw(RenderWindow &window);
+
+private:
 	Font font; 
 	Text text; 
 	int score = 0; 
-	
-	void Update(); 
-	void Draw(RenderWindow &window);
 };
 
 #endif;

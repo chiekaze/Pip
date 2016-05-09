@@ -57,8 +57,6 @@ private:
 	std::vector<HealthPack*> healthpacks;
 	
 	Event event;
-	Event event1;
-	Event event2;
 
 	float projectileTimer;
 	float healthTimer;

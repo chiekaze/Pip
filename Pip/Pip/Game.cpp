@@ -36,14 +36,6 @@ Game::Game()
 	healthTime = healthTop;
 
 	score = 0;
-
-	/*isPlaying = false;*/
-
-	/*font.loadFromFile("fonts/Minecraft.ttf");
-	text.setFont(font);
-	text.setString("homo");
-	text.setCharacterSize(22);
-	text.setPosition(Vector2f(400, 300));*/
 }
 
 Game::~Game()
@@ -90,8 +82,6 @@ void Game::UpdateSpawnTimer()
 void Game::Update()
 {
 	
-	
-
 	SoundBuffer buffer;
 	Sound sound;
 
@@ -125,11 +115,6 @@ void Game::Update()
 		{
 			menu->Update();
 		}
-		
-		/*if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::End) && !isPlaying)
-		{
-			isPlaying = true;
-		}*/
 
 		spawnTimer += 1 / 60.0f;
 		healthTimer += 1 / 60.0f;
@@ -161,10 +146,11 @@ void Game::Update()
 		window->setVerticalSyncEnabled(1);
 		window->setKeyRepeatEnabled(false);
 
+		bg->Update();
+		sf->Update();
+
 		if (menu->IsPlaying())
 		{
-			bg->Update();
-			sf->Update();
 			player->Update();
 			elapsedTime->Update();
 
@@ -331,6 +317,9 @@ void Game::Update()
 void Game::Draw()
 {
 	window->clear(Color::Black);
+
+	bg->Draw(*window);
+	sf->Draw(*window);
 	menu->Draw(*window);
 
 	if (menu->IsPlaying())

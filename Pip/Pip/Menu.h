@@ -10,16 +10,22 @@ public:
 	Menu();
 	~Menu();
 
-	Font font;
-	Text text; 
-		
-	Event event; 
-
 	bool IsPlaying();
 	void Draw(RenderWindow &window);
 	void Update();
 
 	bool isPlaying;
+
+private:
+	Font font;
+	
+	Text title; 
+	Text start;
+	Text quit;
+	Text controls;
+	Text move;
+	Text shoot;
+	Text focus;
 };
 
 #endif;
