@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Enemy.h"
+#include "Player.h"
 #include <vector>
 
 using namespace sf;
@@ -22,6 +23,7 @@ public:
 
 private:
 	PlayArea* playarea;
+	Player* mPlayer;
 
 	Texture enemyProjectileText;
 	Sprite enemyProjectileSprite;

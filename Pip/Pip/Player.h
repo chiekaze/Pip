@@ -24,6 +24,9 @@ public:
 	void PlayerInput();
 	void Draw(RenderWindow& window);
 
+	bool PlayerFocus();
+	float GetPlayerFocusFactor();
+
 	Font font;
 	Text text;
 
@@ -37,9 +40,10 @@ private:
 
 	FloatRect playerBoundingBox;
 	
-	int playerSpeed;
-	int playerNormalSpeed;
+	float playerSpeed;
+	float playerNormalSpeed;
 	int playerFocusSpeed;
+	float playerFocusFactor;
 	int playerHP;
 	int playerFullHP;
 };

@@ -3,14 +3,14 @@
 
 #include <SFML/Graphics.hpp>
 #include "PlayArea.h"
-#include <math.h>
+#include "Player.h"
 
 using namespace sf;
 
 class Enemy
 {
 public:
-	Enemy();
+	Enemy(Player* player);
 	~Enemy();
 
 	FloatRect GetEnemyBoundingBox();
@@ -27,6 +27,7 @@ public:
 
 private:
 	PlayArea* playArea;
+	Player* mPlayer;
 
 	Texture enemyText;
 	Texture enemyHurtText;
@@ -34,7 +35,8 @@ private:
 
 	FloatRect enemyBoundingBox;
 
-	int enemySpeed;
+	float enemySpeed;
+	float enemyNormalSpeed;
 	int enemyHp;
 	int enemyDMG;
 };

@@ -90,7 +90,7 @@ void Game::Update()
 		elapsedTime = new ElapsedTime();
 
 		//Spawns enemy when game starts
-		enemy = new Enemy();
+		enemy = new Enemy(player);
 		enemies.push_back(enemy);
 
 		//Spawns enemy projectiles when game starts
@@ -132,7 +132,7 @@ void Game::Update()
 			if ((spawnTimer > spawnTimerValue))
 			{
 				spawnTimer = 0;
-				enemy = new Enemy();
+				enemy = new Enemy(player);
 				enemies.push_back(enemy);
 			}
 

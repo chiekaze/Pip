@@ -22,12 +22,14 @@ public:
 
 private:
 	PlayArea* playArea;
+	Player* mPlayer;
 
 	Texture projectileText;
 	Sprite projectileSprite;
 
-	int projectileSpeed = 15;
-	int projectileDamage = 25;
+	float projectileSpeed;
+	float projectileNormalSpeed;
+	int projectileDamage;
 };
 
 #endif

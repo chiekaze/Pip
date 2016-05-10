@@ -27,6 +27,7 @@ Player::Player()
 
 	playerNormalSpeed = 5;
 	playerFocusSpeed = 2;
+	playerFocusFactor = 0.4;
 
 	SetPosition();
 }
@@ -80,7 +81,7 @@ void Player::TakeHealth(int health)
 	//To make sure that the HP won't go over full HP
 	else if (playerFullHP - health < playerHP < playerFullHP)
 	{
-		text.setString("HEALTH: " + std::to_string(playerHP = 100));
+		text.setString("HEALTH: " + std::to_string(playerHP = playerFullHP));
 	}
 }
 
@@ -93,6 +94,21 @@ bool Player::IsDead()
 		return false;
 }
 
+bool Player::PlayerFocus()
+{
+	if (Keyboard::isKeyPressed(Keyboard::LControl))
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+float Player::GetPlayerFocusFactor()
+{
+	return playerFocusFactor;
+}
+
 void Player::PlayerInput()
 {
 	playArea = new PlayArea();
@@ -101,9 +117,8 @@ void Player::PlayerInput()
 	playerBoundingBox = playerSprite.getGlobalBounds();
 
 	//Player speed
-	if (Keyboard::isKeyPressed(Keyboard::LControl))
-		playerSpeed = playerFocusSpeed;
-
+	if (PlayerFocus())
+		playerSpeed = playerNormalSpeed * playerFocusFactor;
 	else
 		playerSpeed = playerNormalSpeed;
 

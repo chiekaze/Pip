@@ -3,6 +3,10 @@
 
 Projectile::Projectile(Player* player)
 {
+	projectileNormalSpeed = 15;
+	projectileSpeed = projectileNormalSpeed;
+	projectileDamage = 25;
+
 	projectileText.loadFromFile("sprites/projectile.png");
 	projectileText.setSmooth(false);
 	
@@ -10,10 +14,12 @@ Projectile::Projectile(Player* player)
 	projectileSprite.setTextureRect(IntRect(0, 0, 3, 32));
 	projectileSprite.setScale(1, 1);
 
+	mPlayer = player;
+
 	//Sets projectile start position to player position
-	if (player)
+	if (mPlayer)
 	{
-		SetPosition(player->GetPosition());
+		SetPosition(mPlayer->GetPosition());
 	}
 }
 
@@ -56,6 +62,14 @@ bool Projectile::Intersect()
 //Projectile moves
 void Projectile::Update()
 {
+	//Projectile focus speed
+	if (mPlayer->PlayerFocus())
+	{
+		projectileSpeed = projectileNormalSpeed * mPlayer->GetPlayerFocusFactor();
+	}
+	else
+		projectileSpeed = projectileNormalSpeed;
+
 	projectileSprite.move(Vector2f(0, -projectileSpeed));
 }
 

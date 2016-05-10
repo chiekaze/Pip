@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy()
+Enemy::Enemy(Player* player)
 {
 	enemyText.loadFromFile("sprites/enemy_ship.png");
 	enemyText.setSmooth(false);
@@ -14,9 +14,12 @@ Enemy::Enemy()
 	enemySprite.setRotation(180);
 	enemySprite.setOrigin(15, -5);
 
-	enemySpeed = 2;
+	enemyNormalSpeed = 2;
+	enemySpeed = enemyNormalSpeed;
 	enemyHp = 100;
 	enemyDMG = 5;
+
+	mPlayer = player;
 
 	SetPosition();
 }
@@ -89,8 +92,15 @@ bool Enemy::IsDead()
 
 void Enemy::Update()
 {
+	//Enemy focus speed
+	if (mPlayer->PlayerFocus())
+	{
+		enemySpeed = enemyNormalSpeed * mPlayer->GetPlayerFocusFactor();
+	}
+	else
+		enemySpeed = enemyNormalSpeed;
+
 	enemySprite.setTexture(enemyText);
-	//cos(clock.getElapsedTime().asSeconds())*2   example of wave-y movement
 	enemySprite.move(Vector2f(0, enemySpeed));
 }
 
