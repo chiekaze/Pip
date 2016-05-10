@@ -1,4 +1,5 @@
 #include "DeadMenu.h"
+#include <iostream>
 
 DeadMenu::DeadMenu()
 {
@@ -16,6 +17,11 @@ DeadMenu::DeadMenu()
 	score.setString("FINAL SCORE: " + std::to_string(scoretext->getScore()));
 	score.setCharacterSize(22);
 	score.setPosition(Vector2f(5, 5));
+
+	//RESTART
+	restart.setString("PRESS 'ENTER' TO RESTART");
+	restart.setCharacterSize(22);
+	restart.setPosition(Vector2f(5, 5));
 }
 
 DeadMenu::~DeadMenu()
@@ -29,17 +35,28 @@ bool DeadMenu::isPlaying()
 
 void DeadMenu::Update()
 {
-	if (Keyboard::isKeyPressed(Keyboard::Return))
+	if (player->IsDead())
 	{
-		isplaying = true;
-	}
+		menu->stopPlaying();
 
-	else
-		isplaying = false;
+		if (Keyboard::isKeyPressed(Keyboard::Return))
+		{
+			menu->Update();
+		}
+	}
 }
 
 void DeadMenu::Draw(RenderWindow &window)
 {
-	window.draw(dead);
-	window.draw(score);
+	if (player->IsDead())
+	{
+		window.draw(dead);
+		window.draw(score);
+		window.draw(restart);
+
+		if (Keyboard::isKeyPressed(Keyboard::Return))
+		{
+			std::cout << "You fugged-ed up";
+		}
+	}
 }

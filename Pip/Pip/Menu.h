@@ -15,6 +15,7 @@ public:
 	bool IsPlaying();
 	bool isNotPlaying();
 	void stopPlaying();
+	void startPlaying();
 
 	void Draw(RenderWindow &window);
 	void DrawEndMenu(RenderWindow &window);

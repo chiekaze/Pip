@@ -83,6 +83,11 @@ void Menu::stopPlaying()
 	isPlaying = false;
 }
 
+void Menu::startPlaying()
+{
+	isPlaying = true;
+}
+
 void Menu::Update()
 {
 	if (Keyboard::isKeyPressed(Keyboard::Return))

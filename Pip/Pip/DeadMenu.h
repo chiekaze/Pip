@@ -5,6 +5,7 @@
 #include <string>
 #include "Player.h"
 #include "ScoreText.h"
+#include "Menu.h"
 
 using namespace sf;
 
@@ -23,12 +24,14 @@ public:
 private:
 	Player* player;
 	ScoreText* scoretext;
+	Menu* menu;
 
 	Font font;
 
 	//Death menu
 	Text dead;
 	Text score;
+	Text restart;
 };
 
 #endif
