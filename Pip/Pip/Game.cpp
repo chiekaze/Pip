@@ -315,6 +315,7 @@ void Game::Draw()
 	{
 		window->clear(Color::Black);
 		menu->DrawEndMenu(*window);
+		soundManager->GameOver();
 	}
 
 	if (menu->IsPlaying())

@@ -18,6 +18,7 @@ public:
 	void PlayerDeathSound();
 	void HealthPickupSound();
 	void PlayerHurt();
+	void GameOver();
 
 private:
 	SoundBuffer enemyDeath;
@@ -25,12 +26,14 @@ private:
 	SoundBuffer playerDeath;
 	SoundBuffer playerHurt;
 	SoundBuffer healthPickUp;
+	SoundBuffer gameOver;
 
 	Sound enemydeath;
 	Sound projectilesound;
 	Sound playerdeath;
 	Sound playerhurt;
 	Sound healthpickup;
+	Sound gameover;
 };
 
 #endif

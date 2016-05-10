@@ -7,6 +7,7 @@ SoundManager::SoundManager()
 	playerHurt.loadFromFile("sounds/playerhurt.wav");
 	healthPickUp.loadFromFile("sounds/health.wav");
 	projectileSound.loadFromFile("sounds/playershoot.wav");
+	gameOver.loadFromFile("sounds/gameover.wav");
 }
 
 SoundManager::~SoundManager()
@@ -42,4 +43,10 @@ void SoundManager::HealthPickupSound()
 {
 	healthpickup.setBuffer(healthPickUp);
 	healthpickup.play();
+}
+
+void SoundManager::GameOver()
+{
+	gameover.setBuffer(gameOver);
+	gameover.play();
 }
