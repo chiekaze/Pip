@@ -2,7 +2,6 @@
 #define MENU_H
 
 #include <SFML/Graphics.hpp> 
-#include "Player.h"
 
 using namespace sf;
 
@@ -24,7 +23,6 @@ public:
 	bool isPlaying;
 
 private:
-	Player* player;
 
 	Font font;
 	

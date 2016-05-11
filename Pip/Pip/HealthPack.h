@@ -33,8 +33,6 @@ private:
 	float healthSpeed;
 	float healthNormalSpeed;
 	int health;
-
-	Clock clock;
 };
 
 #endif
