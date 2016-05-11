@@ -4,6 +4,8 @@ Projektiopinnot 1
 
 A collaborative effort between Chiki and Hoffmann.
 
+https://youtu.be/SPWcFVWQt7Q
+
 REMEMBER TO USE RELEASE MODE WHILE DEBUGGING!
 REMEMBER TO USE RELEASE MODE WHILE DEBUGGING!
 
