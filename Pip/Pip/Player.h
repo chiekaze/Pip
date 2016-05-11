@@ -43,7 +43,6 @@ private:
 	
 	float playerSpeed;
 	float playerNormalSpeed;
-	int playerFocusSpeed;
 	float playerFocusFactor;
 	int playerHP;
 	int playerFullHP;

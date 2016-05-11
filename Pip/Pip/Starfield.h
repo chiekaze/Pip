@@ -16,11 +16,11 @@ public:
 	void Draw(RenderWindow& window);
 
 private:
-	sf::Texture star1Tex;
-	sf::Texture star2Tex;
+	Texture star1Tex;
+	Texture star2Tex;
 
-	sf::Sprite star1Sprite;
-	sf::Sprite star2Sprite;
+	Sprite star1Sprite;
+	Sprite star2Sprite;
 
 	float starSpeed = 1.3;
 

@@ -30,7 +30,6 @@ Player::Player()
 	focus.setPosition(Vector2f(5, 570));
 
 	playerNormalSpeed = 5;
-	playerFocusSpeed = 2;
 	playerFocusFactor = 0.4;
 
 	SetPosition();
