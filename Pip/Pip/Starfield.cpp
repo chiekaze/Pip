@@ -1,7 +1,12 @@
 #include "StarField.h"
 
-Starfield::Starfield()
+Starfield::Starfield(Player* player)
 {
+	mPlayer = player;
+
+	starNormalSpeed = 1.3;
+	starSpeed = starNormalSpeed;
+
 	star1Tex.loadFromFile("sprites/starfield.png");
 	star1Tex.setSmooth(false);
 
@@ -22,6 +27,14 @@ Starfield::~Starfield()
 
 void Starfield::Update()
 {
+	//Starfield focus speed
+	if (mPlayer->PlayerFocus())
+	{
+		starSpeed = starNormalSpeed * mPlayer->GetPlayerFocusFactor();
+	}
+	else
+		starSpeed = starNormalSpeed;
+
 	windowBgDiff = sf1Y - 600;
 
 	if (sf1Y >= 600)

@@ -60,11 +60,14 @@ private:
 	float healthTimer;
 	float spawnTimer;
 
+	float spawnTimerFocus;
+	float spawnTimerNormal;
 	float spawnTimerValue;
 	int lastSpawnTimerUpdate;
 	int spawnRateTime;
 
 	float healthTimerValue;
+	float healthTimerAddition;
 	int lastHealthTimerUpdate;
 	int healthTime;
 

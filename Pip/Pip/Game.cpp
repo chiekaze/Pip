@@ -12,8 +12,8 @@ Game::Game()
 	window = new RenderWindow(VideoMode(windowWidth, windowHeight), "Pip");
 	player = new Player();
 	playArea = new PlayArea();
-	bg = new Background();
-	sf = new Starfield();
+	bg = new Background(player);
+	sf = new Starfield(player);
 	elapsedTime = new ElapsedTime();
 	scoreTxt = new ScoreText();
 	soundManager = new SoundManager();
@@ -24,12 +24,15 @@ Game::Game()
 	healthTimer = 0;
 	spawnTimer = 0;
 
-	spawnTimerValue = 5;
+	spawnTimerValue = spawnTimerNormal;
+	spawnTimerNormal = 5;
+	spawnTimerFocus = spawnTimerNormal / player->GetPlayerFocusFactor();
 	lastSpawnTimerUpdate = 0;
 	spawnRateTime = 20;
 
 	healthTop = 30;
 	healthBottom = 10;
+	healthTimerAddition = 20;
 
 	healthTimerValue = rand() % healthTop + healthBottom;
 	lastHealthTimerUpdate = 0;
@@ -56,11 +59,21 @@ void Game::UpdateSpawnTimer()
 {
 	if (menu->IsPlaying())
 	{
+
+		if (player->PlayerFocus())
+		{
+			spawnTimerValue = spawnTimerFocus;
+		}
+		else
+			spawnTimerValue = spawnTimerNormal;
+
 		if (spawnTimerValue >= 2)
 		{
 			if (elapsedTime->getElapsedTime() - lastSpawnTimerUpdate >= spawnRateTime)
 			{
-				spawnTimerValue -= 1;
+				spawnTimerNormal -= 1;
+				spawnTimerValue = spawnTimerNormal;
+				spawnTimerFocus = spawnTimerNormal / player->GetPlayerFocusFactor();
 				lastSpawnTimerUpdate = elapsedTime->getElapsedTime();
 			}
 		}
@@ -69,8 +82,8 @@ void Game::UpdateSpawnTimer()
 		{
 			if (elapsedTime->getElapsedTime() - lastHealthTimerUpdate >= healthTime)
 			{
-				healthTop += 10;
-				healthBottom += 10;
+				healthTop += healthTimerAddition;
+				healthBottom += healthTimerAddition;
 				healthTime = healthTop;
 				healthTimerValue = rand() % healthTop + healthBottom;
 				lastHealthTimerUpdate = elapsedTime->getElapsedTime();

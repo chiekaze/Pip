@@ -1,7 +1,10 @@
 #include "BackGround.h"
 
-Background::Background()
+Background::Background(Player* player)
 {
+	bgNormalSpeed = 1;
+	bgSpeed = bgNormalSpeed;
+
 	bg1Tex.loadFromFile("sprites/background.png");
 	bg1Tex.setSmooth(false);
 	
@@ -14,6 +17,8 @@ Background::Background()
 	bg2Sprite.setTexture(bg2Tex);
 	bg2Y = bg2Sprite.getPosition().y;
 	bg2Sprite.setPosition(0, 601);
+
+	mPlayer = player;
 }
 
 Background::~Background()
@@ -22,6 +27,14 @@ Background::~Background()
 
 void Background::Update()
 {
+	//Background focus speed
+	if (mPlayer->PlayerFocus())
+	{
+		bgSpeed = bgNormalSpeed * mPlayer->GetPlayerFocusFactor();
+	}
+	else
+		bgSpeed = bgNormalSpeed;
+
 	windowBgDiff = bg1Y - 600;
 
 	if (bg1Y >= 600)
