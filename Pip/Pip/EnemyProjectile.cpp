@@ -1,6 +1,6 @@
 #include "EnemyProjectile.h"
 
-EnemyProjectile::EnemyProjectile()
+EnemyProjectile::EnemyProjectile(Player* player)
 {
 	enemyProjectileText.loadFromFile("sprites/enemy_projectile.png");
 	enemyProjectileText.setSmooth(false);
@@ -10,8 +10,11 @@ EnemyProjectile::EnemyProjectile()
 	enemyProjectileSprite.setScale(1, 1);
 	enemyProjectileSprite.setRotation(180);
 
-	enemyProjectileSpeed = 7;
+	enemyProjectileNormalSpeed = 7;
+	enemyProjectileSpeed = enemyProjectileNormalSpeed;
 	enemyProjectileDamage = 5;
+
+	mPlayer = player;
 }
 
 EnemyProjectile::~EnemyProjectile()
@@ -53,6 +56,13 @@ bool EnemyProjectile::Intersect()
 //Enemy projectile moves
 void EnemyProjectile::Update()
 {
+	//Enemy projectile focus
+	if (mPlayer->PlayerFocus())
+	{
+		enemyProjectileSpeed = enemyProjectileNormalSpeed * mPlayer->GetPlayerFocusFactor();
+	}
+	else enemyProjectileSpeed = enemyProjectileNormalSpeed;
+
 	enemyProjectileSprite.move(Vector2f(0, enemyProjectileSpeed));
 }
 

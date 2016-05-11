@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <math.h>
 
-HealthPack::HealthPack()
+HealthPack::HealthPack(Player* player)
 {
 	healthText.loadFromFile("sprites/health_pack.png");
 	healthText.setSmooth(false);
@@ -11,8 +11,11 @@ HealthPack::HealthPack()
 	healthSprite.setScale(1 , 1);
 	healthSprite.setOrigin(15, 5);
 
-	healthSpeed = 1.7;
+	healthNormalSpeed = 1.7;
+	healthSpeed = healthNormalSpeed;
 	health = 25;
+
+	mPlayer = player;
 
 	SetPosition();
 }
@@ -56,6 +59,13 @@ int HealthPack::GetHealth()
 
 void HealthPack::Update()
 {
+	if (mPlayer->PlayerFocus())
+	{
+		healthSpeed = healthNormalSpeed * mPlayer->GetPlayerFocusFactor();
+	}
+	else
+		healthSpeed = healthNormalSpeed;
+
 	healthSprite.move(Vector2f(0, healthSpeed));
 }
 

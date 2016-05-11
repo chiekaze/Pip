@@ -94,7 +94,7 @@ void Game::Update()
 		enemies.push_back(enemy);
 
 		//Spawns enemy projectiles when game starts
-		enemyprojectile = new EnemyProjectile();
+		enemyprojectile = new EnemyProjectile(player);
 		enemyprojectiles.push_back(enemyprojectile);
 
 		for (auto enemy : enemies)
@@ -141,7 +141,7 @@ void Game::Update()
 			{
 				healthTimer = 0;
 
-				healthpack = new HealthPack();
+				healthpack = new HealthPack(player);
 				healthpacks.push_back(healthpack);
 			}
 
@@ -226,7 +226,7 @@ void Game::Update()
 				{
 					projectileTimer = 0;
 
-					enemyprojectile = new EnemyProjectile();
+					enemyprojectile = new EnemyProjectile(player);
 					enemyprojectiles.push_back(enemyprojectile);
 					enemyprojectile->setPosition(enemy->GetPosition());
 				}

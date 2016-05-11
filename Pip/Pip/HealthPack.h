@@ -3,13 +3,14 @@
 
 #include <SFML/Graphics.hpp>
 #include "PlayArea.h"
+#include "Player.h"
 
 using namespace sf;
 
 class HealthPack
 {
 public:
-	HealthPack();
+	HealthPack(Player* player);
 	~HealthPack();
 
 	FloatRect GetHealthPackBoundingBox();
@@ -22,6 +23,7 @@ public:
 
 private:
 	PlayArea* playArea;
+	Player* mPlayer;
 
 	Texture healthText;
 	Sprite healthSprite;
@@ -29,6 +31,7 @@ private:
 	FloatRect healthBoundingBox;
 
 	float healthSpeed;
+	float healthNormalSpeed;
 	int health;
 
 	Clock clock;

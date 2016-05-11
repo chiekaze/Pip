@@ -3,7 +3,7 @@
 
 Player::Player()
 {
-	playerFullHP = 10;
+	playerFullHP = 100;
 	playerHP = playerFullHP;
 
 	playerText.loadFromFile("sprites/player_ship.png");
@@ -24,6 +24,10 @@ Player::Player()
 	text.setString("HEALTH: " + std::to_string(playerHP)); 
 	text.setFont(font); text.setCharacterSize(22);
 	text.setPosition(Vector2f(5, 30));
+
+	focus.setString("FOCUS ENABLED!");
+	focus.setFont(font); focus.setCharacterSize(20);
+	focus.setPosition(Vector2f(5, 570));
 
 	playerNormalSpeed = 5;
 	playerFocusSpeed = 2;
@@ -175,4 +179,9 @@ void Player::Draw(RenderWindow& window)
 {
 	window.draw(playerSprite);
 	window.draw(text);
+
+	if (PlayerFocus())
+	{
+		window.draw(focus);
+	}
 }

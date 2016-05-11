@@ -29,6 +29,7 @@ public:
 
 	Font font;
 	Text text;
+	Text focus;
 
 private:
 	PlayArea* playArea;

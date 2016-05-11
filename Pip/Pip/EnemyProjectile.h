@@ -11,7 +11,7 @@ using namespace sf;
 class EnemyProjectile
 {
 public:
-	EnemyProjectile();
+	EnemyProjectile(Player* player);
 	~EnemyProjectile();
 
 	int GetEnemyDamage();
@@ -28,7 +28,8 @@ private:
 	Texture enemyProjectileText;
 	Sprite enemyProjectileSprite;
 
-	int enemyProjectileSpeed;
+	float enemyProjectileSpeed;
+	float enemyProjectileNormalSpeed;
 	int enemyProjectileDamage;
 
 	Enemy* enemy;
