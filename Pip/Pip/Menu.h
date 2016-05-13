@@ -2,27 +2,33 @@
 #define MENU_H
 
 #include <SFML/Graphics.hpp> 
+#include "Player.h"
+#include "ElapsedTime.h"
+#include "ScoreText.h"
 
 using namespace sf;
 
 class Menu
 {
 public:
-	Menu();
+	Menu(Player*);
 	~Menu();
 
 	bool IsPlaying();
-	bool isNotPlaying();
-	void stopPlaying();
-	void startPlaying();
+	bool IsNotPlaying();
+	void StopPlaying();
+	void StartPlaying();
 
 	void Draw(RenderWindow &window);
-	void DrawEndMenu(RenderWindow &window);
+	void DrawDeadMenu(RenderWindow &window);
 	void Update();
-
-	bool isPlaying;
+	void UpdateDeadMenu();
 
 private:
+
+	ElapsedTime* elapsedTime;
+	Player* mPlayer;
+	ScoreText* scrTxt;
 
 	Font font;
 	
@@ -37,7 +43,11 @@ private:
 	
 	//End menu
 	Text dead;
-	Text score;
+	Text restart;
+	Text scoreTxt;
+	Text quit2;
+
+	bool isPlaying;
 };
 
 #endif;

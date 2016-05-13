@@ -20,6 +20,7 @@ private:
 	Font font; 
 	Text text; 
 	int score = 0; 
+	int totalScore = score;
 };
 
 #endif;

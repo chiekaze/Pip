@@ -22,21 +22,26 @@ public:
 	bool IsDead();
 	void Update();
 	void PlayerInput();
+	void SetPlayerHP(int hp);
 	void Draw(RenderWindow& window);
 
 	bool PlayerFocus();
 	float GetPlayerFocusFactor();
 
+private:
+	PlayArea* playArea;
+
 	Font font;
 	Text text;
 	Text focus;
 
-private:
-	PlayArea* playArea;
-
 	Texture playerText;
 	Texture playerHurtText;
 	Texture playerPickupText;
+	
+	Texture focusBGText;
+	Sprite focusBGSprite;
+
 	Sprite playerSprite;
 
 	FloatRect playerBoundingBox;

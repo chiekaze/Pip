@@ -17,8 +17,8 @@ Game::Game()
 	elapsedTime = new ElapsedTime();
 	scoreTxt = new ScoreText();
 	soundManager = new SoundManager();
-	menu = new Menu();
-	menu->IsPlaying();
+	menu = new Menu(player);
+	//menu->IsPlaying();
 
 	projectileTimer = 0;
 	healthTimer = 0;
@@ -59,7 +59,6 @@ void Game::UpdateSpawnTimer()
 {
 	if (menu->IsPlaying())
 	{
-
 		if (player->PlayerFocus())
 		{
 			spawnTimerValue = spawnTimerFocus;
@@ -94,7 +93,6 @@ void Game::UpdateSpawnTimer()
 
 void Game::Update()
 {
-	
 	SoundBuffer buffer;
 	Sound sound;
 
@@ -124,17 +122,17 @@ void Game::Update()
 
 	while (window->isOpen())
 	{
-		if (menu->isNotPlaying())
+		if (menu->IsNotPlaying())
 		{
-			menu->Update();
+				menu->Update();
 		}
 
 		spawnTimer += 1 / 60.0f;
 		healthTimer += 1 / 60.0f;
 
-		if (player->IsDead())
+		if (player->GetPlayerHP() <= 0)
 		{
-			menu->stopPlaying();
+			elapsedTime->Reset();
 		}
 
 		if (menu->IsPlaying())
@@ -219,9 +217,10 @@ void Game::Update()
 					soundManager->PlayerHurt();
 
 					//Plays player death sound
-					if (player->GetPlayerHP() == 5)
+					if (player->GetPlayerHP() <= 0)
 					{
-						soundManager->PlayerDeathSound();
+
+						enemies.erase(enemies.begin());
 					}
 				}
 			}
@@ -261,7 +260,6 @@ void Game::Update()
 						projectiles.erase(projectiles.begin());
 					}
 				}
-
 
 				//Deletes killed enemy, spawns a new one and adds 1 score
 				if (enemy->IsDead())
@@ -327,8 +325,8 @@ void Game::Draw()
 	if (player->IsDead())
 	{
 		window->clear(Color::Black);
-		menu->DrawEndMenu(*window);
-		soundManager->GameOver();
+		menu->DrawDeadMenu(*window);
+		menu->UpdateDeadMenu();
 	}
 
 	if (menu->IsPlaying())

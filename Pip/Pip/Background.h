@@ -14,7 +14,7 @@ public:
 	~Background();
 
 	void Update();
-	void Draw(RenderWindow& window);
+	void Draw(RenderWindow &window);
 
 private:
 	Player* mPlayer;

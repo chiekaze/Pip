@@ -14,6 +14,11 @@ Player::Player()
 
 	playerPickupText.loadFromFile("sprites/player_ship_pickup.png");
 	playerPickupText.setSmooth(false);
+
+	focusBGText.loadFromFile("sprites/focus.png");
+	focusBGText.setSmooth(false);
+
+	focusBGSprite.setTexture(focusBGText);
 	
 	playerSprite.setTexture(playerText);
 	playerSprite.setTextureRect(IntRect(0, 0, 32, 32));
@@ -55,10 +60,16 @@ void Player::SetPosition()
 	playerSprite.setPosition(800 / 2, 600 / 2);
 }
 
+void Player::SetPlayerHP(int hp)
+{
+	playerHP = hp;
+}
+
 void Player::Update()
 {
 	playerSprite.setTexture(playerText);
 	PlayerInput();
+	text.setString("HEALTH: " + std::to_string(GetPlayerHP()));
 }
 
 int Player::GetPlayerHP()
@@ -182,5 +193,6 @@ void Player::Draw(RenderWindow& window)
 	if (PlayerFocus())
 	{
 		window.draw(focus);
+		window.draw(focusBGSprite);
 	}
 }

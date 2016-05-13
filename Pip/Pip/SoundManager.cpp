@@ -12,7 +12,6 @@ SoundManager::SoundManager()
 
 SoundManager::~SoundManager()
 {
-
 }
 
 void SoundManager::EnemyDeathSound()

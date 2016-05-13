@@ -1,11 +1,13 @@
 #include "Menu.h"
 #include <iostream>
 
-Menu::Menu()
+Menu::Menu(Player* player)
 {
 	isPlaying = false;
 	font.loadFromFile("fonts/Minecraft.ttf");
 
+
+	//STARTMENU
 	title.setFont(font);
 	start.setFont(font);
 	quit.setFont(font);
@@ -14,7 +16,13 @@ Menu::Menu()
 	shoot.setFont(font);
 	focus.setFont(font);
 
+	//DEADMENU
 	dead.setFont(font);
+	restart.setFont(font);
+	scoreTxt.setFont(font);
+	quit2.setFont(font);
+
+	mPlayer = player;
 
 	//START MENU---------------------------
 
@@ -54,9 +62,24 @@ Menu::Menu()
 	//-------------------------------------
 
 	//DEAD
-	dead.setString("UR DED M8");
+	dead.setString("YOU DIED!");
 	dead.setCharacterSize(64);
-	dead.setPosition(Vector2f(160, 100));
+	dead.setPosition(Vector2f(220, 100));
+
+	scrTxt = new ScoreText();
+
+	scoreTxt.setString("SCORE: " + std::to_string(scrTxt->getScore()));
+	
+	scoreTxt.setCharacterSize(48);
+	scoreTxt.setPosition(Vector2f(220, 180));
+
+	restart.setString("PRESS 'ENTER' TO PLAY AGAIN");
+	restart.setCharacterSize(32);
+	restart.setPosition(Vector2f(160, 300));
+	
+	quit2.setString("PRESS 'ESC' TO QUIT");
+	quit2.setCharacterSize(32);
+	quit2.setPosition(Vector2f(230, 360));
 }
 
 Menu::~Menu()
@@ -68,7 +91,7 @@ bool Menu::IsPlaying()
 	return isPlaying;
 }
 
-bool Menu::isNotPlaying()
+bool Menu::IsNotPlaying()
 {
 	if (isPlaying == true)
 	{
@@ -78,12 +101,12 @@ bool Menu::isNotPlaying()
 		return true;
 }
 
-void Menu::stopPlaying()
+void Menu::StopPlaying()
 {
 	isPlaying = false;
 }
 
-void Menu::startPlaying()
+void Menu::StartPlaying()
 {
 	isPlaying = true;
 }
@@ -93,6 +116,23 @@ void Menu::Update()
 	if (Keyboard::isKeyPressed(Keyboard::Return))
 	{
 		isPlaying = true;
+	}
+
+	else
+		isPlaying = false;
+}
+
+void Menu::UpdateDeadMenu()
+{
+	if (Keyboard::isKeyPressed(Keyboard::Return))
+	{
+		isPlaying = true;
+		
+		mPlayer->SetPlayerHP(100);
+		mPlayer->SetPosition();
+		
+		elapsedTime = new ElapsedTime();
+		elapsedTime->Reset();
 	}
 
 	else
@@ -110,7 +150,10 @@ void Menu::Draw(RenderWindow &window)
 	window.draw(focus);
 }
 
-void Menu::DrawEndMenu(RenderWindow &window)
+void Menu::DrawDeadMenu(RenderWindow &window)
 {
 	window.draw(dead);
+	window.draw(restart);
+	window.draw(scoreTxt);
+	window.draw(quit2);
 }

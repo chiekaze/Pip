@@ -4,8 +4,6 @@
 
 ElapsedTime::ElapsedTime()
 {
-	menu = new Menu();
-
 	font.loadFromFile("fonts/Minecraft.ttf");
 	text.setFont(font);
 	text.setCharacterSize(22);
@@ -13,16 +11,10 @@ ElapsedTime::ElapsedTime()
 
 	mClockReset = false;
 	playTime = clock.getElapsedTime();
-
-	if (menu->IsPlaying())
-	{
-		text.setString("TIME: " + std::to_string((int)floorf(playTime.asSeconds()))); // <-- This shit turns the time value into an int
-	}
 }
 
 ElapsedTime::~ElapsedTime()
 {
-
 }
 
 int ElapsedTime::getElapsedTime()
@@ -31,10 +23,18 @@ int ElapsedTime::getElapsedTime()
 	return (int)floorf(playTime.asSeconds());
 }
 
+void ElapsedTime::Reset()
+{
+	clock.restart();
+	playTime = clock.getElapsedTime();
+
+}
+
 void ElapsedTime::Update()
 {
 	//Starting playtime from zero
-	if (!mClockReset) {
+	if (!mClockReset) 
+	{
 		clock.restart();
 		mClockReset = true;
 	}
@@ -44,7 +44,7 @@ void ElapsedTime::Update()
 
 	if (floorf(playTime.asSeconds()) > 99)
 	{
-		text.setPosition(Vector2f(690, 5)); 
+		text.setPosition(Vector2f(690, 5));
 	}
 
 	if (floorf(playTime.asSeconds()) > 999)

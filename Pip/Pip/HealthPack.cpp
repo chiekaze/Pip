@@ -9,7 +9,7 @@ HealthPack::HealthPack(Player* player)
 	healthSprite.setTexture(healthText);
 	healthSprite.setTextureRect(IntRect(0, 0, 32, 32));
 	healthSprite.setScale(1 , 1);
-	healthSprite.setOrigin(15, 5);
+	healthSprite.setOrigin(16, 16);
 
 	healthNormalSpeed = 1.7;
 	healthSpeed = healthNormalSpeed;
@@ -66,6 +66,7 @@ void HealthPack::Update()
 	else
 		healthSpeed = healthNormalSpeed;
 
+	healthSprite.rotate(1);
 	healthSprite.move(Vector2f(0, healthSpeed));
 }
 
