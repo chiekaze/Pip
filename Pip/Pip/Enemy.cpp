@@ -100,7 +100,7 @@ void Enemy::Update()
 	else
 		enemySpeed = enemyNormalSpeed;
 
-	enemySprite.setTexture(enemyText);
+	SetSprite();
 	enemySprite.move(Vector2f(0, enemySpeed));
 }
 

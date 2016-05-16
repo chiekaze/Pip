@@ -69,14 +69,14 @@ Menu::Menu(Player* player)
 	scrTxt = new ScoreText();
 
 	scoreTxt.setString("SCORE: " + std::to_string(scrTxt->getScore()));
-	
+
 	scoreTxt.setCharacterSize(48);
 	scoreTxt.setPosition(Vector2f(220, 180));
 
 	restart.setString("PRESS 'ENTER' TO PLAY AGAIN");
 	restart.setCharacterSize(32);
 	restart.setPosition(Vector2f(160, 300));
-	
+
 	quit2.setString("PRESS 'ESC' TO QUIT");
 	quit2.setCharacterSize(32);
 	quit2.setPosition(Vector2f(230, 360));
@@ -124,13 +124,15 @@ void Menu::Update()
 
 void Menu::UpdateDeadMenu()
 {
+	scoreTxt.setString("SCORE: " + std::to_string(scrTxt->getScore()));
+
 	if (Keyboard::isKeyPressed(Keyboard::Return))
 	{
 		isPlaying = true;
-		
+
 		mPlayer->SetPlayerHP(100);
 		mPlayer->SetPosition();
-		
+
 		elapsedTime = new ElapsedTime();
 		elapsedTime->Reset();
 	}

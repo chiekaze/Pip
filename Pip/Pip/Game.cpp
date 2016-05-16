@@ -18,7 +18,6 @@ Game::Game()
 	scoreTxt = new ScoreText();
 	soundManager = new SoundManager();
 	menu = new Menu(player);
-	//menu->IsPlaying();
 
 	projectileTimer = 0;
 	healthTimer = 0;

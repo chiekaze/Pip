@@ -16,11 +16,13 @@ public:
 	void Update();
 	void Draw(RenderWindow &window);
 
+	int score = 0;
+	int totalScore = score;
+
 private:
 	Font font; 
 	Text text; 
-	int score = 0; 
-	int totalScore = score;
+
 };
 
 #endif;
