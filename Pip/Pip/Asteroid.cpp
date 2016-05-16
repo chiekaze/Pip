@@ -19,7 +19,7 @@ Asteroid::Asteroid(Player* player)
 	asteroidSpeed = asteroidNormalSpeed;
 	asteroidSideNormal = 1;
 	asteroidSideSpeed = asteroidSideNormal;
-	asteroidHP = 100;
+	asteroidHP = 500;
 	asteroidDMG = 25;
 
 	SetPosition();
@@ -89,6 +89,7 @@ void Asteroid::Update()
 		asteroidSideSpeed = asteroidSideNormal;
 	}
 
+	asteroidSprite.rotate(1);
 	asteroidSprite.setTexture(asteroidText);
 	asteroidSprite.move(Vector2f(asteroidSideSpeed, asteroidSpeed));
 }

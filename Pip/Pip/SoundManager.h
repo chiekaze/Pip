@@ -19,6 +19,8 @@ public:
 	void HealthPickupSound();
 	void PlayerHurt();
 	void GameOver();
+	void AsteroidExplosion();
+	void PlayerFocusSound();
 
 private:
 	SoundBuffer enemyDeath;
@@ -27,6 +29,8 @@ private:
 	SoundBuffer playerHurt;
 	SoundBuffer healthPickUp;
 	SoundBuffer gameOver;
+	SoundBuffer asteroidExplosion;
+	SoundBuffer playerFocusSound;
 
 	Sound enemydeath;
 	Sound projectilesound;
@@ -34,6 +38,8 @@ private:
 	Sound playerhurt;
 	Sound healthpickup;
 	Sound gameover;
+	Sound asteroidexplosion;
+	Sound playerfocussound;
 };
 
 #endif

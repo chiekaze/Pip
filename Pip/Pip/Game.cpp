@@ -22,12 +22,19 @@ Game::Game()
 	projectileTimer = 0;
 	healthTimer = 0;
 	spawnTimer = 0;
+	asteroidTimer = 0;
 
 	spawnTimerValue = spawnTimerNormal;
 	spawnTimerNormal = 5;
 	spawnTimerFocus = spawnTimerNormal / player->GetPlayerFocusFactor();
 	lastSpawnTimerUpdate = 0;
 	spawnRateTime = 20;
+
+	asteroidTimerValue = asteroidTimerNormal;
+	asteroidTimerNormal = 10;
+	asteroidTimerFocus = asteroidTimerNormal / player->GetPlayerFocusFactor();
+	lastAsteroidUpdate = 0;
+	asteroidTime = 30;
 
 	healthTop = 30;
 	healthBottom = 10;
@@ -61,9 +68,13 @@ void Game::UpdateSpawnTimer()
 		if (player->PlayerFocus())
 		{
 			spawnTimerValue = spawnTimerFocus;
+			asteroidTimerValue = asteroidTimerFocus;
 		}
 		else
+		{
 			spawnTimerValue = spawnTimerNormal;
+			asteroidTimerValue = asteroidTimerNormal;
+		}
 
 		if (spawnTimerValue >= 2)
 		{
@@ -73,6 +84,17 @@ void Game::UpdateSpawnTimer()
 				spawnTimerValue = spawnTimerNormal;
 				spawnTimerFocus = spawnTimerNormal / player->GetPlayerFocusFactor();
 				lastSpawnTimerUpdate = elapsedTime->getElapsedTime();
+			}
+		}
+
+		if (asteroidTimerValue >= 2)
+		{
+			if (elapsedTime->getElapsedTime() - lastAsteroidUpdate >= asteroidTime)
+			{
+				asteroidTimerNormal -= 1;
+				asteroidTimerValue = asteroidTimerNormal;
+				asteroidTimerFocus = asteroidTimerNormal / player->GetPlayerFocusFactor();
+				lastAsteroidUpdate = elapsedTime->getElapsedTime();
 			}
 		}
 
@@ -128,6 +150,7 @@ void Game::Update()
 
 		spawnTimer += 1 / 60.0f;
 		healthTimer += 1 / 60.0f;
+		asteroidTimer += 1 / 60.0f;
 
 		if (player->GetPlayerHP() <= 0)
 		{
@@ -144,6 +167,14 @@ void Game::Update()
 				spawnTimer = 0;
 				enemy = new Enemy(player);
 				enemies.push_back(enemy);
+			}
+
+			//Asteroid spawn timer
+			if (asteroidTimer > asteroidTimerValue)
+			{
+				asteroidTimer = 0;
+				asteroid = new Asteroid(player);
+				asteroids.push_back(asteroid);
 			}
 
 			//Healthpack spawn timer
@@ -260,7 +291,7 @@ void Game::Update()
 					}
 				}
 
-				//Deletes killed enemy, spawns a new one and adds 1 score
+				//Deletes killed enemy and adds 1 score
 				if (enemy->IsDead())
 				{
 					enemies.erase(enemies.begin());
@@ -282,6 +313,48 @@ void Game::Update()
 				}
 			}
 			//ENEMY ENDS HERE
+
+			//ASTEROID UPDATES
+			for (auto asteroid : asteroids)
+			{
+				asteroid->Update();
+
+				//Deletes asteroid if collides with bottom border
+				if (asteroid->Intersect())
+				{
+					asteroids.erase(asteroids.begin());
+				}
+
+				//Checks if asteroid is hit by projectiles
+				for (auto projectile : projectiles)
+				{
+					if (asteroid->GetAsteroidBoundingBox().intersects(projectile->GetProjectileBoundingBox()))
+					{
+						asteroid->TakeDamage(projectile->GetProjectileDamage());
+
+						projectiles.erase(projectiles.begin());
+					}
+				}
+
+				//Deletes destroyed asteroid and adds 1 point
+				if (asteroid->IsDestroyed())
+				{
+					asteroids.erase(asteroids.begin());
+					soundManager->AsteroidExplosion();
+
+					scoreTxt->Update();
+				}
+
+				//Checks if player is hit by asteroid and gives damage to player
+				if (player->GetPlayerBoundingBox().intersects(asteroid->GetAsteroidBoundingBox()))
+				{
+					asteroids.erase(asteroids.begin());
+					soundManager->AsteroidExplosion();
+
+					player->TakeDamage(asteroid->GetAsteroidDamage());
+				}
+			}
+			//ASTEROID ENDS HERE
 		}
 
 		window->setFramerateLimit(60);
@@ -351,6 +424,11 @@ void Game::Draw()
 		for (auto enemyprojectile : enemyprojectiles)
 		{
 			enemyprojectile->Draw(*window);
+		}
+
+		for (auto asteroid : asteroids)
+		{
+			asteroid->Draw(*window);
 		}
 
 		player->Draw(*window);

@@ -8,6 +8,8 @@ SoundManager::SoundManager()
 	healthPickUp.loadFromFile("sounds/health.wav");
 	projectileSound.loadFromFile("sounds/playershoot.wav");
 	gameOver.loadFromFile("sounds/gameover.wav");
+	asteroidExplosion.loadFromFile("sounds/explosion2.wav");
+	playerFocusSound.loadFromFile("sounds/warp.wav");
 }
 
 SoundManager::~SoundManager()
@@ -48,4 +50,16 @@ void SoundManager::GameOver()
 {
 	gameover.setBuffer(gameOver);
 	gameover.play();
+}
+
+void SoundManager::AsteroidExplosion()
+{
+	asteroidexplosion.setBuffer(asteroidExplosion);
+	asteroidexplosion.play();
+}
+
+void SoundManager::PlayerFocusSound()
+{
+	playerfocussound.setBuffer(playerFocusSound);
+	playerfocussound.play();
 }

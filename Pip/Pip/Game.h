@@ -16,7 +16,7 @@
 #include "SoundManager.h"
 #include "HealthPack.h"
 #include "Menu.h"
-//#include "DeadMenu.h"
+#include "Asteroid.h"
 
 using namespace sf;
 
@@ -42,6 +42,9 @@ private:
 	SoundManager* soundManager;
 	Menu* menu;
 
+	Asteroid* asteroid;
+	std::vector<Asteroid*> asteroids;
+
 	Projectile* projectile;
 	std::vector<Projectile*> projectiles;
 
@@ -59,12 +62,19 @@ private:
 	float projectileTimer;
 	float healthTimer;
 	float spawnTimer;
+	float asteroidTimer;
 
 	float spawnTimerFocus;
 	float spawnTimerNormal;
 	float spawnTimerValue;
 	int lastSpawnTimerUpdate;
 	int spawnRateTime;
+
+	float asteroidTimerFocus;
+	float asteroidTimerNormal;
+	float asteroidTimerValue;
+	int lastAsteroidUpdate;
+	int asteroidTime;
 
 	float healthTimerValue;
 	float healthTimerAddition;
