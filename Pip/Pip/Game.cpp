@@ -396,9 +396,8 @@ void Game::Draw()
 	
 	if (player->IsDead())
 	{
-		window->clear(Color::Black);
-		menu->DrawDeadMenu(*window);
 		menu->UpdateDeadMenu();
+		menu->DrawDeadMenu(*window);
 	}
 
 	if (menu->IsPlaying())

@@ -143,13 +143,16 @@ void Menu::UpdateDeadMenu()
 
 void Menu::Draw(RenderWindow &window)
 {
-	window.draw(title);
-	window.draw(start);
-	window.draw(quit);
-	window.draw(controls);
-	window.draw(move);
-	window.draw(shoot);
-	window.draw(focus);
+	if (mPlayer->IsAlive())
+	{
+		window.draw(title);
+		window.draw(start);
+		window.draw(quit);
+		window.draw(controls);
+		window.draw(move);
+		window.draw(shoot);
+		window.draw(focus);
+	}
 }
 
 void Menu::DrawDeadMenu(RenderWindow &window)

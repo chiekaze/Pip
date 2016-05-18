@@ -3,8 +3,8 @@
 
 ScoreText::ScoreText() 
 { 
-	score;
-	totalScore;
+	score = 0;
+	totalScore = score;
 	
 	font.loadFromFile("fonts/Minecraft.ttf"); 
 	text.setFont(font); 
@@ -25,6 +25,7 @@ void ScoreText::Update()
 
 int ScoreText::getScore()
 {
+	totalScore = score;
 	return totalScore;
 }
 

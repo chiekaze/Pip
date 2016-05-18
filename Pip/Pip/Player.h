@@ -20,6 +20,7 @@ public:
 	void TakeDamage(int damage);
 	void TakeHealth(int health);
 	bool IsDead();
+	bool IsAlive();
 	void Update();
 	void PlayerInput();
 	void SetPlayerHP(int hp);

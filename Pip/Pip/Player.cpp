@@ -108,6 +108,14 @@ bool Player::IsDead()
 		return false;
 }
 
+bool Player::IsAlive()
+{
+	if (IsDead())
+		return false;
+	else
+		return true;
+}
+
 bool Player::PlayerFocus()
 {
 	if (Keyboard::isKeyPressed(Keyboard::LControl))
