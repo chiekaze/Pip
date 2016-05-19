@@ -18,6 +18,7 @@ Enemy::Enemy(Player* player)
 	enemySpeed = enemyNormalSpeed;
 	enemyHp = 100;
 	enemyDMG = 5;
+	enemyScore = 1;
 
 	mPlayer = player;
 
@@ -88,6 +89,11 @@ bool Enemy::IsDead()
 
 	else
 		return false;
+}
+
+int Enemy::GetScore()
+{
+	return enemyScore;
 }
 
 void Enemy::Update()

@@ -19,6 +19,7 @@ public:
 	bool Intersect();
 	int GetEnemyHP();
 	int GetEnemyDamage();
+	int GetScore();
 	void TakeDamage(int damage);
 	void SetSprite();
 	bool IsDead();
@@ -39,5 +40,6 @@ private:
 	float enemyNormalSpeed;
 	int enemyHp;
 	int enemyDMG;
+	int enemyScore;
 };
 #endif

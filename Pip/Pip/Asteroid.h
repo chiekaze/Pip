@@ -18,6 +18,7 @@ public:
 	bool Intersect();
 	int GetAsteroidHP();
 	int GetAsteroidDamage();
+	int GetScore();
 	void TakeDamage(int damage);
 	void SetSprite();
 	bool IsDestroyed();
@@ -44,6 +45,7 @@ private:
 
 	int asteroidHP;
 	int asteroidDMG;
+	int asteroidScore;
 };
 
 #endif

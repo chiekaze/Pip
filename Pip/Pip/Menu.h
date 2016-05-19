@@ -2,11 +2,14 @@
 #define MENU_H
 
 #include <SFML/Graphics.hpp> 
+#include <fstream>
+#include <string>
 #include "Player.h"
 #include "ElapsedTime.h"
 #include "ScoreText.h"
 
 using namespace sf;
+using namespace std;
 
 class Menu
 {
@@ -48,6 +51,7 @@ private:
 	Text quit2;
 
 	bool isPlaying;
+	int finalScore;
 };
 
 #endif;

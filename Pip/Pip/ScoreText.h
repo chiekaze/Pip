@@ -12,6 +12,8 @@ public:
 	~ScoreText();
 
 	int getScore();
+	void addScore(int scr);
+	void writeScore();
 
 	void Update();
 	void Draw(RenderWindow &window);

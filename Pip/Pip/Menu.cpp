@@ -6,6 +6,8 @@ Menu::Menu(Player* player)
 	isPlaying = false;
 	font.loadFromFile("fonts/Minecraft.ttf");
 
+	scrTxt = new ScoreText();
+	finalScore = scrTxt->getScore();
 
 	//STARTMENU
 	title.setFont(font);
@@ -124,7 +126,20 @@ void Menu::Update()
 
 void Menu::UpdateDeadMenu()
 {
-	scoreTxt.setString("SCORE: " + std::to_string(scrTxt->getScore()));
+	string line;
+	ifstream scoreFile("kebab.txt");
+
+	if (scoreFile.is_open())
+	{
+		while (getline(scoreFile, line))
+		{
+			scoreTxt.setString("SCORE: " + line);
+		}
+		scoreFile.close();
+	}
+
+	//finalScore = scrTxt->getScore();
+	//scoreTxt.setString("SCORE: " + std::to_string(finalScore));
 
 	if (Keyboard::isKeyPressed(Keyboard::Return))
 	{

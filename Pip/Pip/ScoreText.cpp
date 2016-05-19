@@ -1,5 +1,8 @@
 #include "ScoreText.h" 
-#include <iostream> 
+#include <iostream>
+#include <fstream>
+
+using namespace std;
 
 ScoreText::ScoreText() 
 { 
@@ -8,9 +11,9 @@ ScoreText::ScoreText()
 	
 	font.loadFromFile("fonts/Minecraft.ttf"); 
 	text.setFont(font); 
-	text.setString("SCORE: " + std::to_string(score)); 
+	text.setString("SCORE: " + to_string(score)); 
 	text.setCharacterSize(22); 
-	text.setPosition(Vector2f(5, 5)); 
+	text.setPosition(Vector2f(5, 5));
 } 
 
 ScoreText::~ScoreText() 
@@ -19,14 +22,27 @@ ScoreText::~ScoreText()
 
 void ScoreText::Update()
 { 
-	text.setString("SCORE: " + std::to_string(++score)); 
+	text.setString("SCORE: " + to_string(score));
 	totalScore = score;
+}
+
+void ScoreText::addScore(int scr)
+{
+	text.setString("SCORE: " + to_string(score += scr));
 }
 
 int ScoreText::getScore()
 {
+	return score;
+}
+
+void ScoreText::writeScore()
+{
 	totalScore = score;
-	return totalScore;
+	ofstream scoreFile;
+	scoreFile.open("kebab.txt");
+	scoreFile << to_string(totalScore);
+	scoreFile.close();
 }
 
 void ScoreText::Draw(RenderWindow &window) 

@@ -23,6 +23,7 @@ Asteroid::Asteroid(Player* player)
 	asteroidSideSpeed = asteroidSideNormal;
 	asteroidHP = 200;
 	asteroidDMG = 25;
+	asteroidScore = 5;
 
 	if (asteroidSideNormal == 0)
 	{
@@ -88,6 +89,11 @@ bool Asteroid::IsDestroyed()
 		return true;
 	else
 		return false;
+}
+
+int Asteroid::GetScore()
+{
+	return asteroidScore;
 }
 
 void Asteroid::Update()

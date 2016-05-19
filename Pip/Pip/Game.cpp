@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <iostream>
 #include <cstdlib>
+#include <fstream>
 
 Game::Game()
 {
@@ -153,9 +154,11 @@ void Game::Update()
 		healthTimer += 1 / 60.0f;
 		asteroidTimer += 1 / 60.0f;
 
-		if (player->GetPlayerHP() <= 0)
+		if (player->IsDead())
 		{
 			elapsedTime->Reset();
+			scoreTxt->writeScore();
+			menu->UpdateDeadMenu();
 		}
 
 		if (menu->IsPlaying())
@@ -302,7 +305,7 @@ void Game::Update()
 					//Playes enemy death sound
 					soundManager->EnemyDeathSound();
 
-					scoreTxt->Update();
+					scoreTxt->addScore(enemy->GetScore());
 				}
 
 				//Checks if player collides with enemy and gives damage to player
@@ -345,7 +348,7 @@ void Game::Update()
 					asteroids.erase(asteroids.begin());
 					soundManager->AsteroidExplosion();
 
-					scoreTxt->Update();
+					scoreTxt->addScore(asteroid->GetScore());
 				}
 
 				//Checks if player is hit by asteroid and gives damage to player
@@ -373,6 +376,7 @@ void Game::Update()
 				(event.type == sf::Event::KeyPressed) &&
 				(event.key.code == sf::Keyboard::Escape))
 			{
+				remove("kebab.txt");
 				window->close();
 			}
 
@@ -399,7 +403,6 @@ void Game::Draw()
 	
 	if (player->IsDead())
 	{
-		menu->UpdateDeadMenu();
 		menu->DrawDeadMenu(*window);
 	}
 
