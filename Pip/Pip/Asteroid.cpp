@@ -7,7 +7,7 @@ Asteroid::Asteroid(Player* player)
 	asteroidText.loadFromFile("sprites/asteroid2.png");
 	asteroidText.setSmooth(false);
 
-	asteroidHurtText.loadFromFile("sprites/asteroid2.png");
+	asteroidHurtText.loadFromFile("sprites/asteroid_damage.png");
 	asteroidHurtText.setSmooth(false);
 
 	
