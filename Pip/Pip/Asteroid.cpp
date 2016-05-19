@@ -46,7 +46,7 @@ bool Asteroid::Intersect()
 
 	asteroidBoundingBox = asteroidSprite.getGlobalBounds();
 
-	if (asteroidBoundingBox.intersects(playArea->GetBottomBoundingBox()))
+	if (asteroidBoundingBox.intersects(playArea->GetEnemyBorderBoundingBox()))
 		return true;
 	else
 		return false;

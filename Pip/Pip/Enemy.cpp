@@ -53,7 +53,7 @@ bool Enemy::Intersect()
 
 	enemyBoundingBox = enemySprite.getGlobalBounds();
 
-	if (enemyBoundingBox.intersects(playArea->GetBottomBoundingBox()))
+	if (enemyBoundingBox.intersects(playArea->GetEnemyBorderBoundingBox()))
 		return true;
 
 	else

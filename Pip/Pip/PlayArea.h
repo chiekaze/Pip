@@ -15,6 +15,8 @@ public:
 	FloatRect GetBottomBoundingBox();
 	FloatRect GetRightBoundingBox();
 	FloatRect GetLeftBoundingBox();
+	FloatRect GetEnemyBorderBoundingBox();
+
 	void SetPositions();
 	void Draw(RenderWindow& window);
 
@@ -23,18 +25,21 @@ private:
 	RectangleShape bottomBorder;
 	RectangleShape rightBorder;
 	RectangleShape leftBorder;
+	RectangleShape enemyBorder;
 
 	FloatRect topBoundingBox;
 	FloatRect bottomBoundingBox;
 	FloatRect rightBoundingBox;
 	FloatRect leftBoundingBox;
+	FloatRect enemyBorderBoundingBox;
 
 	//Window width and height
-	int width = 800;
-	int height = 600;
+	int width;
+	int height;
+	int enemyBorderWidth;
 
 	//Playarea bordersize
-	int borderSize = 50;
+	int borderSize;
 };
 
 #endif;

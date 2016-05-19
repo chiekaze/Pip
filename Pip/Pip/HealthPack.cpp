@@ -43,7 +43,7 @@ bool HealthPack::Intersect()
 
 	healthBoundingBox = healthSprite.getGlobalBounds();
 
-	if (healthBoundingBox.intersects(playArea->GetBottomBoundingBox()))
+	if (healthBoundingBox.intersects(playArea->GetEnemyBorderBoundingBox()))
 	{
 		return true;
 	}

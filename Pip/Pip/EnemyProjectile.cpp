@@ -46,7 +46,7 @@ bool EnemyProjectile::Intersect()
 
 	FloatRect enemyProjectileBoundingBox = enemyProjectileSprite.getGlobalBounds();
 
-	if (enemyProjectileBoundingBox.intersects(playarea->GetBottomBoundingBox()))
+	if (enemyProjectileBoundingBox.intersects(playarea->GetEnemyBorderBoundingBox()))
 		return true;
 
 	else
