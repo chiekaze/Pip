@@ -1,13 +1,12 @@
 #include "Menu.h"
 #include <iostream>
 
-Menu::Menu(Player* player)
+Menu::Menu(Player* player, ScoreText* scrtext)
 {
 	isPlaying = false;
 	font.loadFromFile("fonts/Minecraft.ttf");
 
-	scrTxt = new ScoreText();
-	finalScore = scrTxt->getScore();
+	scrTxt = scrtext;
 
 	//STARTMENU
 	title.setFont(font);
@@ -67,8 +66,6 @@ Menu::Menu(Player* player)
 	dead.setString("YOU DIED!");
 	dead.setCharacterSize(64);
 	dead.setPosition(Vector2f(220, 100));
-
-	scrTxt = new ScoreText();
 
 	scoreTxt.setString("SCORE: " + std::to_string(scrTxt->getScore()));
 
@@ -135,11 +132,9 @@ void Menu::UpdateDeadMenu()
 		{
 			scoreTxt.setString("SCORE: " + line);
 		}
+		
 		scoreFile.close();
 	}
-
-	//finalScore = scrTxt->getScore();
-	//scoreTxt.setString("SCORE: " + std::to_string(finalScore));
 
 	if (Keyboard::isKeyPressed(Keyboard::Return))
 	{
@@ -147,6 +142,8 @@ void Menu::UpdateDeadMenu()
 
 		mPlayer->SetPlayerHP(100);
 		mPlayer->SetPosition();
+		
+		scrTxt->ResetScore();
 
 		elapsedTime = new ElapsedTime();
 		elapsedTime->Reset();

@@ -26,6 +26,12 @@ void ScoreText::Update()
 	totalScore = score;
 }
 
+void ScoreText::ResetScore()
+{
+	score = 0;
+	Update();
+}
+
 void ScoreText::addScore(int scr)
 {
 	text.setString("SCORE: " + to_string(score += scr));

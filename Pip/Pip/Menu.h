@@ -14,7 +14,7 @@ using namespace std;
 class Menu
 {
 public:
-	Menu(Player*);
+	Menu(Player*,ScoreText*);
 	~Menu();
 
 	bool IsPlaying();

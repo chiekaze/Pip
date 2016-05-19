@@ -18,7 +18,7 @@ Game::Game()
 	elapsedTime = new ElapsedTime();
 	scoreTxt = new ScoreText();
 	soundManager = new SoundManager();
-	menu = new Menu(player);
+	menu = new Menu(player,scoreTxt);
 
 	projectileTimer = 0;
 	healthTimer = 0;

@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp> 
 #include <string> 
+
 using namespace sf;
 
 class ScoreText
@@ -14,6 +15,7 @@ public:
 	int getScore();
 	void addScore(int scr);
 	void writeScore();
+	void ResetScore();
 
 	void Update();
 	void Draw(RenderWindow &window);
@@ -21,6 +23,7 @@ public:
 private:
 	Font font; 
 	Text text;
+
 
 	int score;
 	int totalScore;
