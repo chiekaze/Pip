@@ -70,6 +70,7 @@ void Game::UpdateSpawnTimer()
 			spawnTimerValue = spawnTimerFocus;
 			asteroidTimerValue = asteroidTimerFocus;
 		}
+		
 		else
 		{
 			spawnTimerValue = spawnTimerNormal;
@@ -145,7 +146,7 @@ void Game::Update()
 	{
 		if (menu->IsNotPlaying())
 		{
-				menu->Update();
+			menu->Update();
 		}
 
 		spawnTimer += 1 / 60.0f;
@@ -172,9 +173,11 @@ void Game::Update()
 			//Asteroid spawn timer
 			if (asteroidTimer > asteroidTimerValue)
 			{
+				
 				asteroidTimer = 0;
 				asteroid = new Asteroid(player);
 				asteroids.push_back(asteroid);
+				
 			}
 
 			//Healthpack spawn timer

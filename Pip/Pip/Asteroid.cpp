@@ -4,24 +4,32 @@ Asteroid::Asteroid(Player* player)
 {
 	mPlayer = player;
 
-	asteroidText.loadFromFile("sprites/health_pack.png");
+	asteroidText.loadFromFile("sprites/asteroid2.png");
 	asteroidText.setSmooth(false);
 
-	asteroidHurtText.loadFromFile("sprites/health_pack.png");
+	asteroidHurtText.loadFromFile("sprites/asteroid2.png");
 	asteroidHurtText.setSmooth(false);
 
+	
+
 	asteroidSprite.setTexture(asteroidText);
-	asteroidSprite.setTextureRect(IntRect(0, 0, 32, 32));
-	asteroidSprite.setScale(3, 3);
-	asteroidSprite.setOrigin(16, 16);
+	asteroidSprite.setTextureRect(IntRect(0, 0, 64, 64));
+	asteroidSprite.setScale(asteroidScale, asteroidScale);
+	asteroidSprite.setOrigin(32, 32);
 
 	asteroidNormalSpeed = 2;
 	asteroidSpeed = asteroidNormalSpeed;
-	asteroidSideNormal = 1;
+	asteroidSideNormal = rand() % (3 + 1) - 2;
 	asteroidSideSpeed = asteroidSideNormal;
-	asteroidHP = 500;
+	asteroidHP = 200;
 	asteroidDMG = 25;
 
+	if (asteroidSideNormal == 0)
+	{
+		asteroidSideNormal += 1;
+	}
+
+	SetScale();
 	SetPosition();
 }
 
@@ -38,6 +46,12 @@ FloatRect Asteroid::GetAsteroidBoundingBox()
 void Asteroid::SetPosition()
 {
 	asteroidSprite.setPosition(rand() % 600 + 100, rand() % 1);
+}
+
+void Asteroid::SetScale()
+{
+	asteroidScale = rand() % 2 + 1;
+	asteroidSprite.setScale(asteroidScale, asteroidScale);
 }
 
 bool Asteroid::Intersect()

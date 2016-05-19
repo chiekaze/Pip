@@ -21,6 +21,7 @@ public:
 	void TakeDamage(int damage);
 	void SetSprite();
 	bool IsDestroyed();
+	void SetScale();
 
 	void Update();
 	void Draw(RenderWindow& window);
@@ -35,6 +36,7 @@ private:
 
 	FloatRect asteroidBoundingBox;
 
+	int asteroidScale;
 	float asteroidSpeed;
 	float asteroidNormalSpeed;
 	float asteroidSideSpeed;
