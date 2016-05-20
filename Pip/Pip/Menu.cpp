@@ -65,12 +65,12 @@ Menu::Menu(Player* player, ScoreText* scrtext)
 	//DEAD
 	dead.setString("YOU DIED!");
 	dead.setCharacterSize(64);
-	dead.setPosition(Vector2f(220, 100));
+	dead.setPosition(Vector2f(240, 100));
 
 	scoreTxt.setString("SCORE: " + std::to_string(scrTxt->getScore()));
 
 	scoreTxt.setCharacterSize(48);
-	scoreTxt.setPosition(Vector2f(220, 180));
+	scoreTxt.setPosition(Vector2f(290, 180));
 
 	restart.setString("PRESS 'ENTER' TO PLAY AGAIN");
 	restart.setCharacterSize(32);

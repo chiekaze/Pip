@@ -66,50 +66,63 @@ void Game::UpdateSpawnTimer()
 {
 	if (menu->IsPlaying())
 	{
+		//Hardlocking the spawnrates after a certain amount of time
+		if (elapsedTime->getElapsedTime() > 100)
+		{
+			spawnTimerNormal = 1;
+			spawnTimerFocus = 2;
+			asteroidTimerNormal = 1;
+			asteroidTimerFocus = 2;
+			healthTimerValue = 100;
+		}
+
+		else
+		{
+			if (spawnTimerValue >= 2)
+			{
+				if (elapsedTime->getElapsedTime() - lastSpawnTimerUpdate >= spawnRateTime)
+				{
+					spawnTimerNormal -= 1;
+					spawnTimerValue = spawnTimerNormal;
+					spawnTimerFocus = spawnTimerNormal / player->GetPlayerFocusFactor();
+					lastSpawnTimerUpdate = elapsedTime->getElapsedTime();
+				}
+			}
+
+			if (asteroidTimerValue >= 2)
+			{
+				if (elapsedTime->getElapsedTime() - lastAsteroidUpdate >= asteroidTime)
+				{
+					asteroidTimerNormal -= 1;
+					asteroidTimerValue = asteroidTimerNormal;
+					asteroidTimerFocus = asteroidTimerNormal / player->GetPlayerFocusFactor();
+					lastAsteroidUpdate = elapsedTime->getElapsedTime();
+				}
+			}
+
+			if (healthTimerValue <= 120)
+			{
+				if (elapsedTime->getElapsedTime() - lastHealthTimerUpdate >= healthTime)
+				{
+					healthTop += healthTimerAddition;
+					healthBottom += healthTimerAddition;
+					healthTime = healthTop;
+					healthTimerValue = rand() % healthTop + healthBottom;
+					lastHealthTimerUpdate = elapsedTime->getElapsedTime();
+				}
+			}
+		}
+
 		if (player->PlayerFocus())
 		{
 			spawnTimerValue = spawnTimerFocus;
 			asteroidTimerValue = asteroidTimerFocus;
 		}
-		
+
 		else
 		{
 			spawnTimerValue = spawnTimerNormal;
 			asteroidTimerValue = asteroidTimerNormal;
-		}
-
-		if (spawnTimerValue >= 2)
-		{
-			if (elapsedTime->getElapsedTime() - lastSpawnTimerUpdate >= spawnRateTime)
-			{
-				spawnTimerNormal -= 1;
-				spawnTimerValue = spawnTimerNormal;
-				spawnTimerFocus = spawnTimerNormal / player->GetPlayerFocusFactor();
-				lastSpawnTimerUpdate = elapsedTime->getElapsedTime();
-			}
-		}
-
-		if (asteroidTimerValue >= 2)
-		{
-			if (elapsedTime->getElapsedTime() - lastAsteroidUpdate >= asteroidTime)
-			{
-				asteroidTimerNormal -= 1;
-				asteroidTimerValue = asteroidTimerNormal;
-				asteroidTimerFocus = asteroidTimerNormal / player->GetPlayerFocusFactor();
-				lastAsteroidUpdate = elapsedTime->getElapsedTime();
-			}
-		}
-
-		if (healthTimerValue <= 120)
-		{
-			if (elapsedTime->getElapsedTime() - lastHealthTimerUpdate >= healthTime)
-			{
-				healthTop += healthTimerAddition;
-				healthBottom += healthTimerAddition;
-				healthTime = healthTop;
-				healthTimerValue = rand() % healthTop + healthBottom;
-				lastHealthTimerUpdate = elapsedTime->getElapsedTime();
-			}
 		}
 	}
 }
@@ -153,6 +166,7 @@ void Game::Update()
 		spawnTimer += 1 / 60.0f;
 		healthTimer += 1 / 60.0f;
 		asteroidTimer += 1 / 60.0f;
+		projectileTimer += 1 / 60.0f;
 
 		if (player->IsDead())
 		{
@@ -252,10 +266,8 @@ void Game::Update()
 					//Plays player hurt sound
 					soundManager->PlayerHurt();
 
-					//Plays player death sound
-					if (player->GetPlayerHP() <= 0)
+					if (player->IsDead())
 					{
-
 						enemies.erase(enemies.begin());
 					}
 				}
@@ -267,8 +279,11 @@ void Game::Update()
 			{
 				enemy->Update();
 
-				//Enemyprojectile timer
-				projectileTimer += 1 / 60.0f;
+				//Checks if an enemy collides with the bottom border, then deletes it and spawns a new one 
+				if (enemy->Intersect())
+				{
+					enemies.erase(enemies.begin());
+				}
 
 				if (projectileTimer > 1)
 				{
@@ -277,12 +292,6 @@ void Game::Update()
 					enemyprojectile = new EnemyProjectile(player);
 					enemyprojectiles.push_back(enemyprojectile);
 					enemyprojectile->setPosition(enemy->GetPosition());
-				}
-
-				//Checks if an enemy collides with the bottom border, then deletes it and spawns a new one 
-				if (enemy->Intersect())
-				{
-					enemies.erase(enemies.begin());
 				}
 
 				//Checks if enemy is hit by projectile
@@ -372,6 +381,8 @@ void Game::Update()
 
 		while (window->pollEvent(event))
 		{
+			soundManager->Update();
+
 			if ((event.type == sf::Event::Closed) ||
 				(event.type == sf::Event::KeyPressed) &&
 				(event.key.code == sf::Keyboard::Escape))
