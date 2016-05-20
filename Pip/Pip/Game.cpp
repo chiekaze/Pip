@@ -47,6 +47,11 @@ Game::Game()
 
 	score = 0;
 	mute = false;
+
+	font.loadFromFile("fonts/Minecraft.ttf");
+	text.setString("SOUNDS OFF");
+	text.setFont(font); text.setCharacterSize(20);
+	text.setPosition(Vector2f(665, 570));
 }
 
 Game::~Game()
@@ -129,33 +134,24 @@ void Game::UpdateSpawnTimer()
 }
 
 //IT JUST DOESN'T WORK
-bool Game::MuteOn()
+void Game::Mute()
 {
 	window->setKeyRepeatEnabled(false);
 
-	if (!mute || MuteOff())
+	if (!mute)
 	{
 		if (event.type == Event::KeyReleased && event.key.code == Keyboard::LShift)
 		{
-			return true;
+			mute = true;
 		}
 	}
-	else
-		return false;
-}
 
-bool Game::MuteOff()
-{
-	window->setKeyRepeatEnabled(false);
-
-	if (MuteOn())
+	if (mute)
 	{
-		if (event.type == Event::KeyReleased && event.key.code == Keyboard::LShift)
+		if (event.type == Event::KeyReleased && event.key.code == Keyboard::RShift)
 		{
-			return true;
+			mute = false;
 		}
-		else
-			return false;
 	}
 }
 
@@ -195,8 +191,7 @@ void Game::Update()
 			menu->Update();
 		}
 
-		MuteOn();
-		MuteOff();
+		Mute();
 
 		spawnTimer += 1 / 60.0f;
 		healthTimer += 1 / 60.0f;
@@ -273,7 +268,10 @@ void Game::Update()
 				if (healthpack->GetHealthPackBoundingBox().intersects(player->GetPlayerBoundingBox()))
 				{
 					player->TakeHealth(healthpack->GetHealth());
-					soundManager->HealthPickupSound();
+					if (!mute)
+					{
+						soundManager->HealthPickupSound();
+					}
 					healthpacks.erase(healthpacks.begin());
 				}
 			}
@@ -299,7 +297,10 @@ void Game::Update()
 					player->TakeDamage(enemyprojectile->GetEnemyDamage());
 
 					//Plays player hurt sound
-					soundManager->PlayerHurt();
+					if (!mute)
+					{
+						soundManager->PlayerHurt();
+					}
 
 					if (player->IsDead())
 					{
@@ -347,7 +348,10 @@ void Game::Update()
 					enemies.erase(enemies.begin());
 
 					//Playes enemy death sound
-					soundManager->EnemyDeathSound();
+					if (!mute)
+					{
+						soundManager->EnemyDeathSound();
+					}
 
 					scoreTxt->addScore(enemy->GetScore());
 				}
@@ -357,7 +361,10 @@ void Game::Update()
 				{
 					//Deletes enemy when player collides with it
 					enemies.erase(enemies.begin());
-					soundManager->EnemyDeathSound();
+					if (!mute)
+					{
+						soundManager->EnemyDeathSound();
+					}
 
 					player->TakeDamage(enemy->GetEnemyDamage());
 				}
@@ -390,7 +397,10 @@ void Game::Update()
 				if (asteroid->IsDestroyed())
 				{
 					asteroids.erase(asteroids.begin());
-					soundManager->AsteroidExplosion();
+					if (!mute)
+					{
+						soundManager->AsteroidExplosion();
+					}
 
 					scoreTxt->addScore(asteroid->GetScore());
 				}
@@ -399,7 +409,10 @@ void Game::Update()
 				if (player->GetPlayerBoundingBox().intersects(asteroid->GetAsteroidBoundingBox()))
 				{
 					asteroids.erase(asteroids.begin());
-					soundManager->AsteroidExplosion();
+					if (!mute)
+					{
+						soundManager->AsteroidExplosion();
+					}
 
 					player->TakeDamage(asteroid->GetAsteroidDamage());
 				}
@@ -427,7 +440,10 @@ void Game::Update()
 			//Shooting
 			if ((event.type == Event::KeyPressed) && (event.key.code == Keyboard::Space) && menu->IsPlaying())
 			{
-				soundManager->ProjectileSound();
+				if (!mute)
+				{
+					soundManager->ProjectileSound();
+				}
 				projectile = new Projectile(player);
 				projectiles.push_back(projectile);
 			}
@@ -484,6 +500,11 @@ void Game::Draw()
 		playArea->Draw(*window);
 		scoreTxt->Draw(*window);
 		elapsedTime->Draw(*window);
+
+		if (mute)
+		{
+			window->draw(text);
+		}
 	}
 	
 	window->display();

@@ -22,10 +22,6 @@ public:
 	void AsteroidExplosion();
 	void PlayerFocusSound();
 
-	bool MuteOn();
-	bool MuteOff();
-	void Update();
-
 private:
 	SoundBuffer enemyDeath;
 	SoundBuffer projectileSound;
@@ -44,10 +40,6 @@ private:
 	Sound gameover;
 	Sound asteroidexplosion;
 	Sound playerfocussound;
-
-	bool mute;
-
-	Event event;
 };
 
 #endif

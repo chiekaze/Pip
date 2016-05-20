@@ -16,6 +16,8 @@ Menu::Menu(Player* player, ScoreText* scrtext)
 	move.setFont(font);
 	shoot.setFont(font);
 	focus.setFont(font);
+	muteOn.setFont(font);
+	muteOff.setFont(font);
 
 	//DEADMENU
 	dead.setFont(font);
@@ -59,6 +61,14 @@ Menu::Menu(Player* player, ScoreText* scrtext)
 	focus.setString("FOCUS - LEFT CTRL");
 	focus.setCharacterSize(16);
 	focus.setPosition(Vector2f(315, 500));
+
+	muteOn.setString("MUTE ON - LEFT SHIFT");
+	muteOn.setCharacterSize(16);
+	muteOn.setPosition(Vector2f(305, 520));
+
+	muteOff.setString("MUTE OFF - RIGHT SHIFT");
+	muteOff.setCharacterSize(16);
+	muteOff.setPosition(Vector2f(295, 540));
 
 	//-------------------------------------
 
@@ -164,6 +174,8 @@ void Menu::Draw(RenderWindow &window)
 		window.draw(move);
 		window.draw(shoot);
 		window.draw(focus);
+		window.draw(muteOn);
+		window.draw(muteOff);
 	}
 }
 

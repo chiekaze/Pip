@@ -43,6 +43,8 @@ private:
 	Text move;
 	Text shoot;
 	Text focus;
+	Text muteOn;
+	Text muteOff;
 	
 	//End menu
 	Text dead;

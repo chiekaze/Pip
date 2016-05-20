@@ -91,8 +91,10 @@ private:
 	bool mute;
 
 	bool isPlaying;
-	bool MuteOn();
-	bool MuteOff();
+	void Mute();
+
+	Font font;
+	Text text;
 };
 
 #endif;
