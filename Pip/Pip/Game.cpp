@@ -195,7 +195,6 @@ void Game::Update()
 		spawnTimer += 1 / 60.0f;
 		healthTimer += 1 / 60.0f;
 		asteroidTimer += 1 / 60.0f;
-		projectileTimer += 1 / 60.0f;
 
 		if (player->IsDead())
 		{
@@ -319,6 +318,8 @@ void Game::Update()
 				{
 					enemies.erase(enemies.begin());
 				}
+
+				projectileTimer += 1 / 60.0f;
 
 				if (projectileTimer > 1)
 				{
