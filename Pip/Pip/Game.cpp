@@ -133,7 +133,6 @@ void Game::UpdateSpawnTimer()
 	}
 }
 
-//IT JUST DOESN'T WORK
 void Game::Mute()
 {
 	window->setKeyRepeatEnabled(false);
