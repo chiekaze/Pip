@@ -88,8 +88,11 @@ private:
 	int windowHeight;
 
 	int score;
+	bool mute;
 
 	bool isPlaying;
+	bool MuteOn();
+	bool MuteOff();
 };
 
 #endif;

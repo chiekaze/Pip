@@ -3,7 +3,7 @@
 
 Player::Player()
 {
-	playerFullHP = 10;
+	playerFullHP = 100;
 	playerHP = playerFullHP;
 
 	playerText.loadFromFile("sprites/player_ship.png");

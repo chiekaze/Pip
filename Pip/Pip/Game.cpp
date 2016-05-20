@@ -46,6 +46,7 @@ Game::Game()
 	healthTime = healthTop;
 
 	score = 0;
+	mute = false;
 }
 
 Game::~Game()
@@ -127,6 +128,37 @@ void Game::UpdateSpawnTimer()
 	}
 }
 
+//IT JUST DOESN'T WORK
+bool Game::MuteOn()
+{
+	window->setKeyRepeatEnabled(false);
+
+	if (!mute || MuteOff())
+	{
+		if (event.type == Event::KeyReleased && event.key.code == Keyboard::LShift)
+		{
+			return true;
+		}
+	}
+	else
+		return false;
+}
+
+bool Game::MuteOff()
+{
+	window->setKeyRepeatEnabled(false);
+
+	if (MuteOn())
+	{
+		if (event.type == Event::KeyReleased && event.key.code == Keyboard::LShift)
+		{
+			return true;
+		}
+		else
+			return false;
+	}
+}
+
 void Game::Update()
 {
 	SoundBuffer buffer;
@@ -162,6 +194,9 @@ void Game::Update()
 		{
 			menu->Update();
 		}
+
+		MuteOn();
+		MuteOff();
 
 		spawnTimer += 1 / 60.0f;
 		healthTimer += 1 / 60.0f;
@@ -381,8 +416,6 @@ void Game::Update()
 
 		while (window->pollEvent(event))
 		{
-			soundManager->Update();
-
 			if ((event.type == sf::Event::Closed) ||
 				(event.type == sf::Event::KeyPressed) &&
 				(event.key.code == sf::Keyboard::Escape))

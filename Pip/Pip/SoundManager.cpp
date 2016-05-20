@@ -113,9 +113,9 @@ bool SoundManager::MuteOff()
 			std::cout << "sound on!\n";
 			return true;
 		}
+		else
+			return false;
 	}
-	else
-		return false;
 }
 
 void SoundManager::Update()
