@@ -73,7 +73,7 @@ void Game::UpdateSpawnTimer()
 	if (menu->IsPlaying())
 	{
 		//Hardlocking the spawnrates after a certain amount of time
-		if (elapsedTime->getElapsedTime() > 100)
+		if (elapsedTime->getElapsedTime() >= 100)
 		{
 			spawnTimerNormal = 1;
 			spawnTimerFocus = 2;
