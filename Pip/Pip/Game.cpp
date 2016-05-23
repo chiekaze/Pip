@@ -240,6 +240,7 @@ void Game::Update()
 			//PROJECTILE UPDATES
 			for (auto pIt = projectiles.begin(); pIt != projectiles.end(); ++pIt)
 			{
+				//Projectile iterator
 				Projectile *projectile = *pIt;
 
 				//Collision checking and projectile movement
@@ -258,6 +259,7 @@ void Game::Update()
 			//HEALTHPACK UPDATES
 			for (auto hIt = healthpacks.begin(); hIt != healthpacks.end(); ++hIt)
 			{
+				//Healthpack iterator
 				HealthPack *healthpack = *hIt;
 
 				//Collision checking and movement
@@ -288,6 +290,7 @@ void Game::Update()
 			//ENEMYPROJECTILE UPDATES
 			for (auto eIt = enemyprojectiles.begin(); eIt != enemyprojectiles.end(); ++eIt)
 			{
+				//Enemyprojectile iterator
 				EnemyProjectile *enemyprojectile = *eIt;
 
 				enemyprojectile->Update();
@@ -322,6 +325,7 @@ void Game::Update()
 			//ENEMY UPDATES
 			for (auto it = enemies.begin(); it != enemies.end(); ++it)
 			{
+				//Enemy iterator
 				Enemy *enemy = *it;
 
 				enemy->Update();
@@ -361,7 +365,7 @@ void Game::Update()
 					}
 				}
 
-				//Deletes killed enemy and adds 1 score
+				//Deletes killed enemy and adds points
 				if (enemy->IsDead())
 				{
 					it = enemies.erase(it);
@@ -398,6 +402,7 @@ void Game::Update()
 			//ASTEROID UPDATES
 			for (auto aIt = asteroids.begin(); aIt != asteroids.end(); ++aIt)
 			{
+				//Asteroid iterator
 				Asteroid *asteroid = *aIt;
 
 				asteroid->Update();
@@ -425,7 +430,7 @@ void Game::Update()
 					}
 				}
 
-				//Deletes destroyed asteroid and adds 1 point
+				//Deletes destroyed asteroid and adds points
 				if (asteroid->IsDestroyed())
 				{
 					aIt = asteroids.erase(aIt);
