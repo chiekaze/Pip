@@ -56,14 +56,21 @@ bool EnemyProjectile::Intersect()
 //Enemy projectile moves
 void EnemyProjectile::Update()
 {
-	//Enemy projectile focus
+	//Enemy projectile focus		
 	if (mPlayer->PlayerFocus())
 	{
-		enemyProjectileSpeed = enemyProjectileNormalSpeed * mPlayer->GetPlayerFocusFactor();
+		enemyProjectileSpeed = enemyProjectileNormalSpeed * mPlayer->GetPlayerFocusFactor();		
 	}
 	else enemyProjectileSpeed = enemyProjectileNormalSpeed;
 
-	enemyProjectileSprite.move(Vector2f(0, enemyProjectileSpeed));
+	if (Intersect())
+	{
+		enemyProjectileSprite.move(Vector2f(0, 0));
+	}
+	else
+	{
+		enemyProjectileSprite.move(Vector2f(0, enemyProjectileSpeed));
+	}
 }
 
 void EnemyProjectile::Draw(RenderWindow& window)

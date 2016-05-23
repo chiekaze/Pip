@@ -283,7 +283,10 @@ void Game::Update()
 				//Checks if enemy projectile collides with bottom border of the screen
 				if (enemyprojectile->Intersect())
 				{
-					enemyprojectiles.erase(enemyprojectiles.begin());
+					if (elapsedTime->getElapsedTime() % 10 == 0)
+					{
+						enemyprojectiles.erase(enemyprojectiles.begin());
+					}
 				}
 
 				//Checks if enemy projectile collides with player
