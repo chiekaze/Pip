@@ -312,14 +312,18 @@ void Game::Update()
 			//ENEMYPROJECTILE ENDS HERE
 
 			//ENEMY UPDATES
-			for (auto enemy : enemies)
+			for (auto it = enemies.begin(); it != enemies.end(); ++it)
 			{
+				Enemy *enemy = *it;
+
 				enemy->Update();
 
 				//Checks if an enemy collides with the bottom border, then deletes it and spawns a new one 
 				if (enemy->Intersect())
 				{
-					enemies.erase(enemies.begin());
+					it = enemies.erase(it);
+					it--;
+					continue;
 				}
 
 				projectileTimer += 1 / 60.0f;
@@ -348,7 +352,8 @@ void Game::Update()
 				//Deletes killed enemy and adds 1 score
 				if (enemy->IsDead())
 				{
-					enemies.erase(enemies.begin());
+					it = enemies.erase(it);
+					it--;
 
 					//Playes enemy death sound
 					if (!mute)
@@ -357,19 +362,23 @@ void Game::Update()
 					}
 
 					scoreTxt->addScore(enemy->GetScore());
+
+					continue;
 				}
 
 				//Checks if player collides with enemy and gives damage to player
 				if (player->GetPlayerBoundingBox().intersects(enemy->GetEnemyBoundingBox()))
 				{
 					//Deletes enemy when player collides with it
-					enemies.erase(enemies.begin());
 					if (!mute)
 					{
 						soundManager->EnemyDeathSound();
 					}
 
 					player->TakeDamage(enemy->GetEnemyDamage());
+					it = enemies.erase(it);
+					it--;
+					delete enemy;
 				}
 			}
 			//ENEMY ENDS HERE
