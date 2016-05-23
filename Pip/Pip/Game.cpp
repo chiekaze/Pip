@@ -238,28 +238,36 @@ void Game::Update()
 			elapsedTime->Update();
 
 			//PROJECTILE UPDATES
-			for (auto projectile : projectiles)
+			for (auto pIt = projectiles.begin(); pIt != projectiles.end(); ++pIt)
 			{
+				Projectile *projectile = *pIt;
+
 				//Collision checking and projectile movement
 				projectile->Update();
 
 				if (projectile->Intersect())
 				{
 					//Deletes projectiles from vector after colliding
-					projectiles.erase(projectiles.begin());
+					pIt = projectiles.erase(pIt);
+					pIt--;
+					continue;
 				}
 			}
 			//PROJECTILE ENDS HERE
 
 			//HEALTHPACK UPDATES
-			for (auto healthpack : healthpacks)
+			for (auto hIt = healthpacks.begin(); hIt != healthpacks.end(); ++hIt)
 			{
+				HealthPack *healthpack = *hIt;
+
 				//Collision checking and movement
 				healthpack->Update();
 
 				if (healthpack->Intersect())
 				{
-					healthpacks.erase(healthpacks.begin());
+					hIt = healthpacks.erase(hIt);
+					hIt--;
+					continue;
 				}
 
 				//Checking if player collides with healthpack
@@ -270,31 +278,31 @@ void Game::Update()
 					{
 						soundManager->HealthPickupSound();
 					}
-					healthpacks.erase(healthpacks.begin());
+					hIt = healthpacks.erase(hIt);
+					hIt--;
+					continue;
 				}
 			}
 			//HEALTHPACK ENDS HERE
 
 			//ENEMYPROJECTILE UPDATES
-			for (auto enemyprojectile : enemyprojectiles)
+			for (auto eIt = enemyprojectiles.begin(); eIt != enemyprojectiles.end(); ++eIt)
 			{
+				EnemyProjectile *enemyprojectile = *eIt;
+
 				enemyprojectile->Update();
 
 				//Checks if enemy projectile collides with bottom border of the screen
 				if (enemyprojectile->Intersect())
 				{
-					if (elapsedTime->getElapsedTime() % 10 == 0)
-					{
-						enemyprojectiles.erase(enemyprojectiles.begin());
-					}
+					eIt = enemyprojectiles.erase(eIt);
+					eIt--;
+					continue;
 				}
 
 				//Checks if enemy projectile collides with player
 				if (enemyprojectile->GetEnemyProjectileBoundingBox().intersects(player->GetPlayerBoundingBox()))
 				{
-					//Deletes enemy projectile when hits player
-					enemyprojectiles.erase(enemyprojectiles.begin());
-
 					player->TakeDamage(enemyprojectile->GetEnemyDamage());
 
 					//Plays player hurt sound
@@ -303,10 +311,10 @@ void Game::Update()
 						soundManager->PlayerHurt();
 					}
 
-					if (player->IsDead())
-					{
-						enemies.erase(enemies.begin());
-					}
+					//Deletes enemy projectile when hits player
+					eIt = enemyprojectiles.erase(eIt);
+					eIt--;
+					continue;
 				}
 			}
 			//ENEMYPROJECTILE ENDS HERE
@@ -338,14 +346,18 @@ void Game::Update()
 				}
 
 				//Checks if enemy is hit by projectile
-				for (auto projectile : projectiles)
+				for (auto pIt = projectiles.begin(); pIt != projectiles.end(); ++pIt)
 				{
+					Projectile *projectile = *pIt;
+
 					if (enemy->GetEnemyBoundingBox().intersects(projectile->GetProjectileBoundingBox()))
 					{
 						enemy->TakeDamage(projectile->GetProjectileDamage());
 
 						//Deletes projectiles from vector after colliding
-						projectiles.erase(projectiles.begin());
+						pIt = projectiles.erase(pIt);
+						pIt--;
+						continue;
 					}
 				}
 
@@ -378,55 +390,67 @@ void Game::Update()
 					player->TakeDamage(enemy->GetEnemyDamage());
 					it = enemies.erase(it);
 					it--;
-					delete enemy;
+					continue;
 				}
 			}
 			//ENEMY ENDS HERE
 
 			//ASTEROID UPDATES
-			for (auto asteroid : asteroids)
+			for (auto aIt = asteroids.begin(); aIt != asteroids.end(); ++aIt)
 			{
+				Asteroid *asteroid = *aIt;
+
 				asteroid->Update();
 
 				//Deletes asteroid if collides with bottom border
 				if (asteroid->Intersect())
 				{
-					asteroids.erase(asteroids.begin());
+					aIt = asteroids.erase(aIt);
+					aIt--;
+					continue;
 				}
 
 				//Checks if asteroid is hit by projectiles
-				for (auto projectile : projectiles)
+				for (auto pIt = projectiles.begin(); pIt != projectiles.end(); ++pIt)
 				{
+					Projectile *projectile = *pIt;
+
 					if (asteroid->GetAsteroidBoundingBox().intersects(projectile->GetProjectileBoundingBox()))
 					{
 						asteroid->TakeDamage(projectile->GetProjectileDamage());
 
-						projectiles.erase(projectiles.begin());
+						pIt = projectiles.erase(pIt);
+						pIt--;
+						continue;
 					}
 				}
 
 				//Deletes destroyed asteroid and adds 1 point
 				if (asteroid->IsDestroyed())
 				{
-					asteroids.erase(asteroids.begin());
+					aIt = asteroids.erase(aIt);
+					aIt--;
 					if (!mute)
 					{
 						soundManager->AsteroidExplosion();
 					}
 
 					scoreTxt->addScore(asteroid->GetScore());
+					continue;
 				}
 
 				//Checks if player is hit by asteroid and gives damage to player
 				if (player->GetPlayerBoundingBox().intersects(asteroid->GetAsteroidBoundingBox()))
 				{
-					asteroids.erase(asteroids.begin());
+					aIt = asteroids.erase(aIt);
+					aIt--;
 					if (!mute)
 					{
 						soundManager->AsteroidExplosion();
 					}
 
 					player->TakeDamage(asteroid->GetAsteroidDamage());
+					continue;
 				}
 			}
 			//ASTEROID ENDS HERE
